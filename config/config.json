@@ -1,0 +1,17 @@
+{
+	"autoloadFolder": [
+		"Framework",
+		"Controller",
+		"Model",
+		"Framework/Exception",
+		"Model/Manager",
+		"Model/Entite"
+	],
+	"datasource":  { 
+		"host": "localhost:3360",
+        "dbname": "lafleur",
+        "user": "root",
+        "password": ""
+    }
+}
+
