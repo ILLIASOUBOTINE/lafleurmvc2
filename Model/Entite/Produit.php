@@ -9,8 +9,8 @@
 		private  $quantiteTotale;
 		private  $unite_idunite;
 		private  $ventesTotales;
-		// private int $img_url;
-		private string $disponible;
+		// private  $img_url;
+		private  $disponible;
 		private  $photos;
 		private $categories;
 		

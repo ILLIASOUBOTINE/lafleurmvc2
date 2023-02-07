@@ -107,3 +107,27 @@ inputSearchVille.addEventListener("input", (e) => {
     }
 });
 
+//  pour carusel 
+
+
+
+let carrousel = document.querySelector(".list_carusel");
+let arrowLeft = document.querySelector(".chevron_left");
+let arrowRight = document.querySelector(".chevron_right");
+let arr = [];
+console.log(carrousel.children);
+
+
+arrowLeft.addEventListener("click", (event) => {
+  arr = Array.from(carrousel.children);
+  let elem = arr[0].cloneNode(true);
+  carrousel.children[0].remove();
+  carrousel.append(elem);
+});
+
+arrowRight.addEventListener("click", (event) => {
+  arr = Array.from(carrousel.children);
+  let elem = arr[arr.length - 1].cloneNode(true);
+  carrousel.children[arr.length - 1].remove();
+  carrousel.children[0].before(elem);
+});

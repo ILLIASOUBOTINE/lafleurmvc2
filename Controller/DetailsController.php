@@ -11,16 +11,16 @@
             
             $notreLivraison = new NotreLivraisonManager();
             $villes = $notreLivraison->getAll();
-
-           
-       
-            // $produitM = new ProduitManager();
-            // $produit = $produitM->getAll();
-            
             $this->addParam('villes',$villes);
-            // $this->addParam('produit',$produit);
+           
+            // var_dump((int)$_GET['id']);
+             $produitM = new ProduitManager();
+             $produit = $produitM->getProduitDetailsById($_GET['id']);
+            // var_dump($produit);
+            
+            $this->addParam('produit',$produit);
             // var_dump( $villes);
-            $filename = 'show' ;
+            $filename = 'show';
             return $this->view($filename);
         }
         
