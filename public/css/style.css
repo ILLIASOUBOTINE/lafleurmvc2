@@ -26,35 +26,29 @@ html {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  
 }
 
-body {
- overflow-x: hidden;
-}
+
 
 .wrapper {
   display: grid;
+  
   grid-template-rows: max-content 1fr max-content;
-  width: 100vw;
+  /* width: 100vw; */
   overflow-x: hidden;
-  /* display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between; */
   min-height: 100vh;
-  /* width: 100vw; */
-  /* overflow: hidden; */
-  /* z-index:1; */
-  /* background-size: cover; */
-  /* width: 100vw; */
+ 
 }
 
 main {
-  width: 100vw;
+  width: 100%;
+  /* height: 100vh; */
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow-x: hidden;
+  /* justify-content: center; */
+  /* overflow-x: hidden; */
 }
 
 /* header */
@@ -177,6 +171,10 @@ header {
   margin-left: 1%;
 }
 
+.marg5bot {
+  margin-bottom: 5px;
+}
+
 /* .cursorscall20 {
   cursor: pointer;
   transform: scale(1.2);
@@ -207,6 +205,7 @@ header {
 
 footer {
   /* height: 120px; */
+  /* height:fit-content; */
   width: 100%;
   display: flex;
   flex-wrap: wrap;
@@ -236,16 +235,16 @@ footer > div {
 /* carte */
 
 .carte {
-  /* width: 260px; */
-  /* max-width: 290px; */
   width: 290px;
   height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  
   background-color: var(--color-white);
   border-radius: 20px;
   box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.64);
-  margin-bottom: 20px;
-
-  /* margin-right: 10px; */
+ 
 }
 
 .carte > a {
@@ -265,7 +264,8 @@ section {
 .img_carte {
   width: 100%;
   /* width: 290px; */
-  height: 300px;
+  /* height: 280px; */
+  height: 260px;
   border-radius: 20px;
 }
 
@@ -310,7 +310,8 @@ section {
 /* populaire_section */
 
 .populaire_section {
-  width: 100%;
+ /* max-width: 1300px; */
+ width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -326,11 +327,13 @@ section {
 }
 
 .populaire_carte {
-  width: 100%;
+  width: 95%;
+  max-width: 1400px;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  /* margin-bottom: 10px; */
+
 }
 
 .marg20top {
@@ -351,7 +354,10 @@ section {
   /* justify-content: space-between; */
 }
 
-
+/* #idDropMenue {
+  height:max-content;
+  overflow:;
+} */
 
 
 
@@ -532,7 +538,9 @@ section {
   flex-wrap: wrap;
 }
 
-/* Carusel */
+/*              Carusel               */
+
+
 .carusel {
   width: 500px;
   height: 470px;
@@ -587,16 +595,39 @@ section {
   border-radius: 20px;
 }
 
-@media screen and (max-width: 1000px) {
+/*             Details               */
 
-  .carte {
-    margin: 20px 20px;
-  }
-
-  .populaire_carte {
-    flex-wrap: wrap;
-  }
+.details {
+   width: 100%;
+  height: 470px; 
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+ 
+  
 }
+
+.details_produit {
+  width: 500px;
+  height: 470px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  background-color: var(--color-white);
+  border-radius: 30px;
+}
+
+.list_details {
+  align-self: flex-start;
+  margin-left: 20%;
+}
+
+.description_details {
+  width: 80%;
+}
+
+
 
 @media screen and (max-width: 840px) and (min-width: 400px){
   .nav_left,
@@ -606,11 +637,15 @@ section {
   }
 
   header {
+    position:fixed;
     height: 60px;
     margin-bottom: 0px;
     align-items: center;
-
     justify-content: space-between;
+  }
+
+  main {
+    margin-top: 60px;
   }
 
   .logo > img {
@@ -657,6 +692,153 @@ section {
   .notrelivraison {
     top:60px;
   }
+
+
+}
+
+
+@media screen and (max-width: 653px) and (min-width: 449px) {
+  .carte {
+    width: 185px;
+    height: 220px;
+    border-radius: 10px;
+    
+  }
+
+  .marg5 {
+    margin-right: 10px;
+    margin-left: 10px;
+  }
+  
+  .img_carte {
+   
+    height: 140px;
+    border-radius: 10px;
+  }
+  
+  .title_carte {
+    margin: 0px 5px;
+  }
+  
+  .footer_carte {
+    margin: 5px 10px 10px 10px;
+    
+  }
+  
+  .btn_ajouter {
+    width: 60px;
+    height: 20px;
+    border-radius: 10px;
+    
+  }
+
+  .pd24w600 {
+    font-size: 16px;
+    font-weight: 700;
+   
+  }
+  
+  .pd40w700 {
+    font-size: 20px;
+    font-weight: 600;
+    
+  }
+  
+  /* .int14w200 {
+    font-size: 14px;
+    font-weight: 200;
+    
+  } */
+  
+  .int20w400 {
+    font-size: 14px;
+    font-weight: 400;
+   
+  }
+  .marg20top {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  footer {
+    margin-top: 10px;
+    
+  }
+  
+
+}
+
+@media screen and (max-width: 449px) {
+  
+ 
+  .populaire_carte {
+    width: 100%;
+  }
+  .carte {
+    width: 140px;
+    height: 180px;
+    border-radius: 10px;
+  }
+  
+  .img_carte {
+   
+    height: 110px;
+    border-radius: 10px;
+  }
+  
+  .title_carte {
+    margin: 0px 5px;
+  }
+  
+  .footer_carte {
+    margin: 5px 10px 10px 10px;
+    
+  }
+  
+  .btn_ajouter {
+    width: 60px;
+    height: 20px;
+    border-radius: 10px;
+    
+  }
+
+  .pd24w600 {
+    font-size: 16px;
+    font-weight: 700;
+   
+  }
+  
+  .pd40w700 {
+    font-size: 20px;
+    font-weight: 600;
+    
+  }
+  
+  /* .int14w200 {
+    font-size: 14px;
+    font-weight: 200;
+    
+  } */
+  
+  .int20w400 {
+    font-size: 14px;
+    font-weight: 400;
+   
+  }
+  .marg20top {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .marg5 {
+    margin-right: 5px;
+    margin-left: 5px;
+  }
+
+  footer {
+    margin-top: 10px;
+    
+  }
 }
 
 @media screen and (max-width: 400px) {
@@ -667,12 +849,18 @@ section {
   }
 
   header {
+    /* position:fixed; */
     height: 60px;
     margin-bottom: 0px;
     align-items: center;
-
     justify-content: space-between;
   }
+
+  main {
+    margin-top: 60px;
+  }
+
+  
 
   .logo > img {
     width: 60px;
@@ -718,4 +906,6 @@ section {
   .notrelivraison {
     top:60px;
   }
+
+  
 }

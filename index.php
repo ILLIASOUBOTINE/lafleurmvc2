@@ -1,5 +1,5 @@
 <?php
-
+  
 	$configFile = file_get_contents("config/config.json");
 	$config = json_decode($configFile);
 	// var_dump($config->autoloadFolder);
@@ -14,8 +14,13 @@
 			}
 		}
 	});
+	
+  	session_start();
+	// unset($_SESSION['offreProduits']);
+	require 'functions.php';
+    require 'config/init.php';
 
-    
+	
 	try
 	{
 		$httpRequest = new HttpRequest();

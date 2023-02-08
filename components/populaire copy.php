@@ -1,7 +1,39 @@
+<?php
+ class ListCart {
+    private string $title;
+    private $listProduits;
+    
+    public function __construct($title,$listProduits)
+    {
+        $this->title = $title;
+        $this->listProduits = $listProduits;
+        
+    }
+
+    
+
+    /**
+     * Get the value of title
+     *
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    public function getListProduits()
+    {
+        return $this->getListProduits();
+    }
+ }
+?>
 <section class="populaire_section">
-    <h2 class="pd40w700 marg20top">Le plus populaire</h2>
+    <h2 class="pd40w700 marg20top">
+        <?=$this->getTitle()?>
+    </h2>
     <div class="populaire_carte">
-        <?php foreach($populaireProduits as $produit):?>
+        <?php foreach($this->getListProduits() as $produit):?>
         <div class="carte marg5">
             <a href="details?id=<?=$produit->getIdproduit()?>"><img class="img_carte"
                     src="public/imgs/fleurs/<?=$produit->getPhotos()[0]->getImgUrl()?>" title=" details"></a>

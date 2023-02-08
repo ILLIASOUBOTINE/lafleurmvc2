@@ -11,6 +11,7 @@
 		private  $ventesTotales;
 		// private  $img_url;
 		private  $disponible;
+		
 		private  $photos;
 		private $categories;
 		
@@ -33,7 +34,7 @@
 		public function affichDisponible($produit){
 			
 			if($produit->quantiteTotale == 0){
-				$produit->disponible = "Indisponible";
+				$produit->disponible = "Rupture";
 			}else{
 				$produit->disponible = "Ajouter";
 			}

@@ -115,7 +115,7 @@ let carrousel = document.querySelector(".list_carusel");
 let arrowLeft = document.querySelector(".chevron_left");
 let arrowRight = document.querySelector(".chevron_right");
 let arr = [];
-console.log(carrousel.children);
+// console.log(carrousel.children);
 
 
 arrowLeft.addEventListener("click", (event) => {

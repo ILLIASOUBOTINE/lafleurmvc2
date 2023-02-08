@@ -37,4 +37,10 @@
 		{
 			$this->_param[$name] = $value;
 		}
+
+		public function redirect($route)
+		{
+			header('Location: '.$route);
+            exit;
+		}
 	}
