@@ -8,7 +8,7 @@
 		
 		public function getProduitPopulair($num)
 		{
-			$req = $this->_bdd->prepare("SELECT produit.* FROM produit 
+			$req = $this->_bdd->prepare("SELECT * FROM produit 
 			 	ORDER BY ventesTotales DESC LIMIT :num");
 			$req->bindValue(':num', $num, PDO::PARAM_INT);
 			$req->execute();
@@ -19,7 +19,7 @@
 
 		public function getProduitOffre($debut, $num)
 		{
-			$req = $this->_bdd->prepare("SELECT produit.* FROM produit 
+			$req = $this->_bdd->prepare("SELECT * FROM produit 
 			WHERE produit.idproduit > :debut AND produit.idproduit <= :fin ORDER BY produit.idproduit DESC");
 			$req->bindValue(':debut', $debut, PDO::PARAM_INT);
 			$req->bindValue(':fin', $debut + $num, PDO::PARAM_INT);

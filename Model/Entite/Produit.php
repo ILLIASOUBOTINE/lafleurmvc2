@@ -13,7 +13,7 @@
 		private  $disponible;
 		
 		private  $photos;
-		private $categories;
+		private  $categories;
 		
 		
 		
@@ -253,17 +253,11 @@
 				return $this->disponible;
 		}
 
-		/**
-		 * Set the value of disponible
-		 *
-		 * @param string $disponible
-		 *
-		 * @return self
-		 */
-		// public function setDisponible(string $disponible): self
-		// {
-		// 		$this->disponible = $disponible;
+		public function getCategories()
+		{
+				return $this->categories;
+		}
 
-		// 		return $this;
-		// }
+
+		
 	}

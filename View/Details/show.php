@@ -9,4 +9,10 @@ var_dump($produit);
     <?php include 'components/carrousel.php'?>
     <?php include 'components/details_produit.php'?>
 
+    <!-- <div class="block_carte">
+        <?php
+         getViewListCarte($titreSectionPopulaire,$populaireProduits);
+    ?> -->
+
+    </div>
 </section>
