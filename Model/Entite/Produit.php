@@ -14,18 +14,25 @@
 		
 		private  $photos;
 		private  $categories;
-		
+		private  $unite;
+		private  $fleures;
 		
 		
 		public function __construct()
 		{
 			$this->affichDisponible($this);
 			
-			$photos = new PhotoManager();
-			$this->photos = $photos->getPhotosByIdProduit($this->getIdproduit());
+			$photosM = new PhotoManager();
+			$this->photos = $photosM->getPhotosByIdProduit($this->idproduit);
 			
-			$categories = new CategorieManager();
-			$this->categories = $categories->getCategoriesByIdProduit($this->getIdproduit());
+			$categorieM = new CategorieManager();
+			$this->categories = $categorieM->getCategoriesByIdProduit($this->idproduit);
+
+			$uniteM = new UniteManager();
+			$this->unite = $uniteM->getById($this->unite_idunite)->getNom();
+
+			$fleurM = new FleurManager();
+			$this->fleures = $fleurM->getFleuresByIdProduit($this->idproduit);
 		}
 
 
@@ -260,4 +267,22 @@
 
 
 		
+
+		/**
+		 * Get the value of fleures
+		 *
+		 * @return Fleur
+		 */
+		public function getFleures()
+		{
+				return $this->fleures;
+		}
+
+		/**
+		 * Get the value of unite
+		 */
+		public function getUnite()
+		{
+				return $this->unite;
+		}
 	}

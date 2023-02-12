@@ -15,11 +15,18 @@
            
             // var_dump((int)$_GET['id']);
              $produitM = new ProduitManager();
-             $produit = $produitM->getProduitDetailsById($_GET['id']);
+             $produit = $produitM->getById($_GET['id']);
+            //  $produits = $produitM->getAll();
             // var_dump($produit);
             
             $this->addParam('produit',$produit);
-            // var_dump( $villes);
+            // $this->addParam('produits',$produits);
+            // // var_dump( $villes);
+
+            // $couleurM = new CouleurManager();
+            // $couleur = $couleurM->getAll();
+            // $this->addParam('couleur',$couleur);
+            
             $filename = 'show';
             return $this->view($filename);
         }

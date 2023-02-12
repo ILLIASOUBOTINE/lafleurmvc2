@@ -1,6 +1,7 @@
 <h1>Details</h1>
 <?php 
-var_dump($produit);
+var_dump($produit->getFleures());
+// var_dump($couleur);
     
     // include 'components/carrousel.php';
     
@@ -12,7 +13,7 @@ var_dump($produit);
     <!-- <div class="block_carte">
         <?php
          getViewListCarte($titreSectionPopulaire,$populaireProduits);
-    ?> -->
+    ?>
 
-    </div>
+    </div> -->
 </section>

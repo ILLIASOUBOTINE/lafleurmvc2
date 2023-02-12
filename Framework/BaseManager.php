@@ -14,9 +14,14 @@
 		
 		public function getById($id)
 		{
-			$req = $this->_bdd->prepare("SELECT * FROM " . $this->_table . " WHERE id=?");
-			$req->execute(array($id));
-			$req->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE,$this->_object);
+			$req = $this->_bdd->prepare('SELECT * FROM ' .$this->_table .' WHERE '.$this->_table.'.id'.$this->_table.' = :id');
+			$re = "SELECT * FROM  $this->_table WHERE {$this->_table}.id{$this->_table} = :id";
+			// echo $re;
+			// $req->execute(array($id));
+			$req->bindValue(':id', $id, PDO::PARAM_INT);
+			$req->execute();
+			$req->setFetchMode(PDO::FETCH_CLASS,$this->_object);
+			
 			return $req->fetch();
 		}
 		

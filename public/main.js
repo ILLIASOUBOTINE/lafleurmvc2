@@ -121,13 +121,15 @@ let arr = [];
 arrowLeft.addEventListener("click", (event) => {
   arr = Array.from(carrousel.children);
   let elem = arr[0].cloneNode(true);
-  carrousel.children[0].remove();
   carrousel.append(elem);
+  carrousel.children[0].remove();
+  
 });
 
 arrowRight.addEventListener("click", (event) => {
   arr = Array.from(carrousel.children);
   let elem = arr[arr.length - 1].cloneNode(true);
-  carrousel.children[arr.length - 1].remove();
-  carrousel.children[0].before(elem);
+   carrousel.children[0].before(elem);
+  carrousel.children[arr.length].remove();
+ 
 });
