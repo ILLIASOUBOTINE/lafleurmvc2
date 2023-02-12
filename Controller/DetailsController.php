@@ -9,9 +9,11 @@
         
 		public function show(){
             
-            $notreLivraison = new NotreLivraisonManager();
-            $villes = $notreLivraison->getAll();
-            $this->addParam('villes',$villes);
+            // $notreLivraison = new NotreLivraisonManager();
+            // $villes = $notreLivraison->getAll();
+            // $villes = $_SESSION['villes'];
+        
+            // $this->addParam('villes',$villes);
            
             // var_dump((int)$_GET['id']);
              $produitM = new ProduitManager();
@@ -26,6 +28,10 @@
             // $couleurM = new CouleurManager();
             // $couleur = $couleurM->getAll();
             // $this->addParam('couleur',$couleur);
+            
+            $populaireProduits = $_SESSION['populaireProduits'];
+            $this->addParam('titreSectionPopulaire', 'Le plus populaire');
+            $this->addParam('populaireProduits', $populaireProduits);
             
             $filename = 'show';
             return $this->view($filename);

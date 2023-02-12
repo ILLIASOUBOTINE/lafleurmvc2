@@ -21,6 +21,9 @@
 				return preg_match("#^" . $route->path . "$#", $httpRequest->getRedirectUrl()) && $route->method == $httpRequest->getMethod()  
 				&& empty(array_diff_assoc($httpRequest->getKeyParam(),$route->param)) && count($httpRequest->getKeyParam()) == count($route->param); 
 			});
+			// var_dump($httpRequest);
+			// echo '<br/>';
+			var_dump($_POST);
 			// var_dump($routeFound);
 			// echo '<br/>';
 			// var_dump(array_shift($routeFound));

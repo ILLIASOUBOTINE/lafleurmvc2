@@ -8,7 +8,7 @@
 
 <div class="block_carte">
     <?php
-         getViewListCarte($titreSectionPopulaire,$populaireProduits);
+        getViewListCarte($titreSectionPopulaire,$populaireProduits);
     ?>
 
 </div>
@@ -17,6 +17,9 @@
     <?php
         getViewListCarte($titreSectionNosOffre,$offreProduits);
     ?>
-    <a href="getPlusProduitOffre"><button id="produitOffre" class="btn_grand pd24w600" title="Montre plus">Montre
-            plus</button></a>
+    <a href="getPlusProduitOffre">
+        <button id="produitOffre" class="btn_grand pd24w600" title="Montre plus">Montre
+            plus
+        </button>
+    </a>
 </div>

@@ -2,15 +2,14 @@
 
 
 
-	class AccueilController extends BaseController
+	class FiltreController extends BaseController
 	{
 		public function __construct($httpRequest)
 		{
 			parent::__construct($httpRequest);
-            $this->addParam('title','Accueil');
-		}
+        }
         
-		public function show(){
+		public function filtreBy(){
             
             // $villes = $_SESSION['villes'];
             $offreProduits = $_SESSION['offreProduits'];
@@ -26,7 +25,7 @@
             // $this->addParam('secPop', $secPop);
             // $this->addParam('villes',$villes);
             // var_dump( $villes);
-            $filename = 'main';
+            $filename = 'main' ;
             return $this->view($filename);
         }
         

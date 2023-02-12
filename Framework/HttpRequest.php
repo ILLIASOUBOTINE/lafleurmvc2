@@ -79,16 +79,12 @@
 					}
 				case "POST":
 				case "PUT":
-					if(isset($this->_route))
-						{
-							foreach($this->_route->getParam() as $param)
-							{
-								if(isset($_POST[$param]))
-								{
-									$this->_param[] = $_POST[$param];
-								}
-							}
-						}
+					
+					foreach($_POST as $key => $param)
+					{
+						$this->_param[$key] = $param;
+					}
+						
 					
 			}
 		}

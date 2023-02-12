@@ -14,6 +14,23 @@
 	"method" : "GET",
 	"param" : []
 },
+
+{
+	"path" : "/getProduitVotreChoix",
+	"controller" : "Accueil",
+	"action" : "getProduitVotreChoix",
+	"method" : "POST",
+	"param" : ["prix","fleures","categories","couleures"]
+},
+
+{
+	"path" : "/getProduitVotreChoix",
+	"controller" : "Accueil",
+	"action" : "getProduitVotreChoix",
+	"method" : "POST",
+	"param" : ["prix"]
+},
+
 {
 	"path" : "/contact",
 	"controller" : "Contact",

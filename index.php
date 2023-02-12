@@ -16,10 +16,13 @@
 	});
 	
   	session_start();
+	// unset($_SESSION['populaireProduits']);
 	// unset($_SESSION['offreProduits']);
+	// unset($_SESSION['villes']);
+	
 	require 'functions.php';
     require 'config/init.php';
-
+	
 	
 	try
 	{
