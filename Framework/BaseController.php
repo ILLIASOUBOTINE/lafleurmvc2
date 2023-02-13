@@ -43,4 +43,12 @@
 			header('Location: '.$route);
             exit;
 		}
+
+		/**
+		 * Get the value of _httpRequest
+		 */
+		public function get_httpRequest()
+		{
+				return $this->_httpRequest;
+		}
 	}

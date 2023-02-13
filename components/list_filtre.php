@@ -7,7 +7,7 @@
             </div>
             <div class="itemPrix dnone" id="itemPrix">
                 <input type="range" id="prix" name="prix" value="150" step="1" max="150" min="0">
-                <span class="prix_affiche int20w400">30</span>
+                <span class="prix_affiche int20w400">150</span>
                 <span class="int20w400">$</span>
                 </input>
             </div>

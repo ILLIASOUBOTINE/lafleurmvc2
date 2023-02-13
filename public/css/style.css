@@ -1,6 +1,6 @@
 :root {
   --color-text-main: rgba(0, 0, 0, 1);
-  --color-gris: rgba(217, 217, 217, 1);
+  --color-gris: rgb(246, 243, 243);
   --color-white: rgba(255, 255, 255, 0.8);
   --color-white-fh: white;
   --font-family-pd: "Playfair Display";
@@ -96,7 +96,12 @@ header {
   top: -300px;
   /* width: 320px; */
   width: 100%;
-  min-height: 240px;
+  /* min-height: 240px; */
+  /* height: 600px; */
+  /* height: calc(100vh - 60px); */
+  
+  /* height: max-content; */
+  /* overflow: auto; */
   background-color: var(--color-gris);
   z-index: -5;
   transition: top 1s;
@@ -106,6 +111,9 @@ header {
   top: 60px;
   transition: top 1s;
   z-index: -5;
+ height: calc(100vh - 60px);
+  overflow: auto;
+  background-color: rgb(255, 255, 255,0);
 }
 
 .burger_ligne {
@@ -206,7 +214,8 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: var(--color-white);
+  /* background-color: var(--color-white); */
+  background-color:  var(--color-gris);
   padding: 10px 20px;
   cursor: pointer;
 }
@@ -389,6 +398,7 @@ section {
   justify-content: space-between;
   align-items: center;
   background-color: var(--color-white);
+  background-color: var(--color-gris);
   padding: 10px 40px;
   cursor: pointer;
 }
@@ -402,7 +412,8 @@ section {
   height: 30px;
   display: flex;
   align-items: center;
-  background-color: var(--color-white);
+  /* background-color: var(--color-white); */
+  background-color: var(--color-gris);
   padding: 5px 40px;
   cursor: pointer;
 }
@@ -416,7 +427,7 @@ section {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--color-white);
+  background-color: var(--color-gris);
   padding: 10px 20px;
 }
 
@@ -431,6 +442,7 @@ section {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: var(--color-gris);
 }
 
 .dnone {
@@ -477,7 +489,7 @@ section {
   display: flex;
   justify-content:space-between;
   align-items: center;
-  background-color: var(--color-gris);
+  background-color: var(--color-white-fh);
   border-radius: 15px;
   border: none;
   padding: 0 10px;
@@ -525,13 +537,13 @@ section {
 
 .filtreProduit {
   background: var(--color-gris);
-  border-bottom: none;
+  /* border-bottom: none; */
    /* z-index: 5; */
 }
 
-.filtreProduit:hover {
+/* .filtreProduit:hover {
   background: rgba(255, 255, 255, 0.5);
-}
+} */
 
 .nav_seconde_filtre {
   position: absolute;

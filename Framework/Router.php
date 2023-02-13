@@ -23,7 +23,7 @@
 			});
 			// var_dump($httpRequest);
 			// echo '<br/>';
-			var_dump($_POST);
+			// var_dump($_POST);
 			// var_dump($routeFound);
 			// echo '<br/>';
 			// var_dump(array_shift($routeFound));

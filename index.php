@@ -19,7 +19,7 @@
 	// unset($_SESSION['populaireProduits']);
 	// unset($_SESSION['offreProduits']);
 	// unset($_SESSION['villes']);
-	
+	// unset($_SESSION['votreChoixProduits']);
 	require 'functions.php';
     require 'config/init.php';
 	

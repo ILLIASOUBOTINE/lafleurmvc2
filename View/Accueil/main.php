@@ -5,6 +5,17 @@
     // getViewListCarte($titreSectionNosOffre,$offreProduits);
     
 ?>
+<?php if(isset($votreChoixProduits)):?>
+<div class="block_carte">
+
+    <?php
+        getViewListCarte($titreSectionVotreChoix,$votreChoixProduits);
+    ?>
+    <?php if(empty($votreChoixProduits)):?>
+    <p class="pd24w600">Rien n'a été trouvé selon votre requête, modifiez les paramètres de la requête.</p>
+    <?php endif?>
+</div>
+<?php endif?>
 
 <div class="block_carte">
     <?php

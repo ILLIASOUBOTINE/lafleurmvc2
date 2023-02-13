@@ -12,7 +12,7 @@
         
 		public function show(){
             
-            // $villes = $_SESSION['villes'];
+            
             $offreProduits = $_SESSION['offreProduits'];
             $populaireProduits = $_SESSION['populaireProduits'];
             
@@ -23,9 +23,14 @@
           
             $this->addParam('titreSectionPopulaire', 'Le plus populaire');
             $this->addParam('populaireProduits', $populaireProduits);
-            // $this->addParam('secPop', $secPop);
-            // $this->addParam('villes',$villes);
-            // var_dump( $villes);
+            
+            if (isset($_SESSION['votreChoixProduits'])) {
+                $votreChoixProduits = $_SESSION['votreChoixProduits'];
+                $this->addParam('titreSectionVotreChoix', 'Votre choix');
+                $this->addParam('votreChoixProduits', $votreChoixProduits);
+            }
+            
+           
             $filename = 'main';
             return $this->view($filename);
         }
@@ -43,11 +48,16 @@
         }
 
         public function getProduitVotreChoix(){
-            echo 'filtre';
+            $votreChoixM = new ProduitManager();
+			
+           $votreChoixProduits = $votreChoixM->getProduitVotreChoix($this->get_httpRequest()->getParam()['prix'],['categories'=>$this->get_httpRequest()->getParam()['categories'], 'fleures'=>$this->get_httpRequest()->getParam()['fleures'], 'couleures'=>$this->get_httpRequest()->getParam()['couleures']]);
+           $_SESSION['votreChoixProduits'] = $votreChoixProduits;
+           
+			
+            $this->redirect('/');
         }
 		
         
-	
  
 	
 }
