@@ -5,7 +5,8 @@
 		"Model",
 		"Framework/Exception",
 		"Model/Manager",
-		"Model/Entite"
+		"Model/Entite",
+		"components"
 	],
 	"datasource":  { 
 		"host": "localhost:3360",

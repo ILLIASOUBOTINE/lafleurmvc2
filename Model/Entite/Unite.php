@@ -33,4 +33,13 @@
 		{
 			$this->nom = $nom;
 		}
+
+		public  function getUniteArrayAsso()
+		{
+			return   array(
+				"idunite" => $this->idunite,
+				"nom" => $this->nom,
+			);
+			
+		}
 	}

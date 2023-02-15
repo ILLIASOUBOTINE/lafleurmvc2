@@ -46,4 +46,13 @@
 		{
 				return $this->idphoto;
 		}
+
+		public  function getPhotoArrayAsso()
+		{
+			return   array(
+				"idphoto" => $this->idphoto,
+				"img_url" => $this->img_url,
+			);
+			
+		}
 	}

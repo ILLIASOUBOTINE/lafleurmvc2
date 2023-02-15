@@ -14,7 +14,7 @@
 		
 		private  $photos;
 		private  $categories;
-		private  $unite;
+		private $unite;
 		private  $fleures;
 		
 		
@@ -188,6 +188,8 @@
 				return $this->unite_idunite;
 		}
 
+		
+
 		/**
 		 * Set the value of unite_idunite
 		 *
@@ -236,6 +238,15 @@
 				return $this->photos;
 		}
 
+		public function getPhotosArrayAsso()
+		{
+			$arr = [];
+			foreach($this->photos as $photo ){
+				$arr[] = $photo->getPhotoArrayAsso();
+			}
+				return $arr;
+		}
+
 		/**
 		 * Set the value of img_url
 		 *
@@ -262,7 +273,16 @@
 
 		public function getCategories()
 		{
-				return $this->categories;
+			return $this->categories;
+		}
+		
+		public function getCategoriesArrayAsso()
+		{
+			$arr = [];
+			foreach($this->categories as $categorie ){
+				$arr[] = $categorie->getCategorieArrayAsso();
+			}
+				return $arr;
 		}
 
 
@@ -284,5 +304,33 @@
 		public function getUnite()
 		{
 				return $this->unite;
+		}
+
+
+		public static function toJson($offreProduits){
+			$arrayProduits = array();
+			foreach ($offreProduits as $produit) {
+			   	$arrayProduits[] = array(
+					"idproduit" => $produit->getIdproduit(),
+					"nom" => $produit->getNom(),
+					"longueur" => $produit->getLongueur(),
+					"prix_unite" => $produit->getPrixUnite(),
+					"description" => $produit->getDescription(),
+					"quantiteTotale" => $produit->getQuantiteTotale(),
+					"unite_idunite" => $produit->getUniteIdunite(),
+					"ventesTotales" => $produit->getVentesTotales(),
+					"disponible" => $produit->getDisponible(),
+					"photos"=>$produit->getPhotosArrayAsso(),
+					"categories"=>$produit->getCategoriesArrayAsso(),
+					// "categories"=>$produit->getCategories(),
+					"unite"=>$produit->getUnite(),
+					"fleures"=>$produit->getFleures(),
+				);
+				
+			}
+		
+			// Преобразование ассоциативного массива в JSON
+			// $json = json_encode($arrayProduits);
+			return $arrayProduits;
 		}
 	}

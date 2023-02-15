@@ -14,7 +14,7 @@
 </section>
 <div class="block_carte">
     <?php
-         getViewListCarte($titreSectionPopulaire,$populaireProduits);
+        ListsCarte::getViewListCarte($titreSectionPopulaire,$populaireProduits);
     ?>
 
 </div>

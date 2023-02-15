@@ -1,12 +1,13 @@
 :root {
   --color-text-main: rgba(0, 0, 0, 1);
+  --color-text-bann:rgb(93, 64, 157);
   --color-gris: rgb(246, 243, 243);
   --color-white: rgba(255, 255, 255, 0.8);
   --color-white-fh: white;
   --font-family-pd: "Playfair Display";
   --font-family-int: "Inter";
   --color-bgd: rgba(255, 240, 189, 1);
-  --font-size24: 24px;
+ 
 }
 
 * {
@@ -113,7 +114,7 @@ header {
   z-index: -5;
  height: calc(100vh - 60px);
   overflow: auto;
-  background-color: rgb(255, 255, 255,0);
+  background-color: rgb(255, 255, 255, 0.5);
 }
 
 .burger_ligne {
@@ -140,6 +141,21 @@ header {
   opacity: 0;
   transition: opacity 1s;
 }
+
+.pd64w700 {
+  font-size: 64px;
+  font-weight: 700;
+  font-family: var(--font-family-pd);
+  color: var(--color-text-bann);
+}
+
+.pd40w700b {
+  font-size: 40px;
+  font-weight: 700;
+  font-family: var(--font-family-pd);
+  color: var(--color-text-bann);
+}
+
 
 .pd24w600 {
   font-size: 24px;
@@ -671,6 +687,38 @@ section {
 }
 
 
+/* Banniere  */
+
+.banniere {
+  position: relative;
+  width: 100%;
+  /* max-height: 300px; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.img_banniere {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: -1;
+}
+
+.text_banniere {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: var(--color-white);
+  border-radius: 30px;
+  padding: 5px;
+}
+
+
 @media screen and (max-width: 840px) and (min-width: 400px){
   .nav_left,
   .idAccount,
@@ -802,22 +850,35 @@ section {
     
   }
 
+  .text_banniere {
+    width: 75%;
+  }
+
   .pd24w600 {
     font-size: 16px;
     font-weight: 700;
-   
   }
+
+  .pd64w700 {
+    font-size: 32px;
+    font-weight: 700;
+  }
+
+  .pd40w700b {
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+
   
   .pd40w700 {
     font-size: 20px;
     font-weight: 600;
-    
   }
   
-   .pd20w400 {
+  .pd20w400 {
     font-size: 14px;
     font-weight: 200;
-    
   } 
   
   .int20w400 {
@@ -866,16 +927,30 @@ section {
   }
   
   .btn_ajouter {
-    width: 60px;
+   width: 60px;
     height: 20px;
     border-radius: 10px;
     
+  }
+
+  .text_banniere {
+    width: 95%;
   }
 
   .pd24w600 {
     font-size: 16px;
     font-weight: 700;
    
+  }
+
+  .pd64w700 {
+    font-size: 32px;
+    font-weight: 700;
+  }
+
+  .pd40w700b {
+    font-size: 20px;
+    font-weight: 600;
   }
   
   .pd40w700 {
@@ -919,12 +994,14 @@ section {
   }
 
   header {
-    /* position:fixed; */
+    position:fixed;
     height: 60px;
     margin-bottom: 0px;
     align-items: center;
     justify-content: space-between;
   }
+
+
 
   main {
     margin-top: 60px;

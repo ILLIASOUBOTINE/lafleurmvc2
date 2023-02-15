@@ -1,8 +1,8 @@
 <?php
 	class Categorie
 	{
-		private int $idcategorie;
-		private string $nom;
+		private  $idcategorie;
+		private  $nom;
 		
 		
 		public function __construct()
@@ -15,7 +15,7 @@
 		 *
 		 * @return int
 		 */
-		public function getIdcategorie(): int
+		public function getIdcategorie()
 		{
 				return $this->idcategorie;
 		}
@@ -25,7 +25,7 @@
 		 *
 		 * @return string
 		 */
-		public function getNom(): string
+		public function getNom()
 		{
 				return $this->nom;
 		}
@@ -37,10 +37,19 @@
 		 *
 		 * @return self
 		 */
-		public function setNom(string $nom): self
+		public function setNom(string $nom)
 		{
 				$this->nom = $nom;
 
 				return $this;
+		}
+
+		public  function getCategorieArrayAsso()
+		{
+			return   array(
+				"idcategorie" => $this->idcategorie,
+				"nom" => $this->nom,
+			);
+			
 		}
 	}
