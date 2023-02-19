@@ -53,5 +53,10 @@
 		
         
  
-	
+        public function  getProduitVotreChoixByCategorie(){
+            $votreChoixM = new ProduitManager();
+			$votreChoixProduits = $votreChoixM->getProduitVotreChoixByCategorie($this->get_httpRequest()->getParam()['idcategorie']);
+            $_SESSION['votreChoixProduits'] = $votreChoixProduits;
+            $this->redirect('/');
+        }
 }

@@ -32,7 +32,8 @@
         <a class="marg20 idAccount" href="#"><img class="cursorscall20" src="public/imgs/general/account_icon.svg"
                 alt="account"></a>
         <img class="marg20 cursorscall20 idlivraison" src="public/imgs/general/delivery_icon.svg" alt="livraison">
-        <img class="marg20 cursorscall20" src="public/imgs/general/basket_icon.svg" alt="panier">
+        <img class="marg20 cursorscall20 idpanier" src="public/imgs/general/basket_icon.svg" alt="panier">
     </nav>
     <?php include 'components/list_livraison.php'?>
+    <?php include 'components/panier.php'?>
 </header>

@@ -21,6 +21,9 @@ const idLivraison = document.querySelector('.idlivraison');
 const prix = document.querySelector('#prix');
 const inputSearchVille = document.querySelector('#inputSearchVille');
 
+const panierList = document.querySelector('.panier_list');
+let arrItemIdProduit = [];
+
 // console.dir(filtreProduit);
 
 
@@ -91,6 +94,21 @@ idLivraison.addEventListener('click', (event)=>{
 document.querySelector('#livraisonVilleFermer').addEventListener('click', (event)=>{
     document.querySelector('#notrelivraison').classList.toggle('notrelivraison_active');
 });
+
+
+//   for panier move and remove block
+
+    document.querySelector('.idpanier').addEventListener('click', (event)=>{
+        if (panierList.children.length !== 0) {
+            document.querySelector('#panier').classList.toggle('panier_active');
+        }
+    });
+
+    document.querySelector('#panierFermer').addEventListener('click', (event)=>{
+        document.querySelector('#panier').classList.toggle('panier_active');
+    });
+
+
 
 //  pour chercher les villes des livraison
 
@@ -178,17 +196,105 @@ if (document.querySelector("#produitOffre") !== null) {
         })
     });
 
-
+}
     function getViewCarte(idProduit, imgProduit, nomProduit, prixProduit, dispoProduit) {
         let carteHtml = '';
         carteHtml += '<div class="carte marg5 marg20top"><a href="details?id='+idProduit+'">';
         carteHtml += '<img class="img_carte" src="public/imgs/fleurs/'+imgProduit+'" title=" details"></a>';
         carteHtml += '<p class="title_carte pd24w600">'+nomProduit+'</p>';
         carteHtml += '<div class="footer_carte"><span class="prix_carte int20w400">'+prixProduit+'</span>';
-        carteHtml += '<button class="btn_ajouter int20w400">'+dispoProduit+'</button></div></div>';
+        carteHtml += '<button class="btn_ajouter int20w400" id="idBtnAjouter'+idProduit+'">'+dispoProduit+'</button></div></div>';
         return carteHtml;
     }
+
+
+// pour panier
+
+
+document.querySelector('main').addEventListener('click',(event)=>{
+    if (event.target.classList.contains('btn_ajouter') && event.target.innerText === 'Ajouter') {
+        console.dir(event.target);
+        let idProduit = event.target.id.replace('idBtnAjouter','');
+        if (!arrItemIdProduit.includes(idProduit)) {
+            arrItemIdProduit.push(idProduit);
+            let produit = event.target.parentElement.parentElement;
+            // let idProduit = produit.children[0].href;
+            let nomProduit = produit.children[1].innerText;
+            let imgProduit = produit.children[0].children[0].src;
+            let prixProduit = produit.children[2].children[0].innerText;
+            let prixProduitTotal = prixProduit;
+
+            console.log(idProduit,nomProduit,imgProduit,prixProduit);
+        
+            let str = getViewItemPanier(idProduit, imgProduit, nomProduit, prixProduit,  prixProduitTotal);
+
+            panierList.insertAdjacentHTML('beforeend',str);
+
+          let obj = {idProduit: idProduit, imgProduit: imgProduit, nomProduit:nomProduit, prixProduit:prixProduit,  prixProduitTotal:prixProduitTotal, quantite:1};
+          let  objSerialized = JSON.stringify(obj);
+          sessionStorage.setItem('produit'+idProduit, objSerialized);
+        }
+        console.log(arrItemIdProduit);
+    }
+})
+
+//  ajouter et supprimer quantite produit
+panierList.addEventListener('click',(event)=>{
+    
+
+    if (event.target.classList.contains('panier_item_plus')){
+        let itemPanier = event.target.parentElement.parentElement.parentElement.parentElement;
+        let idItemPanier = itemPanier.id.replace('idItemPanier','');
+
+       let count = ++event.target.previousElementSibling.textContent;
+        event.target.parentElement.nextElementSibling.textContent = count*event.target.parentElement.previousElementSibling.textContent;
+       
+        let  objSerialized = sessionStorage.getItem('produit'+idItemPanier);
+        let obj = JSON.parse(objSerialized);
+        obj.quantite = count;
+        obj.prixProduitTotal = count*event.target.parentElement.previousElementSibling.textContent;
+        sessionStorage.setItem('produit'+idItemPanier, JSON.stringify(obj));
+
+    }
+
+    if (event.target.classList.contains('panier_item_minus')){
+        let itemPanier = event.target.parentElement.parentElement.parentElement.parentElement;
+        let idItemPanier = itemPanier.id.replace('idItemPanier','');
+
+        if (event.target.nextElementSibling.textContent > 1) {
+            let count = --event.target.nextElementSibling.textContent;
+            event.target.parentElement.nextElementSibling.textContent = count*event.target.parentElement.previousElementSibling.textContent;
+        
+            let  objSerialized = sessionStorage.getItem('produit'+idItemPanier);
+            let obj = JSON.parse(objSerialized);
+            obj.quantite = count;
+            obj.prixProduitTotal = count*event.target.parentElement.previousElementSibling.textContent;
+            sessionStorage.setItem('produit'+idItemPanier, JSON.stringify(obj));
+
+        }else if(event.target.nextElementSibling.textContent == 1){
+            let itemPanier = event.target.parentElement.parentElement.parentElement.parentElement;
+            itemPanier.remove(); 
+           
+            let idItemPanier = itemPanier.id.replace('idItemPanier','');
+            let index = arrItemIdProduit.indexOf(idItemPanier);
+            if (index !== -1) {
+                arrItemIdProduit.splice(index,1);
+            }
+        }
+        if ( arrItemIdProduit.length === 0) {
+            document.querySelector('#panier').classList.remove('panier_active'); 
+        }
+    }
+})
+
+function getViewItemPanier(idProduit, imgProduit, nomProduit, prixProduit, prixProduitTotal) {
+    let itemPanierHtml = '';
+    itemPanierHtml += '<div class="item_panier" id="idItemPanier'+idProduit+'"><h4 class="int20w500">'+nomProduit+'</h4>';
+    itemPanierHtml += '<div class="item_panier_body"><img src="'+imgProduit+'" alt="">';
+    itemPanierHtml += '<div class="panier_details"><p class="panier_prix_unit int14w500">'+prixProduit+'</p>';
+    itemPanierHtml += '<div class="panier_countre"><img class="panier_item_minus" src="public/imgs/general/minus.svg" alt=""><span class="int20w500">'+1+'</span>';
+    itemPanierHtml += '<img class="panier_item_plus" src="public/imgs/general/plus.svg" alt=""></div><p class="panier_prix_total int14w500">'+prixProduitTotal+'</p> </div></div></div>';
+    return itemPanierHtml;
 }
 
-
-
+console.log(sessionStorage);

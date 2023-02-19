@@ -10,10 +10,9 @@
     </div>
 
     <nav class="nav_categorie">
-        <a class="pd24w600 marg20 cursorscall20" href="#">Remerciement</a>
-        <a class="pd24w600 marg20 cursorscall20" href="#">Naissance</a>
-        <a class="pd24w600 marg20 cursorscall20" href="#">Mariage</a>
-        <a class="pd24w600 marg20 cursorscall20" href="#">Amour et sentiments</a>
-        <a class="pd24w600 marg20 cursorscall20" href="#">Anniversaire</a>
+        <?php foreach($_SESSION['categories'] as $categorie):?>
+        <a class="pd24w600 marg20 cursorscall20"
+            href="/getProduitVotreChoixByCategorie?idcategorie=<?=$categorie->getIdcategorie()?>"><?=$categorie->getNom()?></a>
+        <?php endforeach?>
     </nav>
 </nav>

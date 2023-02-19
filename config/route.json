@@ -24,11 +24,11 @@
 },
 
 {
-	"path" : "/getProduitVotreChoix",
+	"path" : "/getProduitVotreChoixByCategorie",
 	"controller" : "Accueil",
-	"action" : "getProduitVotreChoix",
-	"method" : "POST",
-	"param" : ["prix"]
+	"action" : "getProduitVotreChoixByCategorie",
+	"method" : "GET",
+	"param" : ["idcategorie"]
 },
 
 {
