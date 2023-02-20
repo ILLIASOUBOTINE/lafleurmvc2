@@ -31,6 +31,12 @@
             $filename = 'main';
             return $this->view($filename);
         }
+
+        public function show1(){
+            var_dump( json_decode($_POST["dataPanier"], true));
+           
+            exit;
+        }
         
         public function getPlusProduitOffre(){
             header("Content-Type:application/json; charset=utf-8");

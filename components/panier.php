@@ -1,4 +1,4 @@
-<div class="panier" id="panier">
+<form action="/" method="POST" class="panier" id="panier">
     <div id="panierFermer" class="pd24w600 itemdrop">
         <span>Panier</span>
         <img src="public/imgs/general/close_circle_icon.svg" alt="">
@@ -24,7 +24,8 @@
     <p id="panierTotale" class="int20w500 panierTotale">
         Total: <span> 200</span>$
     </p>
-    <p id="panierCommander" class="pd24w600 itemdrop">
+    <input type="text" id="dataPanier" name="dataPanier" class="dnone">
+    <button type="button" id="panierCommander" class="pd24w600 itemdrop">
         Commander
-    </p>
-</div>
+    </button>
+</form>

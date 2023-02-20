@@ -1,5 +1,4 @@
 <?php
-  
 	$configFile = file_get_contents("config/config.json");
 	$config = json_decode($configFile);
 	// var_dump($config->autoloadFolder);

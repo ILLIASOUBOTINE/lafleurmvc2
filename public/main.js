@@ -22,7 +22,26 @@ const prix = document.querySelector('#prix');
 const inputSearchVille = document.querySelector('#inputSearchVille');
 
 const panierList = document.querySelector('.panier_list');
-let arrItemIdProduit = [];
+let produitsPanier;
+let arrItemIdProduit;
+let prixTotalePanier = 0;
+if (sessionStorage.getItem('produitsPanier') == null) {
+      produitsPanier = [];
+    //   arrItemIdProduit = [];
+}else {
+    produitsPanier =JSON.parse(sessionStorage.getItem('produitsPanier')); 
+    // arrItemIdProduit = JSON.parse(sessionStorage.getItem('arrItemIdProduit')); 
+
+    produitsPanier.forEach((produit)=>{
+        // console.log(produit);
+       let str = getViewItemPanier(produit.idProduit, produit.imgProduit, produit.nomProduit, produit.prixProduit,produit.quantite, produit.prixProduitTotal);
+        panierList.insertAdjacentHTML('beforeend',str);
+        prixTotalePanier += produit.prixProduit * produit.quantite;
+    });
+
+    // pour prixtotalePanier
+    document.querySelector('#panierTotale>span').textContent = prixTotalePanier;
+}
 
 // console.dir(filtreProduit);
 
@@ -211,30 +230,46 @@ if (document.querySelector("#produitOffre") !== null) {
 // pour panier
 
 
+
+
 document.querySelector('main').addEventListener('click',(event)=>{
     if (event.target.classList.contains('btn_ajouter') && event.target.innerText === 'Ajouter') {
-        console.dir(event.target);
+        // console.dir(event.target);
         let idProduit = event.target.id.replace('idBtnAjouter','');
-        if (!arrItemIdProduit.includes(idProduit)) {
-            arrItemIdProduit.push(idProduit);
+         console.log(produitsPanier.findIndex(produit=>produit.idProduit == idProduit) );
+         console.log(produitsPanier);
+        if (produitsPanier.findIndex(produit=>produit.idProduit === idProduit) == -1)  {
+           
+
             let produit = event.target.parentElement.parentElement;
             // let idProduit = produit.children[0].href;
             let nomProduit = produit.children[1].innerText;
             let imgProduit = produit.children[0].children[0].src;
             let prixProduit = produit.children[2].children[0].innerText;
             let prixProduitTotal = prixProduit;
-
-            console.log(idProduit,nomProduit,imgProduit,prixProduit);
+            let quantite = 1;
+         
         
-            let str = getViewItemPanier(idProduit, imgProduit, nomProduit, prixProduit,  prixProduitTotal);
+            let str = getViewItemPanier(idProduit, imgProduit, nomProduit, prixProduit,quantite,  prixProduitTotal);
 
             panierList.insertAdjacentHTML('beforeend',str);
 
-          let obj = {idProduit: idProduit, imgProduit: imgProduit, nomProduit:nomProduit, prixProduit:prixProduit,  prixProduitTotal:prixProduitTotal, quantite:1};
-          let  objSerialized = JSON.stringify(obj);
-          sessionStorage.setItem('produit'+idProduit, objSerialized);
+       
+            let obj = {idProduit: idProduit, imgProduit: imgProduit, nomProduit:nomProduit, prixProduit:prixProduit,  prixProduitTotal:prixProduitTotal, quantite:1};
+            // produitsPanier.push(obj); 
+           
+            produitsPanier.push(obj);
+            let produitsPanierSerialized = JSON.stringify(produitsPanier);
+            sessionStorage.setItem('produitsPanier', produitsPanierSerialized);
+
+            // pour prixtotalePanier
+            prixTotalePanier = 0;
+            produitsPanier.forEach((produit)=>{
+                prixTotalePanier += produit.prixProduit * produit.quantite;
+            });
+            document.querySelector('#panierTotale>span').textContent = prixTotalePanier;
         }
-        console.log(arrItemIdProduit);
+      
     }
 })
 
@@ -249,12 +284,22 @@ panierList.addEventListener('click',(event)=>{
        let count = ++event.target.previousElementSibling.textContent;
         event.target.parentElement.nextElementSibling.textContent = count*event.target.parentElement.previousElementSibling.textContent;
        
-        let  objSerialized = sessionStorage.getItem('produit'+idItemPanier);
-        let obj = JSON.parse(objSerialized);
-        obj.quantite = count;
-        obj.prixProduitTotal = count*event.target.parentElement.previousElementSibling.textContent;
-        sessionStorage.setItem('produit'+idItemPanier, JSON.stringify(obj));
+       
+        produitsPanier.map((produit)=>{
+            if (produit.idProduit === idItemPanier) {
+                produit.quantite = count;
+                produit.prixProduitTotal = count*event.target.parentElement.previousElementSibling.textContent;
+            }
+        });
+        
+        sessionStorage.setItem('produitsPanier', JSON.stringify(produitsPanier));
 
+         // pour prixtotalePanier
+        prixTotalePanier = 0;
+        produitsPanier.forEach((produit)=>{
+            prixTotalePanier += produit.prixProduit * produit.quantite;
+        });
+        document.querySelector('#panierTotale>span').textContent = prixTotalePanier;
     }
 
     if (event.target.classList.contains('panier_item_minus')){
@@ -265,36 +310,75 @@ panierList.addEventListener('click',(event)=>{
             let count = --event.target.nextElementSibling.textContent;
             event.target.parentElement.nextElementSibling.textContent = count*event.target.parentElement.previousElementSibling.textContent;
         
-            let  objSerialized = sessionStorage.getItem('produit'+idItemPanier);
-            let obj = JSON.parse(objSerialized);
-            obj.quantite = count;
-            obj.prixProduitTotal = count*event.target.parentElement.previousElementSibling.textContent;
-            sessionStorage.setItem('produit'+idItemPanier, JSON.stringify(obj));
+           
+            produitsPanier.map((produit)=>{
+                if (produit.idProduit === idItemPanier) {
+                    produit.quantite = count;
+                    produit.prixProduitTotal = count*event.target.parentElement.previousElementSibling.textContent;
+                }
+            });
+        
+            sessionStorage.setItem('produitsPanier', JSON.stringify(produitsPanier));
+
+            // pour prixtotalePanier
+            prixTotalePanier = 0;
+            produitsPanier.forEach((produit)=>{
+                prixTotalePanier += produit.prixProduit * produit.quantite;
+            });
+            document.querySelector('#panierTotale>span').textContent = prixTotalePanier;
+
 
         }else if(event.target.nextElementSibling.textContent == 1){
             let itemPanier = event.target.parentElement.parentElement.parentElement.parentElement;
             itemPanier.remove(); 
            
             let idItemPanier = itemPanier.id.replace('idItemPanier','');
-            let index = arrItemIdProduit.indexOf(idItemPanier);
+         
+            let index = produitsPanier.findIndex((produit)=>produit.idProduit == idItemPanier);
+            
             if (index !== -1) {
-                arrItemIdProduit.splice(index,1);
+                produitsPanier.splice(index,1);
             }
+            console.log(produitsPanier);
+            sessionStorage.setItem('produitsPanier', JSON.stringify(produitsPanier));
+
+            // pour prixtotalePanier
+            prixTotalePanier = 0;
+            produitsPanier.forEach((produit)=>{
+                prixTotalePanier += produit.prixProduit * produit.quantite;
+            });
+            document.querySelector('#panierTotale>span').textContent = prixTotalePanier;
+
+           
         }
-        if ( arrItemIdProduit.length === 0) {
+        if ( produitsPanier.length === 0) {
             document.querySelector('#panier').classList.remove('panier_active'); 
         }
     }
 })
 
-function getViewItemPanier(idProduit, imgProduit, nomProduit, prixProduit, prixProduitTotal) {
+function getViewItemPanier(idProduit, imgProduit, nomProduit, prixProduit,quantite, prixProduitTotal) {
     let itemPanierHtml = '';
     itemPanierHtml += '<div class="item_panier" id="idItemPanier'+idProduit+'"><h4 class="int20w500">'+nomProduit+'</h4>';
     itemPanierHtml += '<div class="item_panier_body"><img src="'+imgProduit+'" alt="">';
     itemPanierHtml += '<div class="panier_details"><p class="panier_prix_unit int14w500">'+prixProduit+'</p>';
-    itemPanierHtml += '<div class="panier_countre"><img class="panier_item_minus" src="public/imgs/general/minus.svg" alt=""><span class="int20w500">'+1+'</span>';
+    itemPanierHtml += '<div class="panier_countre"><img class="panier_item_minus" src="public/imgs/general/minus.svg" alt=""><span class="int20w500">'+quantite+'</span>';
     itemPanierHtml += '<img class="panier_item_plus" src="public/imgs/general/plus.svg" alt=""></div><p class="panier_prix_total int14w500">'+prixProduitTotal+'</p> </div></div></div>';
     return itemPanierHtml;
 }
 
-console.log(sessionStorage);
+console.log(sessionStorage.getItem('produitsPanier'));
+
+document.querySelector('#panierCommander').addEventListener('click',(event)=>{
+    // event.preventDefault();
+    let objs = [];
+    produitsPanier.forEach((produit)=>{
+        let obj = {'id': produit.idProduit, 'quantite': produit.quantite};
+        objs.push(obj); 
+    });
+
+    let str = JSON.stringify(objs);
+
+    document.querySelector('#dataPanier').value = str;
+    event.target.form.submit();
+});

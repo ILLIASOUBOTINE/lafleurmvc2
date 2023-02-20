@@ -8,6 +8,14 @@
 },
 
 {
+	"path" : "/",
+	"controller" : "Accueil",
+	"action" : "show1",
+	"method" : "POST",
+	"param" : ["dataPanier"]
+},
+
+{
 	"path" : "/getPlusProduitOffre",
 	"controller" : "Accueil",
 	"action" : "getPlusProduitOffre",
