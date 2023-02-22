@@ -1,11 +1,7 @@
 if (window.innerWidth > 841) {
     document.querySelectorAll('.listFiltre')[0].remove();
     document.querySelector('#filtreProduit').remove();
-    
-    // console.dir(document.querySelectorAll('.listFiltre'));
-} else {
-    // console.dir(document.querySelectorAll('.listFiltre'));
-}
+} 
  
 const burgerMenu = document.querySelector('.burger_menu');
 const dropMenu = document.querySelector('.drop_menu');
@@ -21,27 +17,44 @@ const idLivraison = document.querySelector('.idlivraison');
 const prix = document.querySelector('#prix');
 const inputSearchVille = document.querySelector('#inputSearchVille');
 
+// const panierList = document.querySelector('.panier_list');
+
+
+if (window.location.pathname == '/commande') {
+    console.log('fyfy');
+    document.getElementById('panier').remove();
+    document.getElementById('panier').classList.remove('panier');
+    document.getElementById('panier').classList.add('panier_commande');
+    document.getElementById('panierFermer').remove();
+    document.getElementById('panierCommander').remove();
+}
+
 const panierList = document.querySelector('.panier_list');
 let produitsPanier;
 let arrItemIdProduit;
 let prixTotalePanier = 0;
 if (sessionStorage.getItem('produitsPanier') == null) {
-      produitsPanier = [];
+    produitsPanier = [];
     //   arrItemIdProduit = [];
 }else {
-    produitsPanier =JSON.parse(sessionStorage.getItem('produitsPanier')); 
+    produitsPanier =JSON.parse(sessionStorage.getItem('produitsPanier'));
+    console.dir(produitsPanier); 
     // arrItemIdProduit = JSON.parse(sessionStorage.getItem('arrItemIdProduit')); 
 
     produitsPanier.forEach((produit)=>{
         // console.log(produit);
-       let str = getViewItemPanier(produit.idProduit, produit.imgProduit, produit.nomProduit, produit.prixProduit,produit.quantite, produit.prixProduitTotal);
+       let prixProduitTotal1 = Number(produit.prixProduitTotal).toFixed(2);
+       let str = getViewItemPanier(produit.idProduit, produit.imgProduit, produit.nomProduit, produit.prixProduit,produit.quantite, prixProduitTotal1);
         panierList.insertAdjacentHTML('beforeend',str);
         prixTotalePanier += produit.prixProduit * produit.quantite;
     });
 
     // pour prixtotalePanier
-    document.querySelector('#panierTotale>span').textContent = prixTotalePanier;
+    document.querySelector('#panierTotale').textContent ='Total: '+ prixTotalePanier.toFixed(2)+'$';
 }
+// if ( produitsPanier.length === 0 && document.querySelector('#panierCommander') === null) {
+//     document.querySelector('#panier').remove();  
+// }
 
 // console.dir(filtreProduit);
 
@@ -116,7 +129,7 @@ document.querySelector('#livraisonVilleFermer').addEventListener('click', (event
 
 
 //   for panier move and remove block
-
+if (document.querySelector('#panierFermer') !== null) {
     document.querySelector('.idpanier').addEventListener('click', (event)=>{
         if (panierList.children.length !== 0) {
             document.querySelector('#panier').classList.toggle('panier_active');
@@ -128,6 +141,8 @@ document.querySelector('#livraisonVilleFermer').addEventListener('click', (event
     });
 
 
+}
+    
 
 //  pour chercher les villes des livraison
 
@@ -216,22 +231,19 @@ if (document.querySelector("#produitOffre") !== null) {
     });
 
 }
-    function getViewCarte(idProduit, imgProduit, nomProduit, prixProduit, dispoProduit) {
-        let carteHtml = '';
-        carteHtml += '<div class="carte marg5 marg20top"><a href="details?id='+idProduit+'">';
-        carteHtml += '<img class="img_carte" src="public/imgs/fleurs/'+imgProduit+'" title=" details"></a>';
-        carteHtml += '<p class="title_carte pd24w600">'+nomProduit+'</p>';
-        carteHtml += '<div class="footer_carte"><span class="prix_carte int20w400">'+prixProduit+'</span>';
-        carteHtml += '<button class="btn_ajouter int20w400" id="idBtnAjouter'+idProduit+'">'+dispoProduit+'</button></div></div>';
-        return carteHtml;
-    }
+
+function getViewCarte(idProduit, imgProduit, nomProduit, prixProduit, dispoProduit) {
+    let carteHtml = '';
+    carteHtml += '<div class="carte marg5 marg20top"><a href="details?id='+idProduit+'">';
+    carteHtml += '<img class="img_carte" src="public/imgs/fleurs/'+imgProduit+'" title=" details"></a>';
+    carteHtml += '<p class="title_carte pd24w600">'+nomProduit+'</p>';
+    carteHtml += '<div class="footer_carte"><span class="prix_carte int20w400">'+prixProduit+'</span>';
+    carteHtml += '<button class="btn_ajouter int20w400" id="idBtnAjouter'+idProduit+'">'+dispoProduit+'</button></div></div>';
+    return carteHtml;
+}    
 
 
 // pour panier
-
-
-
-
 document.querySelector('main').addEventListener('click',(event)=>{
     if (event.target.classList.contains('btn_ajouter') && event.target.innerText === 'Ajouter') {
         // console.dir(event.target);
@@ -249,9 +261,9 @@ document.querySelector('main').addEventListener('click',(event)=>{
             let prixProduitTotal = prixProduit;
             let quantite = 1;
          
-        
+            console.dir(prixProduitTotal);
             let str = getViewItemPanier(idProduit, imgProduit, nomProduit, prixProduit,quantite,  prixProduitTotal);
-
+            
             panierList.insertAdjacentHTML('beforeend',str);
 
        
@@ -263,11 +275,12 @@ document.querySelector('main').addEventListener('click',(event)=>{
             sessionStorage.setItem('produitsPanier', produitsPanierSerialized);
 
             // pour prixtotalePanier
-            prixTotalePanier = 0;
-            produitsPanier.forEach((produit)=>{
-                prixTotalePanier += produit.prixProduit * produit.quantite;
-            });
-            document.querySelector('#panierTotale>span').textContent = prixTotalePanier;
+            getPrixTotalPanier(produitsPanier);
+            // prixTotalePanier = 0;
+            // produitsPanier.forEach((produit)=>{
+            //     prixTotalePanier += produit.prixProduit * produit.quantite;
+            // });
+            // document.querySelector('#panierTotale').textContent = 'Total: '+ prixTotalePanier+'$';
         }
       
     }
@@ -281,25 +294,36 @@ panierList.addEventListener('click',(event)=>{
         let itemPanier = event.target.parentElement.parentElement.parentElement.parentElement;
         let idItemPanier = itemPanier.id.replace('idItemPanier','');
 
-       let count = ++event.target.previousElementSibling.textContent;
-        event.target.parentElement.nextElementSibling.textContent = count*event.target.parentElement.previousElementSibling.textContent;
+    //    let count = ++event.target.previousElementSibling.textContent;
+    //     event.target.parentElement.nextElementSibling.textContent = count*event.target.parentElement.previousElementSibling.textContent;
        
        
+        // produitsPanier.map((produit)=>{
+        //     if (produit.idProduit === idItemPanier) {
+        //         produit.quantite = count;
+        //         produit.prixProduitTotal = count*event.target.parentElement.previousElementSibling.textContent;
+        //     }
+        // });
+
         produitsPanier.map((produit)=>{
             if (produit.idProduit === idItemPanier) {
-                produit.quantite = count;
-                produit.prixProduitTotal = count*event.target.parentElement.previousElementSibling.textContent;
+                produit.quantite++;
+                produit.prixProduitTotal = produit.quantite*produit.prixProduit;
+                
+                event.target.previousElementSibling.textContent++;
+                event.target.parentElement.nextElementSibling.textContent ='Total: '+ produit.prixProduitTotal.toFixed(2)+'$';
             }
         });
         
         sessionStorage.setItem('produitsPanier', JSON.stringify(produitsPanier));
 
          // pour prixtotalePanier
-        prixTotalePanier = 0;
-        produitsPanier.forEach((produit)=>{
-            prixTotalePanier += produit.prixProduit * produit.quantite;
-        });
-        document.querySelector('#panierTotale>span').textContent = prixTotalePanier;
+        getPrixTotalPanier(produitsPanier);
+        // prixTotalePanier = 0;
+        // produitsPanier.forEach((produit)=>{
+        //     prixTotalePanier += produit.prixProduit * produit.quantite;
+        // });
+        // document.querySelector('#panierTotale>span').textContent = prixTotalePanier;
     }
 
     if (event.target.classList.contains('panier_item_minus')){
@@ -307,25 +331,29 @@ panierList.addEventListener('click',(event)=>{
         let idItemPanier = itemPanier.id.replace('idItemPanier','');
 
         if (event.target.nextElementSibling.textContent > 1) {
-            let count = --event.target.nextElementSibling.textContent;
-            event.target.parentElement.nextElementSibling.textContent = count*event.target.parentElement.previousElementSibling.textContent;
+            // let count = --event.target.nextElementSibling.textContent;
+            // event.target.parentElement.nextElementSibling.textContent = count*event.target.parentElement.previousElementSibling.textContent;
         
            
             produitsPanier.map((produit)=>{
                 if (produit.idProduit === idItemPanier) {
-                    produit.quantite = count;
-                    produit.prixProduitTotal = count*event.target.parentElement.previousElementSibling.textContent;
+                    produit.quantite--;
+                    produit.prixProduitTotal = produit.quantite*produit.prixProduit;
+
+                    event.target.nextElementSibling.textContent--;
+                    event.target.parentElement.nextElementSibling.textContent = 'Total: '+ produit.prixProduitTotal.toFixed(2)+'$';
                 }
             });
         
             sessionStorage.setItem('produitsPanier', JSON.stringify(produitsPanier));
 
             // pour prixtotalePanier
-            prixTotalePanier = 0;
-            produitsPanier.forEach((produit)=>{
-                prixTotalePanier += produit.prixProduit * produit.quantite;
-            });
-            document.querySelector('#panierTotale>span').textContent = prixTotalePanier;
+            getPrixTotalPanier(produitsPanier);
+            // prixTotalePanier = 0;
+            // produitsPanier.forEach((produit)=>{
+            //     prixTotalePanier += produit.prixProduit * produit.quantite;
+            // });
+            // document.querySelector('#panierTotale>span').textContent = prixTotalePanier;
 
 
         }else if(event.target.nextElementSibling.textContent == 1){
@@ -339,46 +367,76 @@ panierList.addEventListener('click',(event)=>{
             if (index !== -1) {
                 produitsPanier.splice(index,1);
             }
-            console.log(produitsPanier);
+            // console.log(produitsPanier);
             sessionStorage.setItem('produitsPanier', JSON.stringify(produitsPanier));
 
             // pour prixtotalePanier
-            prixTotalePanier = 0;
-            produitsPanier.forEach((produit)=>{
-                prixTotalePanier += produit.prixProduit * produit.quantite;
-            });
-            document.querySelector('#panierTotale>span').textContent = prixTotalePanier;
+            getPrixTotalPanier(produitsPanier);
+            // prixTotalePanier = 0;
+            // produitsPanier.forEach((produit)=>{
+            //     prixTotalePanier += produit.prixProduit * produit.quantite;
+            // });
+            // document.querySelector('#panierTotale>span').textContent = prixTotalePanier;
 
            
         }
-        if ( produitsPanier.length === 0) {
-            document.querySelector('#panier').classList.remove('panier_active'); 
+        // pour la page de commande si le panier vide
+         if ( produitsPanier.length === 0 && window.location.pathname == '/commande') {
+            document.querySelector('#panier').remove();  
+           window.location.pathname = "/"; 
         }
+
+        // pour cacher le panier si il est vide
+        console.log(produitsPanier.length);
+        if ( produitsPanier.length === 0) {
+           document.querySelector('#panier').classList.remove('panier_active');
+        }
+       
     }
 })
 
+// pour creer le element de panier. return le string html
 function getViewItemPanier(idProduit, imgProduit, nomProduit, prixProduit,quantite, prixProduitTotal) {
     let itemPanierHtml = '';
     itemPanierHtml += '<div class="item_panier" id="idItemPanier'+idProduit+'"><h4 class="int20w500">'+nomProduit+'</h4>';
     itemPanierHtml += '<div class="item_panier_body"><img src="'+imgProduit+'" alt="">';
-    itemPanierHtml += '<div class="panier_details"><p class="panier_prix_unit int14w500">'+prixProduit+'</p>';
-    itemPanierHtml += '<div class="panier_countre"><img class="panier_item_minus" src="public/imgs/general/minus.svg" alt=""><span class="int20w500">'+quantite+'</span>';
-    itemPanierHtml += '<img class="panier_item_plus" src="public/imgs/general/plus.svg" alt=""></div><p class="panier_prix_total int14w500">'+prixProduitTotal+'</p> </div></div></div>';
+    itemPanierHtml += '<div class="panier_details"><p class="panier_prix_unit int14w500">'+prixProduit+'$/unité</p>';
+    itemPanierHtml += '<div class="panier_countre"><img class="panier_item_minus cursorscall20" src="public/imgs/general/minus.svg" alt=""><span class="int20w500">'+quantite+'</span>';
+    itemPanierHtml += '<img class="panier_item_plus cursorscall20" src="public/imgs/general/plus.svg" alt=""></div><p class="panier_prix_total int14w500">'+'Total: '+prixProduitTotal+'$'+'</p> </div></div></div>';
     return itemPanierHtml;
 }
 
+// pour calculer prixtotalePanier et remetre le resultate dans le html
+function getPrixTotalPanier(produitsPanier) {
+    let prixTotalePanier = 0;
+    produitsPanier.forEach((produit)=>{
+        prixTotalePanier += produit.prixProduit * produit.quantite;
+    });
+    document.querySelector('#panierTotale').textContent = 'Total: '+ prixTotalePanier.toFixed(2)+'$';
+}
+
+
+
 console.log(sessionStorage.getItem('produitsPanier'));
 
-document.querySelector('#panierCommander').addEventListener('click',(event)=>{
-    // event.preventDefault();
-    let objs = [];
-    produitsPanier.forEach((produit)=>{
-        let obj = {'id': produit.idProduit, 'quantite': produit.quantite};
-        objs.push(obj); 
-    });
+// pour commande
+// if (document.querySelector('#panierCommander') !== null) {
+//     document.querySelector('#panierCommander').addEventListener('click',(event)=>{
+//         // event.preventDefault();
+//         let objs = [];
+//         produitsPanier.forEach((produit)=>{
+//             let obj = {'id': Number(produit.idProduit), 'quantite': produit.quantite};
+//             objs.push(obj); 
+//         });
+    
+//         let str = JSON.stringify(objs);
+    
+//         document.querySelector('#dataPanier').value = str;
+//         event.target.form.submit();
+//     });
+// }
 
-    let str = JSON.stringify(objs);
 
-    document.querySelector('#dataPanier').value = str;
-    event.target.form.submit();
-});
+
+
+console.dir(window.location.pathname);

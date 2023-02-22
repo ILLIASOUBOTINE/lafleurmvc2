@@ -7,13 +7,6 @@
 	"param" : []
 },
 
-{
-	"path" : "/",
-	"controller" : "Accueil",
-	"action" : "show1",
-	"method" : "POST",
-	"param" : ["dataPanier"]
-},
 
 {
 	"path" : "/getPlusProduitOffre",
@@ -54,13 +47,14 @@
 	"param" : ["id"]
 },
 {
-	"path" : "/Login",
-	"controller" : "Home",
-	"action" : "Authenticate",
-	"method" : "POST",
-	"param" : [
-		"login",
-		"password"
-	]
+	"path" : "/commande",
+	"controller" : "Commande",
+	"action" : "show",
+	"method" : "GET",
+	"param" : []
 }
+
+
+
+	
 ]

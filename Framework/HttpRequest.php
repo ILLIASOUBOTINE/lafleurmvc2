@@ -75,14 +75,16 @@
 				case "DELETE":
 					foreach( $_GET as $key => $param)
 					{
-						$this->_param[$key] = $param;
+						// $this->_param[$key] = $param;
+						$this->_param[$key] = filter_input(INPUT_GET, $key);
 					}
 				case "POST":
 				case "PUT":
 					
 					foreach($_POST as $key => $param)
 					{
-						$this->_param[$key] = $param;
+						// $this->_param[$key] = $param;
+						$this->_param[$key] = filter_input(INPUT_POST, $key);
 					}
 						
 					

@@ -1,0 +1,11 @@
+.commande_identification {
+    display: flex;
+    margin: 20px;
+}
+
+.commande_block {
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+    /* min-width: 400px; */
+}

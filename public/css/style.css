@@ -199,6 +199,13 @@ header {
   color: var(--color-text-main);
 }
 
+.int24w500 {
+  font-size: 24px;
+  font-weight: 500;
+  font-family: var(--font-family-int);
+  color: var(--color-text-main);
+}
+
 .int14w500 {
   font-size: 14px;
   font-weight: 500;
@@ -563,6 +570,19 @@ section {
  /* display: none; */
 }
 
+.panier_commande {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* position: absolute;
+  top:120px; */
+  width: 320px;
+  /* right: -350px; */
+  background: var(--color-gris);
+  /* transition: right 1s; */
+  /* display: none; */
+}
+
 .panier_list {
   width: 100%;
 }
@@ -621,6 +641,27 @@ section {
   align-items: center;
   padding: 10px 20px;
   
+}
+
+.btnPanierCommander {
+  width: 100%;
+  height: 60px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid var(--color-text-main);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color:  var(--color-gris);
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+
+
+.btnPanierCommander:hover {
+  background-color: aquamarine;
 }
 
 /*                   nav seconde                   */
@@ -810,6 +851,8 @@ section {
   border-radius: 30px;
   padding: 5px;
 }
+
+
 
 
 @media screen and (max-width: 840px) and (min-width: 400px){

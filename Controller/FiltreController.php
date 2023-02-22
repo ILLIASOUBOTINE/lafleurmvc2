@@ -29,17 +29,17 @@
             return $this->view($filename);
         }
         
-        public function getPlusProduitOffre(){
-            $offre = new ProduitManager();
-            $offreProduits = $offre->getProduitOffre(count($_SESSION['offreProduits']),4);
+        // public function getPlusProduitOffre(){
+        //     $offre = new ProduitManager();
+        //     $offreProduits = $offre->getProduitOffre(count($_SESSION['offreProduits']),4);
           
-            $_SESSION['offreProduits'] = array_merge($_SESSION['offreProduits'], $offreProduits);
-            $this->redirect('/#produitOffre');
+        //     $_SESSION['offreProduits'] = array_merge($_SESSION['offreProduits'], $offreProduits);
+        //     $this->redirect('/#produitOffre');
             
-            // header('Location: /');
-            // exit;
+        //     // header('Location: /');
+        //     // exit;
             
-        }
+        // }
 
         public function getProduitVotreChoix(){
             echo 'filtre';
