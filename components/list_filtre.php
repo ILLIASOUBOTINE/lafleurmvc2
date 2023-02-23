@@ -20,7 +20,7 @@
             </div>
             <div class="itemdrop_menu dnone" id="itemFleur">
                 <!-- <?php var_dump($_SESSION['especeFleures'])?> -->
-                <input type="checkbox" name="fleures[]" checked hidden>
+                <input type="checkbox" name="fleures[]" value="none" checked hidden>
 
                 <?php foreach($_SESSION['especeFleures'] as $fleur):?>
                 <label class=" itemdrop2 int20w400" for=<? echo 'fleur' .$fleur->getIdEspeceFleur()?>>
@@ -39,7 +39,7 @@
                 <img src="public/imgs/general/icons_triangle-down.svg" alt="">
             </div>
             <div class="itemdrop_menu dnone" id="itemCategorie">
-                <input type="checkbox" name="categories[]" checked hidden>
+                <input type="checkbox" name="categories[]" value="none" checked hidden>
                 <?php foreach($_SESSION['categories'] as $categorie):?>
                 <label class="itemdrop2 int20w400" for=<? echo 'categorie' .$categorie->getIdcategorie()?>>
                     <input type="checkbox" id=<? echo 'categorie' .$categorie->getIdcategorie()?>
@@ -57,7 +57,7 @@
                 <img src="public/imgs/general/icons_triangle-down.svg" alt="">
             </div>
             <div class="itemdrop_menu dnone" id="itemCouleur">
-                <input type="checkbox" name="couleures[]" checked hidden>
+                <input type="checkbox" name="couleures[]" value="none" checked hidden>
                 <?php foreach($_SESSION['couleures'] as $couleur):?>
                 <label class="itemdrop2 int20w400" for=<? echo 'couleur' .$couleur->getIdcouleur()?>>
                     <input type="checkbox" id=<? echo 'couleur' .$couleur->getIdcouleur()?>

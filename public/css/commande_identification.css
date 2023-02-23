@@ -1,11 +1,36 @@
-.commande_identification {
-    display: flex;
-    margin: 20px;
-}
-
-.commande_block {
+.section_commande_identification {
+    width: 100%;
+    max-width: 1000px;
     display: flex;
     justify-content: center;
-    margin: 10px;
+    
+    margin: 10px 20px;
+}
+
+.section_commande_etape {
+    width: 100%;
+    max-width: 1000px;
+    display: flex;
+    justify-content: center;
+    
+    /* margin: 10px 20px; */
+}
+
+.commande_block_panier {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px 10px;
     /* min-width: 400px; */
+}
+
+.commande_block_form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 5px 10px;
+   
 }

@@ -15,7 +15,7 @@
 		public function getById($id)
 		{
 			$req = $this->_bdd->prepare('SELECT * FROM ' .$this->_table .' WHERE '.$this->_table.'.id'.$this->_table.' = :id');
-			$re = "SELECT * FROM  $this->_table WHERE {$this->_table}.id{$this->_table} = :id";
+			// $re = "SELECT * FROM  $this->_table WHERE {$this->_table}.id{$this->_table} = :id";
 			// echo $re;
 			// $req->execute(array($id));
 			$req->bindValue(':id', $id, PDO::PARAM_INT);
@@ -33,27 +33,28 @@
 			return $req->fetchAll();
 		}
 		
-		public function create($obj,$param)
+		public function create($param,$values)
 		{
-			
-			$paramNumber = count($param);
-			$valueArray = array_fill(1,$paramNumber,"?");
-			$valueString = implode(",", $valueArray);
-			$sql = "INSERT INTO " . $this->_table . "(" . implode(",", $param) . ") VALUES(" . $valueString . ")";
-			$req = $this->_bdd->prepare($sql);
-			$boundParam = array();
-			foreach($param as $paramName)
-			{
-				if(property_exists($obj,$paramName))
+			try {
+				$paramNumber = count($param);
+				$valueArray = array_fill(1,$paramNumber,"?");
+				$valueString = implode(",", $valueArray);
+				$sql = "INSERT INTO " . $this->_table . "(" . implode(",", $param) . ") VALUES(" . $valueString . ")";
+				$req = $this->_bdd->prepare($sql);
+				$boundParam = array();
+				foreach($values as $value)
 				{
-					$boundParam[$paramName] = $obj->$paramName;	
+					$boundParam[] = $value;	
 				}
-				else
-				{
-					throw new PropertyNotFoundException($this->_object,$paramName);	
-				}
+				$req->execute($boundParam);
+				$insertedId = $this->_bdd->lastInsertId();
+				return $insertedId;
+			} catch (Throwable $er) {
+				return $er;
+				// var_dump($er->getMessage());
+				// exit;
 			}
-			$req->execute($boundParam);
+			
 		}
 		
 		public function update($obj,$param)

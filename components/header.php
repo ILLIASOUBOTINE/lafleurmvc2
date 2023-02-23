@@ -12,7 +12,7 @@
             </div>
             <div class="burger_ligne"></div>
         </div>
-        <a href="#"><img class="cursorscall20" src="public/imgs/general/account_icon.svg" alt="account"></a>
+        <a href="/account"><img class="cursorscall20" src="public/imgs/general/account_icon.svg" alt="account"></a>
     </nav>
 
     <nav id="idDropMenue" class="drop_menu">
@@ -29,8 +29,8 @@
     </nav>
     <a class="logo cursorscall20" href="/"><img src="public/imgs/general/logo.png" alt="accueil"></a>
     <nav class="nav_right">
-        <a class="marg20 idAccount" href="#"><img class="cursorscall20" src="public/imgs/general/account_icon.svg"
-                alt="account"></a>
+        <a class="marg20 idAccount" href="/account"><img class="cursorscall20"
+                src="public/imgs/general/account_icon.svg" alt="account"></a>
         <img class="marg20 cursorscall20 idlivraison" src="public/imgs/general/delivery_icon.svg" alt="livraison">
         <img class="marg20 cursorscall20 idpanier" src="public/imgs/general/basket_icon.svg" alt="panier">
     </nav>

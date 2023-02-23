@@ -52,6 +52,27 @@
 	"action" : "show",
 	"method" : "GET",
 	"param" : []
+},
+{
+	"path" : "/account",
+	"controller" : "Account",
+	"action" : "identification",
+	"method" : "GET",
+	"param" : []
+},
+{
+	"path" : "/inscription",
+	"controller" : "Account",
+	"action" : "inscription",
+	"method" : "POST",
+	"param" : ["email","password"]
+},
+{
+	"path" : "/connexion",
+	"controller" : "Account",
+	"action" : "connexion",
+	"method" : "POST",
+	"param" : ["email","password"]
 }
 
 

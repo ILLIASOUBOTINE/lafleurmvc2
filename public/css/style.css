@@ -7,7 +7,7 @@
   --font-family-pd: "Playfair Display";
   --font-family-int: "Inter";
   --color-bgd: rgba(255, 240, 189, 1);
- 
+  --color-yellow:rgb(228, 169, 81);
 }
 
 * {

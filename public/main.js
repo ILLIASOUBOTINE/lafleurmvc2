@@ -436,7 +436,19 @@ console.log(sessionStorage.getItem('produitsPanier'));
 //     });
 // }
 
+if (document.querySelector('.titre_commande_etape') !== null) {
 
+  etaps = document.querySelectorAll('.item_etape_nom');
+  console.dir(etaps);
+  etaps.forEach(element => {
+    console.dir(element.textContent);
+    console.dir(document.querySelector('.titre_commande_etape').textContent);
+        if (element.textContent == document.querySelector('.titre_commande_etape').textContent ) {
+            console.dir(element);
+            element.previousElementSibling.classList.add('item_etape_cercle_activ');
+        }
+    });
+}
 
 
 console.dir(window.location.pathname);

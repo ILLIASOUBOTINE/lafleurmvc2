@@ -37,11 +37,12 @@
 			ON  produit.idproduit = produit_has_fleures.produit_idproduit JOIN fleures
 			ON produit_has_fleures.fleures_idfleures = fleures.idfleures WHERE prix_unite <= ?';
 			
-		
+			// echo '<br>';
+			// print_r($params);
 			$paramsArr = [$prix];
 			foreach($params as $key => $param){
-				echo '<br>';
-				
+				// echo '<br>';
+				//  var_dump($param);
 				array_shift($param);
 				// var_dump($newArr);
 				switch ($key) {

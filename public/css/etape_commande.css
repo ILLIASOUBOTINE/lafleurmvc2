@@ -1,6 +1,6 @@
 .etape_commande {
     width: 100%;
-    max-width: 800px;
+    /* max-width: 1000px; */
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -18,12 +18,18 @@
 .item_etape_cercle {
     width: 50px;
     height: 50px;
-    display: inline-flex;
+    display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 50%;
     background-color: var(--color-gris);
     margin-bottom: 5px;
+}
+
+.item_etape_cercle_activ {
+    
+    background-color: var(--color-yellow);
+   
 }
 
 /* .item_etape_nom{
