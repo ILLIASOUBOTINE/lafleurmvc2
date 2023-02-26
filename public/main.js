@@ -19,8 +19,8 @@ const inputSearchVille = document.querySelector('#inputSearchVille');
 
 // const panierList = document.querySelector('.panier_list');
 
-
-if (window.location.pathname == '/commande') {
+console.dir(document.title);
+if (document.title == 'Commande') {
     console.log('fyfy');
     document.getElementById('panier').remove();
     document.getElementById('panier').classList.remove('panier');
@@ -439,12 +439,12 @@ console.log(sessionStorage.getItem('produitsPanier'));
 if (document.querySelector('.titre_commande_etape') !== null) {
 
   etaps = document.querySelectorAll('.item_etape_nom');
-  console.dir(etaps);
+//    console.dir(etaps);
   etaps.forEach(element => {
-    console.dir(element.textContent);
-    console.dir(document.querySelector('.titre_commande_etape').textContent);
+    // console.dir(element.textContent);
+    // console.dir(document.querySelector('.titre_commande_etape').textContent);
         if (element.textContent == document.querySelector('.titre_commande_etape').textContent ) {
-            console.dir(element);
+            // console.dir(element);
             element.previousElementSibling.classList.add('item_etape_cercle_activ');
         }
     });

@@ -8,10 +8,17 @@
 		}
         
 		public function identification(){
-           
-			
-			$filename = 'identification' ;
-            return $this->view($filename);
+			if (isset($_SESSION['client'])) {
+				// $client = $_SESSION['client'];
+				// $this->addParam('client',$client);
+				// $filename = 'monaccount';
+            	// return $this->view($filename);
+				$this->redirect('/monAccount');
+			}else{
+				$filename = 'identification' ;
+            	return $this->view($filename);
+			} 
+          
         }
         
 		public function inscription(){
@@ -37,46 +44,54 @@
 				}else {
 					$messageSucces = 'Votre compte a été créé';
 					$this->addParam('messageSucces',$messageSucces);
-					$filename = 'identification';
-					return $this->view($filename);
+					$filename = 'connexion' ;
+            		return $this->view($filename);
 				}
 				
 			}
-		   
-		   
+			
 		}
 		
         public function connexion(){
             $clientM = new ClientManager();
-		   $email = $this->get_httpRequest()->getParam()['email'];
-		   $password = $this->get_httpRequest()->getParam()['password'];
-		//    var_dump($clientM->getByEmail($email));
-		//    var_dump($this->get_httpRequest()->getParam()['email']);
-		//    exit;
-		   if (!$clientM->getByEmail($email)) {
+			$email = $this->get_httpRequest()->getParam()['email'];
+			$password = $this->get_httpRequest()->getParam()['password'];
+			//    var_dump($clientM->getByEmail($email));
+			//    var_dump($this->get_httpRequest()->getParam()['email']);
+			//    exit;
+			$client = $clientM->getByEmail($email);
+		   if (!$client) {
 				$messageError = "email n'est pas correct";
 				$this->addParam('messageError',$messageError);
-				$filename = 'identification';
-				return $this->view($filename);
+				$filename = 'connexion' ;
+            	return $this->view($filename);
 			}else {
+				if (password_verify($password,$client->getMotPasse())) {
 				
-				
-				
-					if (password_verify($password,$clientM->getByEmail($email)["mot_passe"])) {
-						$messageSucces = 'Mon account';
-						$this->addParam('messageSucces',$messageSucces);
-						$filename = 'identification';
-						return $this->view($filename);
-					}
+					$_SESSION['client'] = $client;
+					$this->redirect('/monAccount');
+				}else {
 					$messageError = "password n'est pas correct";
 					$this->addParam('messageError',$messageError);
-					$filename = 'identification';
+					$filename = 'connexion' ;
 					return $this->view($filename);
-			}
+				}
 				
+			}
 			
-		
-        }
+		}
+
+		public function monAccount() {
+			$client = $_SESSION['client'];
+			$this->addParam('client',$client);
+			$filename = 'monaccount';
+            return $this->view($filename);
+		}
+
+		public function logOut() {
+			unset($_SESSION['client']);
+			$this->redirect('/account');
+		}
 
 		
 		public static function getMessageError($strError) {
@@ -91,12 +106,8 @@
 			return $messageError;
 		}
 	
-		// public static function is_emailExist($email,$clientM) {
-		// 	$messageError = '';
-		// 	if (!$clientM->getByEmail($email)) {
-		// 		$messageError = 'Un utilisateur avec le même nom existe déjà';
-		// 		$this->addParam('messageError',$messageError);
-		// 	} 
+		// public function ($email,$clientM) {
+			
 			
 		// }
 	

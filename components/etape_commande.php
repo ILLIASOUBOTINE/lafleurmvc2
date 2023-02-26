@@ -1,11 +1,11 @@
 <div class="etape_commande">
     <div class="item_etape">
-        <p class="item_etape_cercle int24w500">1</p>
+        <a href="/etapeIdentification" class="item_etape_cercle int24w500">1</a>
         <p class="item_etape_nom int20w400">Identification</p>
     </div>
     <!-- <p class="item_etape_ligne"></p> -->
     <div class="item_etape">
-        <p class="item_etape_cercle int24w500">2</p>
+        <a href="/etapeLivraison" class="item_etape_cercle int24w500">2</a>
         <p class="item_etape_nom int20w400">Livraison</p>
     </div>
     <!-- <p class="item_etape_ligne"></p> -->

@@ -9,7 +9,7 @@
         0
     </p>
 
-    <a href="/commande" id="panierCommander" class="pd24w600  btnPanierCommander">
+    <a href="/etapeIdentification" id="panierCommander" class="pd24w600  btnPanierCommander">
         Commander
     </a>
 </div>

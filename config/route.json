@@ -47,9 +47,44 @@
 	"param" : ["id"]
 },
 {
-	"path" : "/commande",
+	"path" : "/etapeIdentification",
 	"controller" : "Commande",
-	"action" : "show",
+	"action" : "identification",
+	"method" : "GET",
+	"param" : []
+},
+{
+	"path" : "/inscriptionCommande",
+	"controller" : "Commande",
+	"action" : "inscription",
+	"method" : "POST",
+	"param" : ["email","password"]
+},
+{
+	"path" : "/connexionCommande",
+	"controller" : "Commande",
+	"action" : "connexion",
+	"method" : "POST",
+	"param" : ["email","password"]
+},
+{
+	"path" : "/etapeLivraison",
+	"controller" : "Commande",
+	"action" : "livraison",
+	"method" : "GET",
+	"param" : []
+},
+{
+	"path" : "/controlFormLivraison",
+	"controller" : "Commande",
+	"action" : "controlFormLivraison",
+	"method" : "POST",
+	"param" : ["ville","rue","num_maison","num_appart","num_telephone","date_livre"]
+},
+{
+	"path" : "/etapeRecapitulatif",
+	"controller" : "Commande",
+	"action" : "recapitulatif",
 	"method" : "GET",
 	"param" : []
 },
@@ -73,6 +108,20 @@
 	"action" : "connexion",
 	"method" : "POST",
 	"param" : ["email","password"]
+},
+{
+	"path" : "/monAccount",
+	"controller" : "Account",
+	"action" : "monAccount",
+	"method" : "GET",
+	"param" : []
+},
+{
+	"path" : "/logOut",
+	"controller" : "Account",
+	"action" : "logOut",
+	"method" : "GET",
+	"param" : []
 }
 
 

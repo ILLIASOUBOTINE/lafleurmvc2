@@ -11,7 +11,8 @@
 			$req = $this->_bdd->prepare('SELECT * FROM client WHERE client.email = :email');
 			$req->bindValue(':email', $email);
 			$req->execute();
-			return $req->fetch(PDO::FETCH_ASSOC);
+			$req->setFetchMode(PDO::FETCH_CLASS,$this->_object);
+			return $req->fetch();
 		}
 	}
 
