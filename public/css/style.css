@@ -352,12 +352,16 @@ section {
 .btn_grand {
   width: 220px;
   height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 30px;
   background-color: var(--color-white);
   border: 0px;
   cursor: pointer;
   box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.64), -5px -5px 4px rgba(0, 0, 0, 0.64);
   margin: 10px auto;
+  
 }
 
 .btn_ajouter:hover,

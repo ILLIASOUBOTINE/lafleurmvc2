@@ -381,7 +381,7 @@ panierList.addEventListener('click',(event)=>{
            
         }
         // pour la page de commande si le panier vide
-         if ( produitsPanier.length === 0 && window.location.pathname == '/commande') {
+         if ( produitsPanier.length === 0 && document.title == 'Commande') {
             document.querySelector('#panier').remove();  
            window.location.pathname = "/"; 
         }
@@ -419,22 +419,24 @@ function getPrixTotalPanier(produitsPanier) {
 
 console.log(sessionStorage.getItem('produitsPanier'));
 
-// pour commande
-// if (document.querySelector('#panierCommander') !== null) {
-//     document.querySelector('#panierCommander').addEventListener('click',(event)=>{
-//         // event.preventDefault();
-//         let objs = [];
-//         produitsPanier.forEach((produit)=>{
-//             let obj = {'id': Number(produit.idProduit), 'quantite': produit.quantite};
-//             objs.push(obj); 
-//         });
+// pour envoye les informations de panier a la serveur 
+if (document.querySelector('#panierValider') !== null) {
+    document.querySelector('#panierValider').addEventListener('click',(event)=>{
+        event.preventDefault();
+        let objs = [];
+        produitsPanier.forEach((produit)=>{
+            let obj = {'id': Number(produit.idProduit), 'quantite': produit.quantite};
+            objs.push(obj); 
+        });
     
-//         let str = JSON.stringify(objs);
+        let str = JSON.stringify(objs);
     
-//         document.querySelector('#dataPanier').value = str;
-//         event.target.form.submit();
-//     });
-// }
+        document.querySelector('#dataPanier').value = str;
+        event.target.form.submit();
+    });
+}
+
+// pour metre le coleur sur etape de commande
 
 if (document.querySelector('.titre_commande_etape') !== null) {
 

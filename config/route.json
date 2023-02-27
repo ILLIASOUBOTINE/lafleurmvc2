@@ -79,7 +79,7 @@
 	"controller" : "Commande",
 	"action" : "controlFormLivraison",
 	"method" : "POST",
-	"param" : ["ville","rue","num_maison","num_appart","num_telephone","date_livre"]
+	"param" : ["id_ville","rue","num_maison","num_appart","num_telephone","date_prevu","dataPanier"]
 },
 {
 	"path" : "/etapeRecapitulatif",

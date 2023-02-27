@@ -8,6 +8,7 @@
         <?php include 'components/panier.php'?>
     </div>
     <div class="commande_block_form">
+
         <?php if (isset($messageError)): ?>
         <h1 class="pd40w700 marg20top titre_account">
             <?=$messageError?>

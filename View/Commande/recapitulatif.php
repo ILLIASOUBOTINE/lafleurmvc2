@@ -8,6 +8,10 @@
         <?php include 'components/panier.php'?>
     </div>
     <div class="commande_block_form">
-        <?php include 'components/form_livraison.php'?>
+        <a href="/etapeLivraison" class="btn_grand pd24w600">retour</a>
+        <?php if (isset($_SESSION['livraison'])) {
+            var_dump($_SESSION['livraison']);
+            var_dump($_SESSION['panier']);
+        }?>
     </div>
 </section>
