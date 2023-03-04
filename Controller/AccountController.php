@@ -20,65 +20,78 @@
 			} 
           
         }
-        
+
 		public function inscription(){
+			$filename = AccountController::inscriptionAccount($this);
+			return $this->view($filename);
+		
+		}
+        
+		public static function inscriptionAccount($thisController){
            $clientM = new ClientManager();
-		   $email = $this->get_httpRequest()->getParam()['email'];
-		   $password = password_hash($this->get_httpRequest()->getParam()['password'],PASSWORD_BCRYPT);
-		//    var_dump($clientM->getByEmail($email));
-		//    var_dump($this->get_httpRequest()->getParam()['email']);
-		//    exit;
+		   $email = $thisController->get_httpRequest()->getParam()['email'];
+		   $password = password_hash($thisController->get_httpRequest()->getParam()['password'],PASSWORD_BCRYPT);
+		
 		   if ($clientM->getByEmail($email)) {
 				$messageError = 'Un utilisateur avec le même nom existe déjà';
-				$this->addParam('messageError',$messageError);
+				$thisController->addParam('messageError',$messageError);
 				$filename = 'identification';
-				return $this->view($filename);
+				// return $thisController->view($filename);
 			}else {
 				$response = $clientM->create(['email','mot_passe'],[$email,$password]);
 				if (is_a($response, 'PDOException')){
 				// echo $response->getMessage();
 					$messageError = AccountController::getMessageError($response->getMessage());
-					$this->addParam('messageError',$messageError);
+					$thisController->addParam('messageError',$messageError);
 					$filename = 'identification';
-					return $this->view($filename);
+					// return $thisController->view($filename);
 				}else {
 					$messageSucces = 'Votre compte a été créé';
-					$this->addParam('messageSucces',$messageSucces);
+					$thisController->addParam('messageSucces',$messageSucces);
 					$filename = 'connexion' ;
-            		return $this->view($filename);
+            		// return $thisController->view($filename);
 				}
-				
 			}
-			
+
+			return $filename;
 		}
 		
-        public function connexion(){
+		public function connexion(){
+			$filename = AccountController::connexionAccount($this);
+			if ($filename === true ) {
+				$this->redirect('/monAccount');
+			}else{
+				return $this->view($filename);
+			}
+		}
+		
+		
+        public static function connexionAccount($thisController){
             $clientM = new ClientManager();
-			$email = $this->get_httpRequest()->getParam()['email'];
-			$password = $this->get_httpRequest()->getParam()['password'];
-			//    var_dump($clientM->getByEmail($email));
-			//    var_dump($this->get_httpRequest()->getParam()['email']);
-			//    exit;
+			$email = $thisController->get_httpRequest()->getParam()['email'];
+			$password = $thisController->get_httpRequest()->getParam()['password'];
+			
 			$client = $clientM->getByEmail($email);
 		   if (!$client) {
 				$messageError = "email n'est pas correct";
-				$this->addParam('messageError',$messageError);
+				$thisController->addParam('messageError',$messageError);
 				$filename = 'connexion' ;
-            	return $this->view($filename);
+            	// return $thisController->view($filename);
 			}else {
 				if (password_verify($password,$client->getMotPasse())) {
 				
 					$_SESSION['client'] = $client;
-					$this->redirect('/monAccount');
+					$filename = true ;
+					// $thisController->redirect('/monAccount');
 				}else {
 					$messageError = "password n'est pas correct";
-					$this->addParam('messageError',$messageError);
+					$thisController->addParam('messageError',$messageError);
 					$filename = 'connexion' ;
-					return $this->view($filename);
+					// return $thisController->view($filename);
 				}
 				
 			}
-			
+			return $filename;
 		}
 
 		public function monAccount() {

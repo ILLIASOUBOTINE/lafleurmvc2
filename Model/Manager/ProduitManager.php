@@ -93,6 +93,16 @@
 			$srt = $req->fetchAll(PDO::FETCH_CLASS,"Produit");
 			return $srt;
 		}
+
+		public function getProduitPanier($arrIdProduits)
+		{
+			$req = $this->_bdd->prepare("SELECT * FROM produit WHERE produit.idproduit in");
+			$req->bindValue(':num', $num, PDO::PARAM_INT);
+			$req->execute();
+			// $req->setFetchMode(PDO::FETCH_CLASS,"Produit");
+			$srt = $req->fetchAll(PDO::FETCH_CLASS,"Produit");
+			return $srt;
+		}
 	}
 
   

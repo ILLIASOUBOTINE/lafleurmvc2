@@ -1,0 +1,45 @@
+.section_commande_recapupitulatif {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: space-around;
+    background-color: var(--color-white);
+    border-radius: 30px;
+    margin: 20px;
+    padding: 20px 50px;
+}
+
+.commande_block_info {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 5px 10px;
+   
+}
+
+.commande_block_produits {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px 10px;
+    /* min-width: 400px; */
+}
+
+.div_commande {
+    width: 100%;
+    display: flex;
+}
+
+.div_commande > p {
+    width: 50%;
+}
+
+.div_commande_adresse {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+}

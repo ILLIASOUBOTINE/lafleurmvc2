@@ -8,7 +8,7 @@
 		}
         
 		public function identification(){
-          
+			
 			$filename = 'identification' ;
 		  
 			return $this->view($filename);
@@ -24,59 +24,17 @@
 		} 
 		
         public function inscription(){
-			$clientM = new ClientManager();
-			$email = $this->get_httpRequest()->getParam()['email'];
-			$password = password_hash($this->get_httpRequest()->getParam()['password'],PASSWORD_BCRYPT);
-		
-			if ($clientM->getByEmail($email)) {
-				 $messageError = 'Un utilisateur avec le même nom existe déjà';
-				 $this->addParam('messageError',$messageError);
-				 $filename = 'identification';
-				 return $this->view($filename);
-			 }else {
-				 $response = $clientM->create(['email','mot_passe'],[$email,$password]);
-				 if (is_a($response, 'PDOException')){
-				 // echo $response->getMessage();
-					 $messageError = AccountController::getMessageError($response->getMessage());
-					 $this->addParam('messageError',$messageError);
-					 $filename = 'identification';
-					 return $this->view($filename);
-				 }else {
-					 $messageSucces = 'Votre compte a été créé';
-					 $this->addParam('messageSucces',$messageSucces);
-					 $filename = 'connexion' ;
-					 return $this->view($filename);
-				 }
-				 
-			 }
-			 
+			$filename = AccountController::inscriptionAccount($this);
+			return $this->view($filename);
 		}
 		 
 		public function connexion(){
-			 $clientM = new ClientManager();
-			 $email = $this->get_httpRequest()->getParam()['email'];
-			 $password = $this->get_httpRequest()->getParam()['password'];
-			
-			 $client = $clientM->getByEmail($email);
-			if (!$client) {
-				 $messageError = "email n'est pas correct";
-				 $this->addParam('messageError',$messageError);
-				 $filename = 'connexion' ;
-				 return $this->view($filename);
-			 }else {
-				 if (password_verify($password,$client->getMotPasse())) {
-				 
-					 $_SESSION['client'] = $client;
-					 $this->redirect('/etapeLivraison');
-				 }else {
-					 $messageError = "password n'est pas correct";
-					 $this->addParam('messageError',$messageError);
-					 $filename = 'connexion' ;
-					 return $this->view($filename);
-				 }
-				 
-			 }
-			 
+			$filename = AccountController::connexionAccount($this);
+			if ($filename === true ) {
+				$this->redirect('/etapeLivraison');
+			}else{
+				return $this->view($filename);
+			}
 		}
 
 		public function controlFormLivraison(){
@@ -113,6 +71,25 @@
 		}
 	
 		public function recapitulatif(){
+
+			$livraison = $_SESSION['livraison'];
+			$villes = $_SESSION['villes'];
+			
+			foreach($villes as $vil){
+				if ($vil->getIdVille() == $_SESSION['livraison']->id_ville) {
+					$ville = $vil;
+				} 
+			};
+			$livraisonVille = $ville->getNomVille();
+			$this->addParam('livraison',$livraison);
+			$this->addParam('livraisonVille',$livraisonVille);
+			
+			$client = $_SESSION['client'];
+			$this->addParam('client',$client);
+			
+			$panier = $_SESSION['panier'];
+			$this->addParam('panier',$panier);
+			
 			$filename = 'recapitulatif' ;
 			return $this->view($filename);
 		}

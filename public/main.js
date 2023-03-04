@@ -1,3 +1,9 @@
+
+ //update page 
+ window.addEventListener('resize', function() {
+    location.reload();
+});
+
 if (window.innerWidth > 841) {
     document.querySelectorAll('.listFiltre')[0].remove();
     document.querySelector('#filtreProduit').remove();
@@ -23,35 +29,44 @@ console.dir(document.title);
 if (document.title == 'Commande') {
     console.log('fyfy');
     document.getElementById('panier').remove();
-    document.getElementById('panier').classList.remove('panier');
-    document.getElementById('panier').classList.add('panier_commande');
-    document.getElementById('panierFermer').remove();
-    document.getElementById('panierCommander').remove();
+    
+    if (document.getElementById('panier')!== null) {
+        document.getElementById('panier').classList.remove('panier');
+        document.getElementById('panier').classList.add('panier_commande');
+        document.getElementById('panierFermer').remove();
+        document.getElementById('panierCommander').remove();
+    }
+    
 }
 
-const panierList = document.querySelector('.panier_list');
 let produitsPanier;
-let arrItemIdProduit;
+// let arrItemIdProduit;
 let prixTotalePanier = 0;
-if (sessionStorage.getItem('produitsPanier') == null) {
-    produitsPanier = [];
-    //   arrItemIdProduit = [];
-}else {
-    produitsPanier =JSON.parse(sessionStorage.getItem('produitsPanier'));
-    console.dir(produitsPanier); 
-    // arrItemIdProduit = JSON.parse(sessionStorage.getItem('arrItemIdProduit')); 
+const panierList = document.querySelector('.panier_list');
+if (document.querySelector('.panier_list') !==null) {
+    
 
-    produitsPanier.forEach((produit)=>{
-        // console.log(produit);
-       let prixProduitTotal1 = Number(produit.prixProduitTotal).toFixed(2);
-       let str = getViewItemPanier(produit.idProduit, produit.imgProduit, produit.nomProduit, produit.prixProduit,produit.quantite, prixProduitTotal1);
-        panierList.insertAdjacentHTML('beforeend',str);
-        prixTotalePanier += produit.prixProduit * produit.quantite;
-    });
+    if (sessionStorage.getItem('produitsPanier') == null) {
+        produitsPanier = [];
+        //   arrItemIdProduit = [];
+    }else {
+        produitsPanier =JSON.parse(sessionStorage.getItem('produitsPanier'));
+        console.dir(produitsPanier); 
+        // arrItemIdProduit = JSON.parse(sessionStorage.getItem('arrItemIdProduit')); 
 
-    // pour prixtotalePanier
-    document.querySelector('#panierTotale').textContent ='Total: '+ prixTotalePanier.toFixed(2)+'$';
+        produitsPanier.forEach((produit)=>{
+            // console.log(produit);
+        let prixProduitTotal1 = Number(produit.prixProduitTotal).toFixed(2);
+        let str = getViewItemPanier(produit.idProduit, produit.imgProduit, produit.nomProduit, produit.prixProduit,produit.quantite, prixProduitTotal1);
+            panierList.insertAdjacentHTML('beforeend',str);
+            prixTotalePanier += produit.prixProduit * produit.quantite;
+        });
+
+        // pour prixtotalePanier
+        document.querySelector('#panierTotale').textContent ='Total: '+ prixTotalePanier.toFixed(2)+'$';
+    }
 }
+
 // if ( produitsPanier.length === 0 && document.querySelector('#panierCommander') === null) {
 //     document.querySelector('#panier').remove();  
 // }
@@ -59,10 +74,7 @@ if (sessionStorage.getItem('produitsPanier') == null) {
 // console.dir(filtreProduit);
 
 
- //update page 
-window.addEventListener('resize', function() {
-    location.reload();
-});
+
 
 
 
@@ -287,113 +299,116 @@ document.querySelector('main').addEventListener('click',(event)=>{
 })
 
 //  ajouter et supprimer quantite produit
-panierList.addEventListener('click',(event)=>{
+if (panierList !== null) {
+    panierList.addEventListener('click',(event)=>{
     
 
-    if (event.target.classList.contains('panier_item_plus')){
-        let itemPanier = event.target.parentElement.parentElement.parentElement.parentElement;
-        let idItemPanier = itemPanier.id.replace('idItemPanier','');
-
-    //    let count = ++event.target.previousElementSibling.textContent;
-    //     event.target.parentElement.nextElementSibling.textContent = count*event.target.parentElement.previousElementSibling.textContent;
-       
-       
-        // produitsPanier.map((produit)=>{
-        //     if (produit.idProduit === idItemPanier) {
-        //         produit.quantite = count;
-        //         produit.prixProduitTotal = count*event.target.parentElement.previousElementSibling.textContent;
-        //     }
-        // });
-
-        produitsPanier.map((produit)=>{
-            if (produit.idProduit === idItemPanier) {
-                produit.quantite++;
-                produit.prixProduitTotal = produit.quantite*produit.prixProduit;
-                
-                event.target.previousElementSibling.textContent++;
-                event.target.parentElement.nextElementSibling.textContent ='Total: '+ produit.prixProduitTotal.toFixed(2)+'$';
-            }
-        });
-        
-        sessionStorage.setItem('produitsPanier', JSON.stringify(produitsPanier));
-
-         // pour prixtotalePanier
-        getPrixTotalPanier(produitsPanier);
-        // prixTotalePanier = 0;
-        // produitsPanier.forEach((produit)=>{
-        //     prixTotalePanier += produit.prixProduit * produit.quantite;
-        // });
-        // document.querySelector('#panierTotale>span').textContent = prixTotalePanier;
-    }
-
-    if (event.target.classList.contains('panier_item_minus')){
-        let itemPanier = event.target.parentElement.parentElement.parentElement.parentElement;
-        let idItemPanier = itemPanier.id.replace('idItemPanier','');
-
-        if (event.target.nextElementSibling.textContent > 1) {
-            // let count = --event.target.nextElementSibling.textContent;
-            // event.target.parentElement.nextElementSibling.textContent = count*event.target.parentElement.previousElementSibling.textContent;
-        
+        if (event.target.classList.contains('panier_item_plus')){
+            let itemPanier = event.target.parentElement.parentElement.parentElement.parentElement;
+            let idItemPanier = itemPanier.id.replace('idItemPanier','');
+    
+        //    let count = ++event.target.previousElementSibling.textContent;
+        //     event.target.parentElement.nextElementSibling.textContent = count*event.target.parentElement.previousElementSibling.textContent;
            
+           
+            // produitsPanier.map((produit)=>{
+            //     if (produit.idProduit === idItemPanier) {
+            //         produit.quantite = count;
+            //         produit.prixProduitTotal = count*event.target.parentElement.previousElementSibling.textContent;
+            //     }
+            // });
+    
             produitsPanier.map((produit)=>{
                 if (produit.idProduit === idItemPanier) {
-                    produit.quantite--;
+                    produit.quantite++;
                     produit.prixProduitTotal = produit.quantite*produit.prixProduit;
-
-                    event.target.nextElementSibling.textContent--;
-                    event.target.parentElement.nextElementSibling.textContent = 'Total: '+ produit.prixProduitTotal.toFixed(2)+'$';
+                    
+                    event.target.previousElementSibling.textContent++;
+                    event.target.parentElement.nextElementSibling.textContent ='Total: '+ produit.prixProduitTotal.toFixed(2)+'$';
                 }
             });
-        
-            sessionStorage.setItem('produitsPanier', JSON.stringify(produitsPanier));
-
-            // pour prixtotalePanier
-            getPrixTotalPanier(produitsPanier);
-            // prixTotalePanier = 0;
-            // produitsPanier.forEach((produit)=>{
-            //     prixTotalePanier += produit.prixProduit * produit.quantite;
-            // });
-            // document.querySelector('#panierTotale>span').textContent = prixTotalePanier;
-
-
-        }else if(event.target.nextElementSibling.textContent == 1){
-            let itemPanier = event.target.parentElement.parentElement.parentElement.parentElement;
-            itemPanier.remove(); 
-           
-            let idItemPanier = itemPanier.id.replace('idItemPanier','');
-         
-            let index = produitsPanier.findIndex((produit)=>produit.idProduit == idItemPanier);
             
-            if (index !== -1) {
-                produitsPanier.splice(index,1);
-            }
-            // console.log(produitsPanier);
             sessionStorage.setItem('produitsPanier', JSON.stringify(produitsPanier));
-
-            // pour prixtotalePanier
+    
+             // pour prixtotalePanier
             getPrixTotalPanier(produitsPanier);
             // prixTotalePanier = 0;
             // produitsPanier.forEach((produit)=>{
             //     prixTotalePanier += produit.prixProduit * produit.quantite;
             // });
             // document.querySelector('#panierTotale>span').textContent = prixTotalePanier;
-
+        }
+    
+        if (event.target.classList.contains('panier_item_minus')){
+            let itemPanier = event.target.parentElement.parentElement.parentElement.parentElement;
+            let idItemPanier = itemPanier.id.replace('idItemPanier','');
+    
+            if (event.target.nextElementSibling.textContent > 1) {
+                // let count = --event.target.nextElementSibling.textContent;
+                // event.target.parentElement.nextElementSibling.textContent = count*event.target.parentElement.previousElementSibling.textContent;
+            
+               
+                produitsPanier.map((produit)=>{
+                    if (produit.idProduit === idItemPanier) {
+                        produit.quantite--;
+                        produit.prixProduitTotal = produit.quantite*produit.prixProduit;
+    
+                        event.target.nextElementSibling.textContent--;
+                        event.target.parentElement.nextElementSibling.textContent = 'Total: '+ produit.prixProduitTotal.toFixed(2)+'$';
+                    }
+                });
+            
+                sessionStorage.setItem('produitsPanier', JSON.stringify(produitsPanier));
+    
+                // pour prixtotalePanier
+                getPrixTotalPanier(produitsPanier);
+                // prixTotalePanier = 0;
+                // produitsPanier.forEach((produit)=>{
+                //     prixTotalePanier += produit.prixProduit * produit.quantite;
+                // });
+                // document.querySelector('#panierTotale>span').textContent = prixTotalePanier;
+    
+    
+            }else if(event.target.nextElementSibling.textContent == 1){
+                let itemPanier = event.target.parentElement.parentElement.parentElement.parentElement;
+                itemPanier.remove(); 
+               
+                let idItemPanier = itemPanier.id.replace('idItemPanier','');
+             
+                let index = produitsPanier.findIndex((produit)=>produit.idProduit == idItemPanier);
+                
+                if (index !== -1) {
+                    produitsPanier.splice(index,1);
+                }
+                // console.log(produitsPanier);
+                sessionStorage.setItem('produitsPanier', JSON.stringify(produitsPanier));
+    
+                // pour prixtotalePanier
+                getPrixTotalPanier(produitsPanier);
+                // prixTotalePanier = 0;
+                // produitsPanier.forEach((produit)=>{
+                //     prixTotalePanier += produit.prixProduit * produit.quantite;
+                // });
+                // document.querySelector('#panierTotale>span').textContent = prixTotalePanier;
+    
+               
+            }
+            // pour la page de commande si le panier vide
+             if ( produitsPanier.length === 0 && document.title == 'Commande') {
+                document.querySelector('#panier').remove();  
+               window.location.pathname = "/"; 
+            }
+    
+            // pour cacher le panier si il est vide
+            console.log(produitsPanier.length);
+            if ( produitsPanier.length === 0) {
+               document.querySelector('#panier').classList.remove('panier_active');
+            }
            
         }
-        // pour la page de commande si le panier vide
-         if ( produitsPanier.length === 0 && document.title == 'Commande') {
-            document.querySelector('#panier').remove();  
-           window.location.pathname = "/"; 
-        }
+    })
+}
 
-        // pour cacher le panier si il est vide
-        console.log(produitsPanier.length);
-        if ( produitsPanier.length === 0) {
-           document.querySelector('#panier').classList.remove('panier_active');
-        }
-       
-    }
-})
 
 // pour creer le element de panier. return le string html
 function getViewItemPanier(idProduit, imgProduit, nomProduit, prixProduit,quantite, prixProduitTotal) {

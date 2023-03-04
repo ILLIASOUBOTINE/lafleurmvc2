@@ -1,3 +1,4 @@
+<?php var_dump($_SERVER["HTTP_REFERER"]) ?>
 <h1 class="pd40w700 marg20top titre_commande_etape">Identification</h1>
 
 <section class="section_commande_etape">
