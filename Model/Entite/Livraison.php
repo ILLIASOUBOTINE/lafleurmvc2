@@ -14,8 +14,11 @@
 		
 		public function __construct()
 		{
-			$villeM = new NotreLivraisonManager();
-			$this->ville = $villeM->getById($this->notre_livraison_idnotre_livraison);
+			if ($this->notre_livraison_idnotre_livraison !== null) {
+				$villeM = new NotreLivraisonManager();
+				$this->ville = $villeM->getById($this->notre_livraison_idnotre_livraison);
+			}
+			
 		}
 
 
@@ -170,4 +173,21 @@
 
 				return $this;
 		}
+
+		public static function createLivraisonConstruct($date_prevu,$notre_livraison_idnotre_livraison,$rue,$num_maison,$num_appart,$num_telephone){
+			$obj = new Livraison();
+			$obj->setDatePrevu($date_prevu);
+			$obj->setNotreLivraisonIdnotreLivraison($notre_livraison_idnotre_livraison);
+			$obj->setRue($rue);
+			$obj->setNumMaison($num_maison);
+			$obj->setNumAppart($num_appart);
+			$obj->setNumTelephone($num_telephone);
+			if ($obj->notre_livraison_idnotre_livraison !== null) {
+				$villeM = new NotreLivraisonManager();
+				$obj->ville = $villeM->getById($obj->notre_livraison_idnotre_livraison);
+			}
+			return $obj;
+		}
+
+		
 	}

@@ -14,8 +14,10 @@
 		
 		private  $photos;
 		private  $categories;
-		private $unite;
+		private  $unite;
 		private  $fleures;
+		
+		private $quantitePanier;
 		
 		
 		public function __construct()
@@ -332,5 +334,23 @@
 			// Преобразование ассоциативного массива в JSON
 			// $json = json_encode($arrayProduits);
 			return $arrayProduits;
+		}
+
+		/**
+		 * Get the value of quantitePanier
+		 */
+		public function getQuantitePanier()
+		{
+				return $this->quantitePanier;
+		}
+
+		/**
+		 * Set the value of quantitePanier
+		 */
+		public function setQuantitePanier($quantitePanier)
+		{
+				$this->quantitePanier = $quantitePanier;
+
+			
 		}
 	}

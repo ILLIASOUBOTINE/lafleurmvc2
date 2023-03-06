@@ -94,12 +94,18 @@
 			return $srt;
 		}
 
-		public function getProduitPanier($arrIdProduits)
+		public function getProduitPanier($arrProduits)
 		{
-			$req = $this->_bdd->prepare("SELECT * FROM produit WHERE produit.idproduit in");
-			$req->bindValue(':num', $num, PDO::PARAM_INT);
-			$req->execute();
-			// $req->setFetchMode(PDO::FETCH_CLASS,"Produit");
+			$params = [];
+			foreach($arrProduits as $produit){
+				array_push($params,$produit->id);
+			}
+			$str = implode(',', array_fill(0, count($arrProduits), '?'));
+			$req1 = 'SELECT * FROM produit WHERE produit.idproduit IN ('.$str.')';
+			$req = $this->_bdd->prepare($req1);
+			
+			$req->execute($params);
+			
 			$srt = $req->fetchAll(PDO::FETCH_CLASS,"Produit");
 			return $srt;
 		}

@@ -16,13 +16,13 @@
         <div class="div_commande">
             <p class="pd24w600">Numéro de téléphone:</p>
             <p class="int20w400">
-                <?=$livraison->num_telephone?>
+                <?=$livraison->getNumTelephone()?>
             </p>
         </div>
         <div class="div_commande">
             <p class="pd24w600">Date de livraison:</p>
             <p class="int20w400">
-                <?=$livraison->date_prevu?>
+                <?=$livraison->getDatePrevu()?>
             </p>
         </div>
         <div class="div_commande_adresse">
@@ -32,25 +32,25 @@
             <div class="div_commande marg20">
                 <p class="pd20w400"> ville:</p>
                 <p class="int20w400">
-                    <?=$livraisonVille?>
+                    <?=$livraison->getVille()->getNomVille()?>
                 </p>
             </div>
             <div class="div_commande marg20">
                 <p class="pd20w400"> rue:</p>
                 <p class="int20w400">
-                    <?=$livraison->rue?>
+                    <?=$livraison->getRue()?>
                 </p>
             </div>
             <div class="div_commande marg20">
                 <p class="pd20w400"> numéro de maison: </p>
                 <p class="int20w400">
-                    <?=$livraison->num_maison?>
+                    <?=$livraison->getNumMaison()?>
                 </p>
             </div>
             <div class="div_commande marg20">
                 <p class="pd20w400"> numéro d'appartement:</p>
                 <p class="int20w400">
-                    <?=$livraison->num_appart?>
+                    <?=$livraison->getNumAppart()?>
                 </p>
             </div>
         </div>
@@ -63,7 +63,8 @@
         <?php if (isset($_SESSION['livraison'])) {
            
             var_dump($_SESSION['panier']);
-          
+            var_dump($commande);
+            
         }?>
 
     </div>

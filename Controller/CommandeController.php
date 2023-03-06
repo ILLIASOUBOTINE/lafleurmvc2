@@ -19,6 +19,12 @@
 			$villes = $_SESSION['villes'];
 			$this->addParam('villes',$villes);
 			
+			if (isset($_SESSION['livraison'])) {
+				$livraison = $_SESSION['livraison'];
+				$this->addParam('livraison',$livraison);
+			}
+			
+			
 			$filename = 'livraison' ;
 			return $this->view($filename);
 		} 
@@ -45,6 +51,8 @@
 			$num_maison = $this->get_httpRequest()->getParam()['num_maison'];
 			$num_appart = $this->get_httpRequest()->getParam()['num_appart'];
 			$num_telephone = $this->get_httpRequest()->getParam()['num_telephone'];
+
+			$livraison = Livraison::createLivraisonConstruct($date_prevu,$id_ville,$rue,$num_maison,$num_appart,$num_telephone);
 			
 			if (true) {
 				// $response = $livraisonM->create(['date_prevu','notre_livraison_idnotre_livraison','rue','num_maison','num_appart','num_telephone'],[$date_prevu,$id_ville,$rue,$num_maison,$num_appart,$num_telephone]);
@@ -61,8 +69,9 @@
 				// 	 return $this->view($filename);
 				//  }
 			
-				$strLivraison = '{"date_prevu":"'.$date_prevu.'","id_ville":'.$id_ville.',"rue":"'.$rue.'","num_maison":"'.$num_maison.'","num_appart":"'.$num_appart.'","num_telephone":"'.$num_telephone.'"}';
-				$_SESSION['livraison'] = json_decode($strLivraison);
+				// $strLivraison = '{"date_prevu":"'.$date_prevu.'","id_ville":'.$id_ville.',"rue":"'.$rue.'","num_maison":"'.$num_maison.'","num_appart":"'.$num_appart.'","num_telephone":"'.$num_telephone.'"}';
+				// $_SESSION['livraison'] = json_decode($strLivraison);
+				$_SESSION['livraison'] = $livraison;
 
 				$strPanier = $this->get_httpRequest()->getParam()['dataPanier'];
 				$_SESSION['panier'] = json_decode($strPanier);
@@ -73,24 +82,31 @@
 		public function recapitulatif(){
 
 			$livraison = $_SESSION['livraison'];
-			$villes = $_SESSION['villes'];
-			
-			foreach($villes as $vil){
-				if ($vil->getIdVille() == $_SESSION['livraison']->id_ville) {
-					$ville = $vil;
-				} 
-			};
-			$livraisonVille = $ville->getNomVille();
 			$this->addParam('livraison',$livraison);
-			$this->addParam('livraisonVille',$livraisonVille);
+			
 			
 			$client = $_SESSION['client'];
 			$this->addParam('client',$client);
 			
 			$panier = $_SESSION['panier'];
 			$this->addParam('panier',$panier);
+				
+			$produitM = new ProduitManager();
+			$produits = $produitM->getProduitPanier($panier);
+
+			foreach($produits as $produit){
+				foreach($panier as $produitP){
+					if ($produit->getIdproduit() == $produitP->id) {
+						$produit->setQuantitePanier($produitP->quantite);
+					}
+				}
+			}
+			$this->addParam('produits',$produits);
 			
-			$filename = 'recapitulatif' ;
+			$commande = Commande::createCommandeConstruct($produits,$livraison,$client);
+			$this->addParam('commande',$commande);
+			
+			$filename = 'recapitulatif';
 			return $this->view($filename);
 		}
 	

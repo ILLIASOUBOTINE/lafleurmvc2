@@ -5,7 +5,7 @@
     <?php if(isset($_SESSION['livraison'])):?>
     <select type="numbre" class="inp_formulair_identif" name="id_ville" placeholder="ville">
         <?php foreach($villes as $ville):?>
-        <?php if($_SESSION['livraison']->id_ville == $ville->getIdVille()):?>
+        <?php if($livraison->getVille()->getIdVille() == $ville->getIdVille()):?>
         <option value="<?=$ville->getIdVille() ?>" selected><?=$ville->getNomVille()?></option>
         <?php else: ?>
         <option value="<?=$ville->getIdVille() ?>"><?=$ville->getNomVille() ?></option>
@@ -13,16 +13,15 @@
 
         <?php endforeach ?>
     </select>
-    <input type="text" class="inp_formulair_identif" name="rue" value="<?=$_SESSION['livraison']->id_ville?>"
-        placeholder="rue">
-    <input type="text" class="inp_formulair_identif" name="num_maison" value="<?=$_SESSION['livraison']->num_maison?>"
+    <input type="text" class="inp_formulair_identif" name="rue" value="<?=$livraison->getRue()?>" placeholder="rue">
+    <input type="text" class="inp_formulair_identif" name="num_maison" value="<?=$livraison->getNumMaison()?>"
         placeholder="numéro de maison">
-    <input type="text" class="inp_formulair_identif" name="num_appart" value="<?=$_SESSION['livraison']->num_appart?>"
+    <input type="text" class="inp_formulair_identif" name="num_appart" value="<?=$livraison->getNumAppart()?>"
         placeholder="numéro d'appartement">
-    <input type="text" class="inp_formulair_identif" name="num_telephone"
-        value="<?=$_SESSION['livraison']->num_telephone?>" placeholder="numéro de téléphone">
+    <input type="text" class="inp_formulair_identif" name="num_telephone" value="<?=$livraison->getNumTelephone()?>"
+        placeholder="numéro de téléphone">
     <h3 class="titre_formulair_identif pd24w600">Date de livraison</h3>
-    <input type="text" class="inp_formulair_identif" name="date_prevu" value="<?=$_SESSION['livraison']->date_prevu?>"
+    <input type="text" class="inp_formulair_identif" name="date_prevu" value="<?=$livraison->getDatePrevu()?>"
         placeholder="09-10-2023">
 
     <?php else: ?>
