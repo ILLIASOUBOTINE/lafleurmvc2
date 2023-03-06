@@ -26,6 +26,7 @@ class Commande
         $obj->setProduits($produits); 
         $obj->setLivraison($livraison); 
         $obj->setClient($client); 
+        $obj->setClientIdclient(intval($obj->getClient()->getIdClient())); 
         $obj->setPrixTotaleProduits($obj->calculPrixTotaleProduits($produits));
         $obj->setPrixPayer($obj->calculFraisLivraison($obj->getPrixTotaleProduits(),50));
         $obj->setPrixPayer(number_format($obj->getPrixTotaleProduits()+$obj->getFraisLivraison(),2));

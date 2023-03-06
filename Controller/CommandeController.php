@@ -105,10 +105,61 @@
 			$this->addParam('produits',$produits);
 			
 			$commande = Commande::createCommandeConstruct($produits,$livraison,$client);
+			$_SESSION['commande'] = $commande;
 			$this->addParam('commande',$commande);
 			
 			$filename = 'recapitulatif';
 			return $this->view($filename);
 		}
+
+
+		public function paiement(){
+			$filename = 'paiement';
+			return $this->view($filename);
+		}
+
+		public function controlPaiement(){
+			$idLivraison = $this->createLivraisonBD();
+			$this->createCommandeBD($idLivraison);
+			
+			$filename = 'paiement';
+			return $this->view($filename);
+		}
 	
+		public function createLivraisonBD(){
+			$livraison = $_SESSION['commande']->getLivraison();
+			$date_prevu = $livraison->getDatePrevu();
+			$notre_livraison_idnotre_livraison = $livraison->getNotreLivraisonIdnotreLivraison();
+			$rue = $livraison->getRue();
+			$num_maison = $livraison->getNumMaison();
+			$num_appart = $livraison->getNumAppart();
+			$num_telephone = $livraison->getNumTelephone();
+			
+			$livraisonM = new LivraisonManager();
+			$params = ['date_prevu','notre_livraison_idnotre_livraison','rue','num_maison','num_appart','num_telephone'];
+			$values = [$date_prevu,$notre_livraison_idnotre_livraison,$rue,$num_maison,$num_appart,$num_telephone];
+			$reponse = $livraisonM->create($params,$values);
+			return intval($reponse);
+			// var_dump($reponse);
+			// exit;
+			
+		}
+
+		public function createCommandeBD($idlivraison){
+			$commande = $_SESSION['commande'];
+			$client_idclient = $commande->getClientIdclient();
+			$num_commande = $commande->getNumCommande();
+			$livraison_idlivraison = $idlivraison;
+			$frais_livraison = $commande->getFraisLivraison();
+			
+			$commandeM = new CommandeManager();
+			$params = ['client_idclient', 'num_commande','livraison_idlivraison','frais_livraison'];
+			$values = [$client_idclient,$num_commande,$livraison_idlivraison,$frais_livraison];
+			$reponse = $commandeM->create($params,$values);
+			
+			var_dump($reponse);
+			exit;
+			
+		}
+		
 	}

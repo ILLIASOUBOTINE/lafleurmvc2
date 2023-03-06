@@ -89,6 +89,20 @@
 	"param" : []
 },
 {
+	"path" : "/etapePaiement",
+	"controller" : "Commande",
+	"action" : "paiement",
+	"method" : "GET",
+	"param" : []
+},
+{
+	"path" : "/controlPaiement",
+	"controller" : "Commande",
+	"action" : "controlPaiement",
+	"method" : "GET",
+	"param" : []
+},
+{
 	"path" : "/account",
 	"controller" : "Account",
 	"action" : "identification",
