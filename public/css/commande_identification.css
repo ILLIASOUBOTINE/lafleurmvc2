@@ -2,7 +2,7 @@
     width: 100%;
     max-width: 1000px;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     
     margin: 10px 20px;
 }
@@ -31,6 +31,18 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 5px 10px;
+    margin: 5px 20px 5px;
    
+}
+
+@media screen and (max-width: 840px) {
+    .section_commande_identification {
+       align-items: center;
+       flex-direction: column;
+    }
+    .commande_block_form {
+        width: 90%;
+        
+       
+    }
 }

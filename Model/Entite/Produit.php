@@ -18,7 +18,7 @@
 		private  $fleures;
 		
 		private $quantitePanier;
-		
+		private $prixPanier;
 		
 		public function __construct()
 		{
@@ -353,4 +353,24 @@
 
 			
 		}
+
+		/**
+		 * Get the value of prixPanier
+		 */
+		public function getPrixPanier()
+		{
+				return $this->prixPanier;
+		}
+
+		/**
+		 * Set the value of prixPanier
+		 */
+		public function setPrixPanier($prixPanier)
+		{
+				$this->prixPanier = $prixPanier;
+
+				
+		}
+
+		
 	}

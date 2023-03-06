@@ -98,6 +98,7 @@
 				foreach($panier as $produitP){
 					if ($produit->getIdproduit() == $produitP->id) {
 						$produit->setQuantitePanier($produitP->quantite);
+						$produit->setPrixPanier(number_format($produit->getQuantitePanier()*$produit->getPrixUnite(),2));
 					}
 				}
 			}

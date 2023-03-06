@@ -39,3 +39,15 @@
 .item_etape_ligne {
     display: none;
 }
+
+@media screen and (max-width: 400px) {
+    .etape_commande {
+        
+        align-items: flex-start;
+        
+    }
+    .item_etape:nth-child(even) .item_etape_cercle {
+     
+        margin-bottom: 30px;
+    }
+}

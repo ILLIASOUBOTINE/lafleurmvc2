@@ -59,11 +59,35 @@
 
     </div>
     <div class="commande_block_produits">
+        <p class="pd24w600">Votre Panier:</p>
+
+        <?php foreach($commande->getProduits() as $produit):?>
+        <?php include 'components/produit_commande.php'?>
+        <?php endforeach?>
+
+        <div class="div_commande">
+            <p class="pd24w600"> Total:</p>
+            <p class="int20w400">
+                <?=$commande->getPrixTotaleProduits()?>$
+            </p>
+        </div>
+        <div class="div_commande">
+            <p class="pd24w600"> frais de livraison:</p>
+            <p class="int20w400">
+                <?=$commande->getFraisLivraison()?>$
+            </p>
+        </div>
+        <div class="div_commande">
+            <p class="pd24w600"> le montant payé: </p>
+            <p class="int20w400">
+                <?=$commande->getPrixPayer()?>$
+            </p>
+        </div>
 
         <?php if (isset($_SESSION['livraison'])) {
            
-            var_dump($_SESSION['panier']);
-            var_dump($commande);
+            // var_dump($_SESSION['panier']);
+            // var_dump($commande);
             
         }?>
 
