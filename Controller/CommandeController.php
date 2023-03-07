@@ -119,8 +119,10 @@
 		}
 
 		public function controlPaiement(){
+			$commande = $_SESSION['commande'];
 			$idLivraison = $this->createLivraisonBD();
-			$this->createCommandeBD($idLivraison);
+			$idCommande = $this->createCommandeBD($idLivraison);
+			CommandeHasProduit::createCommandeHasProduitInBD($commande,$idCommande);
 			
 			$filename = 'paiement';
 			return $this->view($filename);
@@ -156,9 +158,9 @@
 			$params = ['client_idclient', 'num_commande','livraison_idlivraison','frais_livraison'];
 			$values = [$client_idclient,$num_commande,$livraison_idlivraison,$frais_livraison];
 			$reponse = $commandeM->create($params,$values);
-			
-			var_dump($reponse);
-			exit;
+			return intval($reponse);
+			// var_dump($reponse);
+			// exit;
 			
 		}
 		
