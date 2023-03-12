@@ -21,8 +21,8 @@
     <input type="text" class="inp_formulair_identif" name="num_telephone" value="<?=$livraison->getNumTelephone()?>"
         placeholder="numéro de téléphone">
     <h3 class="titre_formulair_identif pd24w600">Date de livraison</h3>
-    <input type="text" class="inp_formulair_identif" name="date_prevu" value="<?=$livraison->getDatePrevu()?>"
-        placeholder="09-10-2023">
+    <input type="date" class="inp_formulair_identif" name="date_prevu" value="<?=$livraison->getDatePrevu()?>"
+        min="<?=$livraisonMin?>" max="<?=$livraisonMax?>">
 
     <?php else: ?>
     <select type="numbre" class="inp_formulair_identif" name="id_ville" placeholder="ville">
@@ -35,7 +35,8 @@
     <input type="text" class="inp_formulair_identif" name="num_appart" placeholder="numéro d'appartement">
     <input type="text" class="inp_formulair_identif" name="num_telephone" placeholder="numéro de téléphone">
     <h3 class="titre_formulair_identif pd24w600">Date de livraison</h3>
-    <input type="text" class="inp_formulair_identif" name="date_prevu" placeholder="09-10-2023">
+    <input type="date" class="inp_formulair_identif" name="date_prevu" value="<?=$livraisonPrev?>"
+        min="<?=$livraisonMin?>" max="<?=$livraisonMax?>">
 
     <?php endif ?>
     <input type="text" id="dataPanier" name="dataPanier" class="dnone">

@@ -22,7 +22,16 @@
 			if (isset($_SESSION['livraison'])) {
 				$livraison = $_SESSION['livraison'];
 				$this->addParam('livraison',$livraison);
+			}else{
+				$livraisonPrev = date("Y-m-d",mktime(0,0,0,date("m"),date("d")+1,date("Y")));
+				$this->addParam('livraisonPrev',$livraisonPrev);
 			}
+			
+			$livraisonMin = date("Y-m-d",mktime(0,0,0,date("m"),date("d")+1,date("Y")));
+			$this->addParam('livraisonMin',$livraisonMin);
+
+			$livraisonMax = date("Y-m-d",mktime(0,0,0,date("m")+1,date("d"),date("Y")));
+			$this->addParam('livraisonMax',$livraisonMax);
 			
 			
 			$filename = 'livraison' ;
@@ -120,48 +129,19 @@
 
 		public function controlPaiement(){
 			$commande = $_SESSION['commande'];
-			$idLivraison = $this->createLivraisonBD();
-			$idCommande = $this->createCommandeBD($idLivraison);
+			$idLivraison = Livraison::createLivraisonDansBD();
+			$idCommande = Commande::createCommandeDansBD($idLivraison);
 			CommandeHasProduit::createCommandeHasProduitInBD($commande,$idCommande);
+			// var_dump($commande);
+			// exit;
+			$commande->modifQuantiteProduitTotalDansBD();
 			
-			$filename = 'paiement';
+			$filename = 'paiement_accepte';
 			return $this->view($filename);
 		}
 	
-		public function createLivraisonBD(){
-			$livraison = $_SESSION['commande']->getLivraison();
-			$date_prevu = $livraison->getDatePrevu();
-			$notre_livraison_idnotre_livraison = $livraison->getNotreLivraisonIdnotreLivraison();
-			$rue = $livraison->getRue();
-			$num_maison = $livraison->getNumMaison();
-			$num_appart = $livraison->getNumAppart();
-			$num_telephone = $livraison->getNumTelephone();
-			
-			$livraisonM = new LivraisonManager();
-			$params = ['date_prevu','notre_livraison_idnotre_livraison','rue','num_maison','num_appart','num_telephone'];
-			$values = [$date_prevu,$notre_livraison_idnotre_livraison,$rue,$num_maison,$num_appart,$num_telephone];
-			$reponse = $livraisonM->create($params,$values);
-			return intval($reponse);
-			// var_dump($reponse);
-			// exit;
-			
-		}
+		
 
-		public function createCommandeBD($idlivraison){
-			$commande = $_SESSION['commande'];
-			$client_idclient = $commande->getClientIdclient();
-			$num_commande = $commande->getNumCommande();
-			$livraison_idlivraison = $idlivraison;
-			$frais_livraison = $commande->getFraisLivraison();
-			
-			$commandeM = new CommandeManager();
-			$params = ['client_idclient', 'num_commande','livraison_idlivraison','frais_livraison'];
-			$values = [$client_idclient,$num_commande,$livraison_idlivraison,$frais_livraison];
-			$reponse = $commandeM->create($params,$values);
-			return intval($reponse);
-			// var_dump($reponse);
-			// exit;
-			
-		}
+		
 		
 	}

@@ -20,6 +20,7 @@
 	// unset($_SESSION['offreProduits']);
 	// unset($_SESSION['villes']);
 	// unset($_SESSION['votreChoixProduits']);
+	//  unset($_SESSION['livraison']);
 	// require 'functions.php';
     require 'config/init.php';
 	

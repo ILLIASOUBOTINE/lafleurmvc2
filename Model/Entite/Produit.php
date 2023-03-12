@@ -372,5 +372,16 @@
 				
 		}
 
+		public function modifQuantiteProduitTotal(){
+			$produitM = new ProduitManager();
+			$id =intval($this->getIdproduit());
+			$param = ["quantiteTotale","ventesTotales"];
+
+			$quantiteTotale = intval($this->getQuantiteTotale() - $this->getQuantitePanier());
+			$ventesTotales = intval($this->getVentesTotales() + $this->getQuantitePanier());
+			$values = [$quantiteTotale,$ventesTotales];
+			$produitM->update($id,$param,$values);
+			
+		}
 		
 	}

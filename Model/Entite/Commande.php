@@ -233,7 +233,28 @@ class Commande
     public function setPrixPayer($prixPayer)
     {
         $this->prixPayer = $prixPayer;
+    }
 
+    public function modifQuantiteProduitTotalDansBD(){
+        foreach($this->getProduits() as $produit){
+            $produit->modifQuantiteProduitTotal();
+        }
+    }
+
+    public static function createCommandeDansBD($idlivraison){
+        $commande = $_SESSION['commande'];
+        $client_idclient = $commande->getClientIdclient();
+        $num_commande = $commande->getNumCommande();
+        $livraison_idlivraison = $idlivraison;
+        $frais_livraison = $commande->getFraisLivraison();
+        
+        $commandeM = new CommandeManager();
+        $params = ['client_idclient', 'num_commande','livraison_idlivraison','frais_livraison'];
+        $values = [$client_idclient,$num_commande,$livraison_idlivraison,$frais_livraison];
+        $reponse = $commandeM->create($params,$values);
+        return intval($reponse);
+        // var_dump($reponse);
+        // exit;
         
     }
 }

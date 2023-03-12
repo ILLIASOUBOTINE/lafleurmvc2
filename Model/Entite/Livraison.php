@@ -189,5 +189,24 @@
 			return $obj;
 		}
 
+		public static function createLivraisonDansBD(){
+			$livraison = $_SESSION['commande']->getLivraison();
+			$date_prevu = $livraison->getDatePrevu();
+			$notre_livraison_idnotre_livraison = $livraison->getNotreLivraisonIdnotreLivraison();
+			$rue = $livraison->getRue();
+			$num_maison = $livraison->getNumMaison();
+			$num_appart = $livraison->getNumAppart();
+			$num_telephone = $livraison->getNumTelephone();
+			
+			$livraisonM = new LivraisonManager();
+			$params = ['date_prevu','notre_livraison_idnotre_livraison','rue','num_maison','num_appart','num_telephone'];
+			$values = [$date_prevu,$notre_livraison_idnotre_livraison,$rue,$num_maison,$num_appart,$num_telephone];
+			$reponse = $livraisonM->create($params,$values);
+			return intval($reponse);
+			// var_dump($reponse);
+			// exit;
+			
+		}
+
 		
 	}

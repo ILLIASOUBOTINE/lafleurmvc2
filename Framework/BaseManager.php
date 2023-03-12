@@ -57,31 +57,29 @@
 			
 		}
 		
-		public function update($obj,$param)
+		public function update($id,$param,$values)
 		{
 			$sql = "UPDATE " . $this->_table . " SET ";
-			foreach($param as $paramName)
-			{
-				$sql = $sql . $paramName . " = ?, ";
+			for ($i = 0; $i < count($param); $i++) { 
+				if ($i == count($param) - 1) {
+					$sql = $sql . $param[$i] . " = ? ";
+				} else {
+					$sql = $sql . $param[$i] . " = ?, ";
+				}
 			}
-			$sql = $sql . " WHERE id = ? ";
+			
+			$sql = $sql . ' WHERE ' .$this->_table.'.id'.$this->_table.' = ? ';
 			$req = $this->_bdd->prepare($sql);
-			
-			$param[] = 'id';
 			$boundParam = array();
-			foreach($param as $paramName)
+			foreach($values as $value)
 			{
-				if(property_exists($obj,$paramName))
-				{
-					$boundParam[$paramName] = $obj->$paramName;	
-				}
-				else
-				{
-					throw new PropertyNotFoundException($this->_object,$paramName);	
-				}
+				$boundParam[] = $value;	
 			}
-			
+			$boundParam[] = $id;
 			$req->execute($boundParam);
+			
+			
+			
 		}
 		
 		public function delete($obj)

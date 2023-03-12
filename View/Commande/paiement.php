@@ -4,24 +4,16 @@
     <?php include 'components/etape_commande.php'?>
 </section>
 <a href="/etapeRecapitulatif" class="btn_grand pd24w600">retour</a>
-<section class="section_commande_recapupitulatif">
-
-
-
-
-
-
-    <div class="commande_block_produits">
-
-
-        <?php if (isset($_SESSION['livraison'])) {
-           
-            // var_dump($_SESSION['panier']);
-            var_dump($_SESSION['commande']);
-            
-        }?>
-
-    </div>
-
+<?php if (isset($messageError)): ?>
+<h1 class="pd40w700 marg20top titre_account">
+    <?=$messageError?>
+</h1>
+<?php endif ?>
+<?php if (isset($messageSucces)): ?>
+<h1 class="pd40w700 marg20top titre_account">
+    <?=$messageSucces?>
+</h1>
+<?php endif ?>
+<section class="section_account_identification">
+    <?php include 'components/form_paiement.php'?>
 </section>
-<a href="/controlPaiement" class="btn_grand pd24w600">Valider</a>
