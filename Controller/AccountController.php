@@ -9,10 +9,6 @@
         
 		public function identification(){
 			if (isset($_SESSION['client'])) {
-				// $client = $_SESSION['client'];
-				// $this->addParam('client',$client);
-				// $filename = 'monaccount';
-            	// return $this->view($filename);
 				$this->redirect('/monAccount');
 			}else{
 				$filename = 'identification' ;
@@ -97,6 +93,14 @@
 		public function monAccount() {
 			$client = $_SESSION['client'];
 			$this->addParam('client',$client);
+			
+			$commandesM = new CommandeManager();
+			$commandes = $commandesM->getCommandeByIdClient($client->getIdClient());
+			foreach($commandes as $commande){
+				$commande->getAllCommandeConstruct();
+			}
+			$this->addParam('commandes',$commandes);
+			
 			$filename = 'monaccount';
             return $this->view($filename);
 		}

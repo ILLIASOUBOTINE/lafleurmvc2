@@ -21,6 +21,40 @@ class Commande
         
     }
 
+    public function getAllCommandeConstruct(){
+        
+        $produits = $this->getProduitsCommande();
+        $this->setProduits($produits); 
+
+        $livraisonM = new LivraisonManager();
+        $livraison = $livraisonM->getById(intval($this->getLivraisonIdlivraison()));
+        $this->setLivraison($livraison); 
+
+        $clientM = new ClientManager();
+        $client = $clientM->getById(intval($this->getClientIdclient()));
+        $this->setClient($client); 
+        
+        $this->setPrixTotaleProduits($this->calculPrixTotaleProduits($produits));
+        
+        $this->setPrixPayer(number_format($this->getPrixTotaleProduits()+$this->getFraisLivraison(),2));
+        return $this;
+    }
+
+    public function getProduitsCommande(){
+        $produits = [];
+        $produitHasCommandeM = new CommandeHasProduitManager();
+        $objs = $produitHasCommandeM->getProduitsByCommande($this->getIdcommandes());
+        foreach($objs as $obj){
+            $produitM = new ProduitManager();
+            $produit = $produitM->getById($obj->getProduitIdproduit());
+            $produit->setQuantitePanier($obj->getQuantite());
+            $produit->setPrixPanier(number_format($obj->getQuantite()*$produit->getPrixUnite(),2));
+            $produits[] = $produit;
+        }
+        return $produits;
+    }
+    
+
     public static function createCommandeConstruct($produits,$livraison,$client){
         $obj = new Commande();
         $obj->setProduits($produits); 

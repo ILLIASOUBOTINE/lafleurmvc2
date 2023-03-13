@@ -8,7 +8,9 @@
 		}
         
 		public function identification(){
-			
+			if (isset($_SESSION['client'])) {
+				$this->redirect('/etapeLivraison');
+			}
 			$filename = 'identification' ;
 		  
 			return $this->view($filename);
