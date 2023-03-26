@@ -260,16 +260,23 @@ document.querySelector('main').addEventListener('click',(event)=>{
     if (event.target.classList.contains('btn_ajouter') && event.target.innerText === 'Ajouter') {
         // console.dir(event.target);
         let idProduit = event.target.id.replace('idBtnAjouter','');
-         console.log(produitsPanier.findIndex(produit=>produit.idProduit == idProduit) );
-         console.log(produitsPanier);
+        //  console.log(produitsPanier.findIndex(produit=>produit.idProduit == idProduit) );
+        //  console.dir(event.target.dataset.message);
+         
         if (produitsPanier.findIndex(produit=>produit.idProduit === idProduit) == -1)  {
-           
+            let produit = JSON.parse(event.target.dataset.message);
+            // console.log(produit);
 
-            let produit = event.target.parentElement.parentElement;
-            // let idProduit = produit.children[0].href;
-            let nomProduit = produit.children[1].innerText;
-            let imgProduit = produit.children[0].children[0].src;
-            let prixProduit = produit.children[2].children[0].innerText;
+            // let produit = event.target.parentElement.parentElement;
+            
+            // let nomProduit = produit.children[1].innerText;
+            // let imgProduit = produit.children[0].children[0].src;
+            // let prixProduit = produit.children[2].children[0].innerText;
+            
+            
+            let nomProduit = produit.nomProduit;
+            let imgProduit = produit.imgProduit;
+            let prixProduit = produit.prixProduit.toFixed(2);
             let prixProduitTotal = prixProduit;
             let quantite = 1;
          

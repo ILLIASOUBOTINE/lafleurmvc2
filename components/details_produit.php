@@ -56,6 +56,10 @@
     </ul>
     <p class="description_details int20w400"><?=$produit->getDescription()?></p>
 
-    <button class="btn_grand pd24w600" title="Ajouter">Ajouter</button>
+
+    <button class="btn_ajouter btn_grand pd24w600" id="idBtnAjouter<?=$produit->getIdproduit()?>"
+        title="<?=$produit->getDisponible()?>"
+        data-message="{&quot;imgProduit&quot;:&quot;public/imgs/fleurs/<?=$produit->getPhotos()[0]->getImgUrl()?>&quot;,
+        &quot;nomProduit&quot;:&quot;<?=$produit->getNom() ?>&quot;,&quot;prixProduit&quot;:<?=$produit->getPrixUnite()?>}"><?=$produit->getDisponible()?></button>
 
 </div>
