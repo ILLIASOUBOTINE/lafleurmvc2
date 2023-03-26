@@ -564,6 +564,10 @@ section {
   right: -350px;
   background: var(--color-gris);
   transition: right 1s;
+  height: calc(100vh - 120px);
+  max-height: 601px;
+  overflow: auto;
+  /* background-color: rgb(255, 255, 255, 0.5); */
   /* display: none; */
 }
 
@@ -919,8 +923,12 @@ section {
     display: flex;
   }
 
-  .notrelivraison {
+  .notrelivraison, .panier {
     top:60px;
+  }
+
+  .panier {
+    height: calc(100vh - 60px);
   }
 
   .details {
@@ -1190,9 +1198,14 @@ section {
     display: flex;
   }
 
-  .notrelivraison {
+  .notrelivraison, .panier {
     top:60px;
   }
+
+  .panier {
+    height: calc(100vh - 60px);
+  }
+
   .details {
     /* width: 95%; */
     height: fit-content;

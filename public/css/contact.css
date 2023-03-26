@@ -1,0 +1,57 @@
+.contact {
+    width: 95%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-top: 30px;
+}
+
+.block_contact {
+    max-width: 500px;
+    width: 50%;
+    height: 100%;
+    /* height: fit-content; */
+    max-height: 500px;
+    min-height: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: var(--color-white);
+    border-radius: 30px;
+    margin-left: 10px;
+}
+
+.google_map {
+    width: 80%;
+    height:70%;
+    border: none;
+    border-radius: 15px;
+}
+
+@media screen and (max-width: 840px) {
+    .contact {
+        height: fit-content;
+        flex-direction: column;
+        justify-content: space-between;
+        margin-top: 20px;
+        margin-bottom: 30px;
+    }
+
+    .block_contact {
+        width: 100%;
+        height: fit-content;
+        margin-top: 20px;
+        margin-left: 0;
+        border-radius: 20px;
+    }
+  
+    .google_map {
+        width: 90%;
+        height:70%;
+        border: none;
+        border-radius: 10px;
+    }
+   
+  }
