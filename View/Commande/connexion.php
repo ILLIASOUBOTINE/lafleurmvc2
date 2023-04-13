@@ -18,6 +18,8 @@
             <?=$messageSucces?>
         </h1>
         <?php endif ?>
+
+        <a href="/etapeIdentification" class="btn_grand pd24w600">retour</a>
         <?php include 'components/form_connexion_commande.php'?>
 
     </div>

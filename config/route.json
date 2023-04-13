@@ -54,6 +54,13 @@
 	"param" : []
 },
 {
+	"path" : "/etapeIdentificationLogout",
+	"controller" : "Commande",
+	"action" : "identificationLogout",
+	"method" : "GET",
+	"param" : []
+},
+{
 	"path" : "/inscriptionCommande",
 	"controller" : "Commande",
 	"action" : "inscription",

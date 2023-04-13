@@ -9,6 +9,12 @@
 
     <div class="commande_block_info">
         <div class="div_commande">
+            <p class="pd24w600">Numéro de commande:</p>
+            <p class="int20w400">
+                <?=$commande->getIdcommandes()?>
+            </p>
+        </div>
+        <div class="div_commande">
             <p class="pd24w600">Votre email:</p>
             <p class="int20w400">
                 <?=$commande->getClient()->getEmail()?>

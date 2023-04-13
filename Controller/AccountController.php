@@ -68,7 +68,7 @@
 			$password = $thisController->get_httpRequest()->getParam()['password'];
 			
 			$client = $clientM->getByEmail($email);
-		   if (!$client) {
+		   if (!$client || empty($client->getEmail())) {
 				$messageError = "email n'est pas correct";
 				$thisController->addParam('messageError',$messageError);
 				$filename = 'connexion' ;

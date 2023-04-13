@@ -10,16 +10,34 @@
 		public function identification(){
 			if (isset($_SESSION['client'])) {
 				$this->redirect('/etapeLivraison');
+				
 			}
 			$filename = 'identification' ;
 		  
 			return $this->view($filename);
         }
+
+		public function identificationLogout(){
+			
+			unset($_SESSION['client']);
+			
+			$this->redirect('/etapeIdentification');
+        }
+		
+		
         
 		public function livraison(){
 			// $villesM = new NotreLivraisonManager();
 			$villes = $_SESSION['villes'];
 			$this->addParam('villes',$villes);
+
+			
+			if (isset($_SESSION['messageError'])) {
+				$messageError = $_SESSION['messageError'];
+				$this->addParam('messageError',$messageError);
+			}
+			// $produitM = new ProduitManager();
+			// $produit = $produitM->getById($id);
 			
 			if (isset($_SESSION['livraison'])) {
 				$livraison = $_SESSION['livraison'];
@@ -36,7 +54,7 @@
 			$this->addParam('livraisonMax',$livraisonMax);
 			
 			
-			$filename = 'livraison' ;
+			$filename = 'livraison';
 			return $this->view($filename);
 		} 
 		
@@ -91,36 +109,66 @@
 		}
 	
 		public function recapitulatif(){
-
-			$livraison = $_SESSION['livraison'];
-			$this->addParam('livraison',$livraison);
-			
-			
-			$client = $_SESSION['client'];
-			$this->addParam('client',$client);
 			
 			$panier = $_SESSION['panier'];
 			$this->addParam('panier',$panier);
-				
+			
 			$produitM = new ProduitManager();
 			$produits = $produitM->getProduitPanier($panier);
-
+			
+			$messageError = [];
 			foreach($produits as $produit){
 				foreach($panier as $produitP){
 					if ($produit->getIdproduit() == $produitP->id) {
-						$produit->setQuantitePanier($produitP->quantite);
-						$produit->setPrixPanier(number_format($produit->getQuantitePanier()*$produit->getPrixUnite(),2));
+						if ($produitP->quantite > $produit->getQuantiteTotale()) {
+							$messageError[] =  'nous n\'avons que '. $produit->getQuantiteTotale().' '. $produit->getNom() .' en stock';
+						}
+						// $produit->setQuantitePanier($produitP->quantite);
+						// $produit->setPrixPanier(number_format($produit->getQuantitePanier()*$produit->getPrixUnite(),2));
+						
 					}
 				}
 			}
-			$this->addParam('produits',$produits);
 			
-			$commande = Commande::createCommandeConstruct($produits,$livraison,$client);
-			$_SESSION['commande'] = $commande;
-			$this->addParam('commande',$commande);
-			
-			$filename = 'recapitulatif';
-			return $this->view($filename);
+			if (count($messageError) > 0) {
+				// var_dump($produits);
+				
+				// echo "<br>";
+				// var_dump($messageError);
+				// exit();
+				
+				$_SESSION['messageError'] = $messageError;
+				$this->redirect('/etapeLivraison');
+			}else {
+				
+				$livraison = $_SESSION['livraison'];
+				$this->addParam('livraison',$livraison);
+				
+				
+				$client = $_SESSION['client'];
+				$this->addParam('client',$client);
+				
+				$produitM = new ProduitManager();
+				$produits = $produitM->getProduitPanier($panier);
+
+				foreach($produits as $produit){
+					foreach($panier as $produitP){
+						if ($produit->getIdproduit() == $produitP->id) {
+							$produit->setQuantitePanier($produitP->quantite);
+							$produit->setPrixPanier(number_format($produit->getQuantitePanier()*$produit->getPrixUnite(),2));
+						}
+					}
+				}
+				$this->addParam('produits',$produits);
+				
+				$commande = Commande::createCommandeConstruct($produits,$livraison,$client);
+				$_SESSION['commande'] = $commande;
+				$this->addParam('commande',$commande);
+				
+				unset($_SESSION['messageError']);
+				$filename = 'recapitulatif';
+				return $this->view($filename);
+			}
 		}
 
 
