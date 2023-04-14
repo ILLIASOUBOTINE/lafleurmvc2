@@ -1,6 +1,6 @@
 [
 	{
-	"path" : "/",
+	"path" : "/index",
 	"controller" : "Accueil",
 	"action" : "show",
 	"method" : "GET",

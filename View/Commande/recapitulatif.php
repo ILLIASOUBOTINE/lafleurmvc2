@@ -3,7 +3,7 @@
 <section class="section_commande_etape">
     <?php include 'components/etape_commande.php'?>
 </section>
-<a href="/etapeLivraison" class="btn_grand pd24w600">retour</a>
+<a href="./etapeLivraison" class="btn_grand pd24w600">retour</a>
 <section class="section_commande_recapupitulatif">
 
     <div class="commande_block_info">
@@ -94,4 +94,4 @@
     </div>
 
 </section>
-<a href="/etapePaiement" class="btn_grand pd24w600">Valider</a>
+<a href="./etapePaiement" class="btn_grand pd24w600">Valider</a>

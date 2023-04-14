@@ -12,7 +12,7 @@
     <nav class="nav_categorie">
         <?php foreach($_SESSION['categories'] as $categorie):?>
         <a class="pd24w600 marg20 cursorscall20"
-            href="/getProduitVotreChoixByCategorie?idcategorie=<?=$categorie->getIdcategorie()?>"><?=$categorie->getNom()?></a>
+            href="./getProduitVotreChoixByCategorie?idcategorie=<?=$categorie->getIdcategorie()?>"><?=$categorie->getNom()?></a>
         <?php endforeach?>
     </nav>
 </nav>

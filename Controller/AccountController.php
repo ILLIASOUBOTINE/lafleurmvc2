@@ -9,7 +9,7 @@
         
 		public function identification(){
 			if (isset($_SESSION['client'])) {
-				$this->redirect('/monAccount');
+				$this->redirect('./monAccount');
 			}else{
 				$filename = 'identification' ;
             	return $this->view($filename);
@@ -55,7 +55,7 @@
 		public function connexion(){
 			$filename = AccountController::connexionAccount($this);
 			if ($filename === true ) {
-				$this->redirect('/monAccount');
+				$this->redirect('./monAccount');
 			}else{
 				return $this->view($filename);
 			}
@@ -107,7 +107,7 @@
 
 		public function logOut() {
 			unset($_SESSION['client']);
-			$this->redirect('/account');
+			$this->redirect('./account');
 		}
 
 		

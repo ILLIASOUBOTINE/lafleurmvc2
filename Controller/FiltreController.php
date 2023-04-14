@@ -34,7 +34,7 @@
         //     $offreProduits = $offre->getProduitOffre(count($_SESSION['offreProduits']),4);
           
         //     $_SESSION['offreProduits'] = array_merge($_SESSION['offreProduits'], $offreProduits);
-        //     $this->redirect('/#produitOffre');
+        //     $this->redirect('./#produitOffre');
             
         //     // header('Location: /');
         //     // exit;

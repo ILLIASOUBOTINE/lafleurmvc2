@@ -1,5 +1,5 @@
 <h1 class="pd40w700 marg20top titre_account">Mes commandes</h1>
-<a href="/logOut" class="btn_grand pd24w600">Logout</a>
+<a href="./logOut" class="btn_grand pd24w600">Logout</a>
 
 <?php if($commandes == null):?>
 <h1 class="pd40w700 marg20top titre_account">Votre historique de commandes est vide</h1>

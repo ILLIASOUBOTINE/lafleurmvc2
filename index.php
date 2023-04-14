@@ -1,7 +1,8 @@
 <?php
 	$configFile = file_get_contents("config/config.json");
 	$config = json_decode($configFile);
-	// var_dump($config->autoloadFolder);
+	
+	// var_dump($config);
 	// var_dump($config->datasource);
 	spl_autoload_register(function($class) use($config)
 	{
@@ -29,6 +30,7 @@
 	{
 		$httpRequest = new HttpRequest();
 		$router = new Router();
+		// var_dump($httpRequest);
 		$route = $router->findRoute($httpRequest);
 		$httpRequest->setRoute($route);
 		

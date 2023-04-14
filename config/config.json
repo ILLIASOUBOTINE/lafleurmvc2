@@ -9,10 +9,10 @@
 		"components"
 	],
 	"datasource":  { 
-		"host": "localhost:3360",
-        "dbname": "lafleur",
-        "user": "root",
-        "password": ""
+		"host": "localhost:3306",
+        "dbname": "c84soubotine",
+        "user": "c84soubotine",
+        "password": "tqkpGeQED2@4"
     }
 }
 

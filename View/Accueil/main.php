@@ -38,7 +38,7 @@
     <?php
         ListsCarte::getViewListCarte($titreSectionNosOffre,$offreProduits);
     ?>
-    <!-- <a href="getPlusProduitOffre"> -->
+    <!-- <a href="./getPlusProduitOffre"> -->
     <button id="produitOffre" class="btn_grand pd24w600" title="Montre plus">Montre
         plus
     </button>

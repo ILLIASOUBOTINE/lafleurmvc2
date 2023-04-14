@@ -7,6 +7,7 @@
 		private $_method;
 		private $_param;
 		private $_route;
+		private $routeSite = "/realisations/lafleurmvc2/";
 		
 		public function __construct()
 		{
@@ -27,15 +28,35 @@
 			return $this->_redirectUrl;	
 		}
 		
+		// private function setRedirectUrl()
+		// {
+		// 	if (isset($_SERVER["REDIRECT_URL"])) {
+		// 		$this->_redirectUrl = $_SERVER["REDIRECT_URL"];
+		// 	}else {
+		// 		$this->_redirectUrl = '/';
+		// 	}
+			
+		// }
+
+		// private function setRedirectUrl()
+		// {
+		// 	$this->_redirectUrl = str_replace($this->routeSite,"",$this->_url);
+			
+		// }
+
 		private function setRedirectUrl()
 		{
-			if (isset($_SERVER["REDIRECT_URL"])) {
-				$this->_redirectUrl = $_SERVER["REDIRECT_URL"];
+			// $this->_redirectUrl = str_replace($this->routeSite,"",$this->_url);
+			$path = parse_url($this->_url, PHP_URL_PATH);
+			if ($this->_url === $this->routeSite) {
+				$this->_redirectUrl ='/index';
 			}else {
-				$this->_redirectUrl = '/';
+				$this->_redirectUrl ='/'.basename($path);
 			}
 			
 		}
+
+
 
 		
 		public function getMethod()

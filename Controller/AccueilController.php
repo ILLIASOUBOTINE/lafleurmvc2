@@ -43,7 +43,7 @@
             $offreProduits = $offre->getProduitOffre(count($_SESSION['offreProduits']),4);
             $_SESSION['offreProduits'] = array_merge($_SESSION['offreProduits'], $offreProduits);
             echo json_encode(Produit::toJson($offreProduits));
-            // $this->redirect('/#produitOffre');
+            // $this->redirect('./#produitOffre');
         }
 
         public function getProduitVotreChoix(){
@@ -53,7 +53,7 @@
 			$votreChoixProduits = $votreChoixM->getProduitVotreChoix($this->get_httpRequest()->getParam()['prix'],['categories'=>$this->get_httpRequest()->getParam()['categories'], 'fleures'=>$this->get_httpRequest()->getParam()['fleures'], 'couleures'=>$this->get_httpRequest()->getParam()['couleures']]);
            
             $_SESSION['votreChoixProduits'] = $votreChoixProduits;
-            $this->redirect('/');
+            $this->redirect('./index');
         }
 		
         
@@ -62,6 +62,6 @@
             $votreChoixM = new ProduitManager();
 			$votreChoixProduits = $votreChoixM->getProduitVotreChoixByCategorie($this->get_httpRequest()->getParam()['idcategorie']);
             $_SESSION['votreChoixProduits'] = $votreChoixProduits;
-            $this->redirect('/');
+            $this->redirect('./index');
         }
 }

@@ -9,7 +9,7 @@
         
 		public function identification(){
 			if (isset($_SESSION['client'])) {
-				$this->redirect('/etapeLivraison');
+				$this->redirect('./etapeLivraison');
 				
 			}
 			$filename = 'identification' ;
@@ -21,7 +21,7 @@
 			
 			unset($_SESSION['client']);
 			
-			$this->redirect('/etapeIdentification');
+			$this->redirect('./etapeIdentification');
         }
 		
 		
@@ -66,7 +66,7 @@
 		public function connexion(){
 			$filename = AccountController::connexionAccount($this);
 			if ($filename === true ) {
-				$this->redirect('/etapeLivraison');
+				$this->redirect('./etapeLivraison');
 			}else{
 				return $this->view($filename);
 			}
@@ -104,7 +104,7 @@
 
 				$strPanier = $this->get_httpRequest()->getParam()['dataPanier'];
 				$_SESSION['panier'] = json_decode($strPanier);
-				$this->redirect('/etapeRecapitulatif');
+				$this->redirect('./etapeRecapitulatif');
 			}
 		}
 	
@@ -138,7 +138,7 @@
 				// exit();
 				
 				$_SESSION['messageError'] = $messageError;
-				$this->redirect('/etapeLivraison');
+				$this->redirect('./etapeLivraison');
 			}else {
 				
 				$livraison = $_SESSION['livraison'];

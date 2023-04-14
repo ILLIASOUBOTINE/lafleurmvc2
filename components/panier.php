@@ -9,12 +9,12 @@
         0
     </p>
 
-    <a href="/etapeIdentification" id="panierCommander" class="pd24w600  btnPanierCommander">
+    <a href="./etapeIdentification" id="panierCommander" class="pd24w600  btnPanierCommander">
         Commander
     </a>
 </div>
 
-<!-- <form action="/commande" method="POST" class="panier" id="panier">
+<!-- <form action="commande" method="POST" class="panier" id="panier">
     <div id="panierFermer" class="pd24w600 itemdrop">
         <span>Panier</span>
         <img src="public/imgs/general/close_circle_icon.svg" alt="">

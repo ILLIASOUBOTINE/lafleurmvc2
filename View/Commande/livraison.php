@@ -18,7 +18,7 @@
         <?php include 'components/panier.php'?>
     </div>
     <div class="commande_block_form">
-        <a href="/etapeIdentificationLogout" class="btn_grand pd24w600">retour</a>
+        <a href="./etapeIdentificationLogout" class="btn_grand pd24w600">retour</a>
         <?php include 'components/form_livraison.php'?>
     </div>
 </section>

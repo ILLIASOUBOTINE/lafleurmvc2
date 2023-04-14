@@ -1,4 +1,4 @@
-<form action="/controlFormLivraison" method="POST" class="formulair_identif">
+<form action="controlFormLivraison" method="POST" class="formulair_identif">
 
     <h3 class="titre_formulair_identif pd24w600">Adresse de livraison</h3>
 

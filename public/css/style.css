@@ -18,7 +18,7 @@
 }
 
 html {
-  background-image: url(/public/imgs/general/bgd.png);
+  background-image: url(../imgs/general/bgd.png);
   background-color: var(--color-bgd);
   background-repeat: repeat;
   background-position: center center;

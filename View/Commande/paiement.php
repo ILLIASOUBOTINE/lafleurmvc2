@@ -3,7 +3,7 @@
 <section class="section_commande_etape">
     <?php include 'components/etape_commande.php'?>
 </section>
-<a href="/etapeRecapitulatif" class="btn_grand pd24w600">retour</a>
+<a href="./etapeRecapitulatif" class="btn_grand pd24w600">retour</a>
 <?php if (isset($messageError)): ?>
 <h1 class="pd40w700 marg20top titre_account">
     <?=$messageError?>

@@ -1,4 +1,4 @@
-<form action="/inscriptionCommande" method="POST" class="formulair_identif formulair_inscription">
+<form action="inscriptionCommande" method="POST" class="formulair_identif formulair_inscription">
 
     <h3 class="titre_formulair_identif pd24w600">Inscription</h3>
     <input type="text" class="inp_formulair_identif" name="email" placeholder="E-mail">

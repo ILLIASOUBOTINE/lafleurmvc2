@@ -1,5 +1,5 @@
 <div class="carte marg5 marg20top">
-    <a href="details?id=<?=$produit->getIdproduit()?>">
+    <a href="./details?id=<?=$produit->getIdproduit()?>">
         <img class="img_carte" src="public/imgs/fleurs/<?=$produit->getPhotos()[0]->getImgUrl()?>" title=" details">
     </a>
     <p class="title_carte pd24w600">
