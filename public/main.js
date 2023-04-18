@@ -223,7 +223,7 @@ if (document.querySelector("#produitOffre") !== null) {
 
     btnProduitOffre.addEventListener("click", (event)=>{
         // console.log(btnProduitOffre);
-        jsonFetch("http://lafleurmvc2/getPlusProduitOffre")
+        jsonFetch("http://lafleurmvc2version2/getPlusProduitOffre")
         .then((jsonData) => {
         //Utilisation des données ici
         // console.log(jsonData);

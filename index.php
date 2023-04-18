@@ -1,7 +1,8 @@
 <?php
 	$configFile = file_get_contents("config/config.json");
 	$config = json_decode($configFile);
-	// var_dump($config->autoloadFolder);
+	
+	// var_dump($config);
 	// var_dump($config->datasource);
 	spl_autoload_register(function($class) use($config)
 	{
@@ -29,9 +30,9 @@
 	{
 		$httpRequest = new HttpRequest();
 		$router = new Router();
+		
 		$route = $router->findRoute($httpRequest);
 		$httpRequest->setRoute($route);
-		
 		// if (null !== $httpRequest->getRoute()) {
 			// echo 'exist route';
 			$path = $route->getController().'Controller';
@@ -48,6 +49,8 @@
 	}
 	catch(Exception $e)
 	{
+		var_dump($httpRequest);
+		
 		echo "Une erreur s'est produite";
 	}
 	
