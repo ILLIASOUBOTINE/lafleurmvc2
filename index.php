@@ -22,6 +22,7 @@
 	// unset($_SESSION['villes']);
 	// unset($_SESSION['votreChoixProduits']);
 	//  unset($_SESSION['livraison']);
+	//  unset($_SESSION['essaiCadeau']);
 	// require 'functions.php';
     require 'config/init.php';
 	
@@ -30,9 +31,11 @@
 	{
 		$httpRequest = new HttpRequest();
 		$router = new Router();
-		
+		// var_dump($httpRequest);
+		// var_dump($_POST);
 		$route = $router->findRoute($httpRequest);
 		$httpRequest->setRoute($route);
+		
 		// if (null !== $httpRequest->getRoute()) {
 			// echo 'exist route';
 			$path = $route->getController().'Controller';
@@ -44,12 +47,12 @@
 			}
 			
 		// }
-        
-       
+    //     var_dump($_SESSION['essaiCadeau']);
+    //    exit();
 	}
 	catch(Exception $e)
 	{
-		var_dump($httpRequest);
+		
 		
 		echo "Une erreur s'est produite";
 	}

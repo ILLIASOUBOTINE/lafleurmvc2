@@ -374,7 +374,7 @@
 
 		public function modifQuantiteProduitTotal(){
 			$produitM = new ProduitManager();
-			$id =intval($this->getIdproduit());
+			$id = intval($this->getIdproduit());
 			$param = ["quantiteTotale","ventesTotales"];
 
 			$quantiteTotale = intval($this->getQuantiteTotale() - $this->getQuantitePanier());

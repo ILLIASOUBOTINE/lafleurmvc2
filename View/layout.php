@@ -28,6 +28,7 @@
 
     </div>
     <script src="public/main.js"></script>
+    <script src="public/loto.js"></script>
 </body>
 
 
