@@ -110,6 +110,13 @@
 	"param" : ["nom","numero","expiration","cryptogramme"]
 },
 {
+	"path" : "/etapeFinale",
+	"controller" : "Commande",
+	"action" : "etapeFinale",
+	"method" : "GET",
+	"param" : []
+},
+{
 	"path" : "/account",
 	"controller" : "Account",
 	"action" : "identification",
@@ -150,8 +157,21 @@
 	"action" : "show",
 	"method" : "GET",
 	"param" : []
+},
+{
+	"path" : "/setCadeau",
+	"controller" : "Cadeau",
+	"action" : "setCadeau",
+	"method" : "POST",
+	"param" : []
+},
+{
+	"path" : "/essaiCadeau",
+	"controller" : "Cadeau",
+	"action" : "setEssaiCadeau",
+	"method" : "GET",
+	"param" : []
 }
-
 
 
 	

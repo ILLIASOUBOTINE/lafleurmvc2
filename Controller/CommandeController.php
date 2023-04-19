@@ -182,15 +182,79 @@
 			$idLivraison = Livraison::createLivraisonDansBD();
 			$idCommande = Commande::createCommandeDansBD($idLivraison);
 			CommandeHasProduit::createCommandeHasProduitInBD($commande,$idCommande);
-			// var_dump($commande);
-			// exit;
-			$commande->modifQuantiteProduitTotalDansBD();
 			
+			$_SESSION['idcommande'] = $idCommande;
+			$commande->modifQuantiteProduitTotalDansBD();
+
+			///////////// send email //////////////
+			$mail = $commande->getClient()->getEmail();
+			$numCommande = $idCommande;
+			$messageCommande = $this->messageCommande($commande,$idCommande);
+			$this->sendMail($mail, $numCommande, $messageCommande);
+			
+			///////////////
+			
+			
+			
+			unset($_SESSION['essaiCadeau']);
+			unset($_SESSION['panier']);
+			$this->redirect('./etapeFinale');
+		}
+
+		public function etapeFinale(){
 			$filename = 'paiement_accepte';
 			return $this->view($filename);
 		}
 	
+		public function messageCommande($commande,$idCommande){
+			$message1 = "Numéro du commande: ".$idCommande."\r\n".
+				"Date de livraison: ".$commande->getLivraison()->getDatePrevu()."\r\n".
+				"Adresse de livraison: "."\r\n".
+				"ville: ".$commande->getLivraison()->getVille()->getNomVille()."\r\n".
+				"rue: ".$commande->getLivraison()->getRue()."\r\n".
+				"numéro de maison: ".$commande->getLivraison()->getNumMaison()."\r\n";
+			
+			$message3 = "Votre Panier: "."\r\n";
+			foreach($commande->getProduits() as $produit) {
+				$message10 = "Titre du produit: ".$produit->getNom()."\r\n".
+				"Quantité: ".$produit->getQuantitePanier()."\r\n".
+				"Prix: ".$produit->getPrixUnite()."\r\n";
+
+				$message3 .= $message10;
+			}
+			
+			
+			$message2 = "Total: ".$commande->getPrixTotaleProduits()."\r\n".
+				"frais de livraison: ".$commande->getFraisLivraison()."\r\n".
+				"le montant payé: ".$commande->getPrixPayer()."\r\n";
+			
+			return $message1.$message3.$message2;
+		}
+	
+	
 		
+		public function sendMail($mail, $numCommande, $messageCommande){
+			
+			// $to = "soubotineillia@gmail.com";
+			$to = $mail;
+			$subject = "Détails de la commande numéro: ".$numCommande;
+			$message = $messageCommande;
+			$from = "semenuk1991311@gmail.com";
+			$headers  = 'MIME-Version: 1.0' . "\r\n";
+			$headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
+			$headers .= "From: <".$from.">\r\n";
+
+			if (mail($to,$subject,$message,$headers)) {
+				echo "OK";
+				// exit();
+			}
+			else {
+				echo "ERROR";
+				 exit();
+			}
+
+			
+		}	
 
 		
 		
