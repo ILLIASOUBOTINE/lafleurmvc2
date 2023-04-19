@@ -248,9 +248,9 @@
 			$headers .= "From: <".$from.">\r\n";
 
 			if (mail($to,$subject,$message,$headers)) {
-				echo "OK";
-				echo $message;
-				exit();
+				// echo "OK";
+				// echo $message;
+				// exit();
 			}
 			else {
 				echo "ERROR";

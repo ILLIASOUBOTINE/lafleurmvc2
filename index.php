@@ -53,7 +53,7 @@
 	catch(Exception $e)
 	{
 		
-		
-		echo "Une erreur s'est produite";
+		include '404.html';
+		// echo "Une erreur s'est produite";
 	}
 	
