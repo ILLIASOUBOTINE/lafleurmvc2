@@ -110,6 +110,13 @@
 	"param" : ["nom","numero","expiration","cryptogramme"]
 },
 {
+	"path" : "/etapeFinale",
+	"controller" : "Commande",
+	"action" : "etapeFinale",
+	"method" : "GET",
+	"param" : []
+},
+{
 	"path" : "/account",
 	"controller" : "Account",
 	"action" : "identification",

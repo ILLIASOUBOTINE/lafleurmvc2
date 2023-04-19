@@ -178,6 +178,7 @@
 		}
 
 		public function controlPaiement(){
+			
 			$commande = $_SESSION['commande'];
 			$idLivraison = Livraison::createLivraisonDansBD();
 			$idCommande = Commande::createCommandeDansBD($idLivraison);
@@ -190,7 +191,7 @@
 			$commande->modifQuantiteProduitTotalDansBD();
 			
 			///////////// send email //////////////
-			$mail =  $commande->client->getEmail();
+			$mail = $commande->getClient()->getEmail();
 			$numCommande = $idCommande;
 			$messageCommande = $this->messageCommande($commande,$idCommande);
 			$this->sendMail($mail, $numCommande, $messageCommande);
@@ -201,17 +202,21 @@
 			unset($_SESSION['essaiCadeau']);
 			unset($_SESSION['panier']);
 			
+			$this->redirect('/etapeFinale');
+		}
+
+		public function etapeFinale(){
 			$filename = 'paiement_accepte';
 			return $this->view($filename);
 		}
 
 		public function messageCommande($commande,$idCommande){
 			$message1 = "Numéro du commande: ".$idCommande."\r\n".
-				"Date de livraison: ".$commande->livraison->getDatePrevu()."\r\n".
+				"Date de livraison: ".$commande->getLivraison()->getDatePrevu()."\r\n".
 				"Adresse de livraison: "."\r\n".
-				"ville: ".$commande->livraison->getVille()->getNomVille()."\r\n".
-				"rue: ".$commande->livraison->getRue()."\r\n".
-				"numéro de maison: ".$commande->livraison->getNumMaison()."\r\n";
+				"ville: ".$commande->getLivraison()->getVille()->getNomVille()."\r\n".
+				"rue: ".$commande->getLivraison()->getRue()."\r\n".
+				"numéro de maison: ".$commande->getLivraison()->getNumMaison()."\r\n";
 			
 			$message3 = "Votre Panier: "."\r\n";
 			foreach($commande->getProduits() as $produit) {
@@ -243,12 +248,13 @@
 			$headers .= "From: <".$from.">\r\n";
 
 			if (mail($to,$subject,$message,$headers)) {
-				// echo "OK";
-				// exit();
+				echo "OK";
+				echo $message;
+				exit();
 			}
 			else {
-				// echo "ERROR";
-				// exit();
+				echo "ERROR";
+				exit();
 			}
 
 			
