@@ -476,3 +476,12 @@ if (document.querySelector('.titre_commande_etape') !== null) {
 
 
 console.dir(window.location.pathname);
+
+if(document.querySelector('.isPanierVide') !== null){
+    let isPanierVide  = (document.querySelector('.isPanierVide').innerText);
+   
+    if (isPanierVide == 1) {
+       sessionStorage.removeItem('produitsPanier');
+       
+    }
+}

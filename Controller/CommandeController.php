@@ -116,12 +116,16 @@
 			$produitM = new ProduitManager();
 			$produits = $produitM->getProduitPanier($panier);
 			
+			//// vérifier s'il y a assez de produit /////
 			$messageError = [];
 			foreach($produits as $produit){
 				foreach($panier as $produitP){
 					if ($produit->getIdproduit() == $produitP->id) {
 						if ($produitP->quantite > $produit->getQuantiteTotale()) {
 							$messageError[] =  'nous n\'avons que '. $produit->getQuantiteTotale().' '. $produit->getNom() .' en stock';
+							$subjectB = "le client n'avait pas assez de produit id: ".$produitP->id;
+							$messageB = "le client voulait acheter: ".$produitP->quantite;
+							$this->sendMailProduit($subjectB, $messageB);
 						}
 						// $produit->setQuantitePanier($produitP->quantite);
 						// $produit->setPrixPanier(number_format($produit->getQuantitePanier()*$produit->getPrixUnite(),2));
@@ -148,8 +152,8 @@
 				$client = $_SESSION['client'];
 				$this->addParam('client',$client);
 				
-				$produitM = new ProduitManager();
-				$produits = $produitM->getProduitPanier($panier);
+				// $produitM = new ProduitManager();
+				// $produits = $produitM->getProduitPanier($panier);
 
 				foreach($produits as $produit){
 					foreach($panier as $produitP){
@@ -183,7 +187,7 @@
 			$idLivraison = Livraison::createLivraisonDansBD();
 			$idCommande = Commande::createCommandeDansBD($idLivraison);
 			CommandeHasProduit::createCommandeHasProduitInBD($commande,$idCommande);
-
+			
 			$_SESSION['idcommande'] = $idCommande;
 			
 			// var_dump($commande);
@@ -194,18 +198,27 @@
 			$mail = $commande->getClient()->getEmail();
 			$numCommande = $idCommande;
 			$messageCommande = $this->messageCommande($commande,$idCommande);
-			$this->sendMail($mail, $numCommande, $messageCommande);
+			$this->sendMailCommandeClient($mail, $numCommande, $messageCommande);
 			
 			///////////////
 
 			
 			unset($_SESSION['essaiCadeau']);
 			unset($_SESSION['panier']);
-			
+			$_SESSION['isPanierVide'] = true;
 			$this->redirect('/etapeFinale');
 		}
 
 		public function etapeFinale(){
+			
+			if (isset($_SESSION['isPanierVide']) && $_SESSION['isPanierVide']) {
+				$isPanierVide = $_SESSION['isPanierVide'];
+				$this->addParam('isPanierVide',$isPanierVide);
+			}else {
+				
+				$this->addParam('isPanierVide',false);
+			}
+			unset($_SESSION['isPanierVide']);
 			$filename = 'paiement_accepte';
 			return $this->view($filename);
 		}
@@ -236,7 +249,7 @@
 		}
 	
 		
-		public function sendMail($mail, $numCommande, $messageCommande){
+		public function sendMailCommandeClient($mail, $numCommande, $messageCommande){
 			
 			// $to = "soubotineillia@gmail.com";
 			$to = $mail;
@@ -258,6 +271,29 @@
 			}
 
 			
+		}	
+
+		public function sendMailProduit($subjectB, $messageB){
+			
+			$to = "soubotineillia@gmail.com";
+			// $to = $mail;
+			// $subject = "Détails de la commande numéro: ".$numProduit;
+			$subject = $subjectB;
+			$message = $messageB;
+			$from = "semenuk1991311@gmail.com";
+			$headers  = 'MIME-Version: 1.0' . "\r\n";
+			$headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
+			$headers .= "From: <".$from.">\r\n";
+
+			if (mail($to,$subject,$message,$headers)) {
+				// echo "OK";
+				// echo $message;
+				// exit();
+			}
+			else {
+				// echo "ERROR";
+				// exit();
+			}
 		}	
 		
 		

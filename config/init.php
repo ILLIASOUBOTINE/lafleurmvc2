@@ -50,8 +50,11 @@ if(!isset($_SESSION['populaireProduits'])){
 
 if(!isset($_SESSION['banniere'])){
     $banniereM = new BanniereManager();
-    $banniere = $banniereM->getById(1);
-    $_SESSION['banniere'] = $banniere;
-}else {
-   $banniere = $_SESSION['banniere'];
+    $banniere = $banniereM->getEventActuel();
+    if (count($banniere) > 0) {
+        $_SESSION['banniere'] = $banniere[0];
+    }
+    // var_dump($banniere);
+    // exit;
+    // $_SESSION['banniere'] = $banniere;
 }

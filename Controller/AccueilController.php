@@ -10,9 +10,10 @@
         
 		public function show(){
 
-            $banniere = $_SESSION['banniere'];
-            $this->addParam('banniere', $banniere);
-            
+            if (isset($_SESSION['banniere'])) {
+                $banniere = $_SESSION['banniere'];
+                $this->addParam('banniere', $banniere);
+            }
             
             if (isset($_SESSION['votreChoixProduits'])) {
                 $votreChoixProduits = $_SESSION['votreChoixProduits'];
@@ -58,10 +59,19 @@
 		
         
  
-        public function  getProduitVotreChoixByCategorie(){
+        public function getProduitVotreChoixByCategorie(){
             $votreChoixM = new ProduitManager();
 			$votreChoixProduits = $votreChoixM->getProduitVotreChoixByCategorie($this->get_httpRequest()->getParam()['idcategorie']);
             $_SESSION['votreChoixProduits'] = $votreChoixProduits;
             $this->redirect('/');
         }
+
+        public function getProduitVotreChoixByEvent(){
+            $votreChoixM = new ProduitManager();
+			$votreChoixProduits = $votreChoixM->getProduitVotreChoixByEvent($this->get_httpRequest()->getParam()['idevent']);
+            $_SESSION['votreChoixProduits'] = $votreChoixProduits;
+            $this->redirect('/');
+        }
+
+       
 }

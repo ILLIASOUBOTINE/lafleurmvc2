@@ -17,7 +17,9 @@
 	
   	session_start();
 	// unset($_SESSION['client']);
-	// unset($_SESSION['populaireProduits']);
+	unset($_SESSION['populaireProduits']);
+	 unset($_SESSION['categories']);
+	 unset($_SESSION['banniere']);
 	// unset($_SESSION['offreProduits']);
 	// unset($_SESSION['villes']);
 	// unset($_SESSION['votreChoixProduits']);

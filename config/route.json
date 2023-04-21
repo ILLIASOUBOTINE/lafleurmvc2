@@ -171,6 +171,13 @@
 	"action" : "setEssaiCadeau",
 	"method" : "GET",
 	"param" : []
+},
+{
+	"path" : "/getProduitVotreChoixByEvent",
+	"controller" : "Accueil",
+	"action" : "getProduitVotreChoixByEvent",
+	"method" : "GET",
+	"param" : ["idevent"]
 }
 
 

@@ -1,8 +1,8 @@
 <header>
     <nav class="nav_left">
-        <a class="pd24w600 marg20" href="#">Blog</a>
-        <a class="pd24w600 marg20" href="/">Accueil</a>
-        <a class="pd24w600 marg20" href="contact">Contact</a>
+        <a class="pd24w600 marg20 cursorscall20" href="#">Blog</a>
+        <a class="pd24w600 marg20 cursorscall20" href="/">Accueil</a>
+        <a class="pd24w600 marg20 cursorscall20" href="contact">Contact</a>
     </nav>
     <nav class="nav_left_phone">
         <div class="burger_menu cursorscall20">

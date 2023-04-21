@@ -272,6 +272,11 @@ class Commande
     public function modifQuantiteProduitTotalDansBD(){
         foreach($this->getProduits() as $produit){
             $produit->modifQuantiteProduitTotal();
+            if ($produit->getQuantiteTotale() <= 5) {
+                $subjectB = "avertissement de quantité";
+                $messageB = "produit restant nom: ".$produit->getNom()." id: ".$produit->getIdproduit() ." moins de 5";
+                $this->sendMailProduit($subjectB, $messageB);
+            }
         }
     }
 
@@ -291,4 +296,27 @@ class Commande
         // exit;
         
     }
+
+    public function sendMailProduit($subjectB, $messageB){
+			
+        $to = "soubotineillia@gmail.com";
+        // $to = $mail;
+        // $subject = "Détails de la commande numéro: ".$numProduit;
+        $subject = $subjectB;
+        $message = $messageB;
+        $from = "semenuk1991311@gmail.com";
+        $headers  = 'MIME-Version: 1.0' . "\r\n";
+        $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
+        $headers .= "From: <".$from.">\r\n";
+
+        if (mail($to,$subject,$message,$headers)) {
+            // echo "OK";
+            // echo $message;
+            // exit();
+        }
+        else {
+            // echo "ERROR";
+            // exit();
+        }
+    }	
 }

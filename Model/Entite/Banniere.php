@@ -7,12 +7,17 @@
 		private  $date_debut;
 		private  $date_fin;
 		private  $photo_idphoto;
+		
+		
 		private  $photo;
-
+		
+		
 		public function __construct()
 		{
 			$photoM = new PhotoManager();
 			$this->photo = $photoM->getById($this->photo_idphoto);
+			
+			
 		}
 		
 		/**
@@ -120,4 +125,8 @@
 		{
 				return $this->photo;
 		}
+
+		
+
+		
 	}
