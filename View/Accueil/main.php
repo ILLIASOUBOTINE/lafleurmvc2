@@ -5,6 +5,7 @@
     // getViewListCarte($titreSectionNosOffre,$offreProduits);
     
 ?>
+<?php if(isset($banniere)):?>
 <div class="banniere">
     <img class="img_banniere" src="public/imgs/fleurs/<?=$banniere->getPhoto()->getImgUrl()?>" alt="">
     <div class="text_banniere marg20top">
@@ -13,8 +14,11 @@
         </h1>
         <p class="description_banniere pd40w700b"> <?=$banniere->getDescription()?></p>
     </div>
-    <button class="btn_grand pd24w600" title="Voir la offre">Voir la offre</button>
+    <a class="btn_grand pd24w600" href="./getProduitVotreChoixByEvent?idevent=<?=$banniere->getIdbanniereEvent()?>"
+        title="Voir la offre">Voir l'offre
+    </a>
 </div>
+<?php endif?>
 
 <?php if(isset($votreChoixProduits)):?>
 <div class="block_carte">

@@ -1,0 +1,33 @@
+.page404 {
+    /* width: 100vw; */
+    height: 100vh;
+    background-color: rgb(221, 219, 215);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 100px;
+    color: rgb(153, 127, 51);
+}
+
+.page404 > h1 {
+    font-size: 100px;
+    color: rgb(153, 127, 51);
+    margin: 0 !important;
+}
+
+.page404 > p {
+    font-size: 50px;
+    color: rgb(153, 127, 51);
+}
+.page404 > a {
+    font-size: 50px;
+    text-decoration: none;
+    color: rgb(12, 102, 135);
+}
+
+.page404 > a:hover {
+    
+    color: rgb(7, 168, 226);
+    transition: all ease 0.5s;
+}

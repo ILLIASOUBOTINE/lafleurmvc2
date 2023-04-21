@@ -235,6 +235,7 @@ header {
 .cursorscall20:hover {
   cursor: pointer;
   transform: scale(1.1);
+  color: rgb(90, 133, 187);
 }
 
 .bordligne {
@@ -564,8 +565,8 @@ section {
   right: -350px;
   background: var(--color-gris);
   transition: right 1s;
-  height: calc(100vh - 120px);
-  max-height: 601px;
+  /* height: calc(100vh - 120px);
+  max-height: 601px; */
   overflow: auto;
   /* background-color: rgb(255, 255, 255, 0.5); */
   /* display: none; */

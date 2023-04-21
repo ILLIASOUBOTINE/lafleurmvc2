@@ -94,6 +94,16 @@
 			return $srt;
 		}
 
+		public function getProduitVotreChoixByEvent($id)
+		{
+			$req = $this->_bdd->prepare('SELECT produit.* FROM produit JOIN banniere_event_has_produit
+			ON produit.idproduit = banniere_event_has_produit.produit_idproduit WHERE banniere_event_has_produit.banniere_event_idbanniere_event = :id  GROUP BY produit.idproduit LIMIT 8');
+			$req->bindValue(':id',$id, PDO::PARAM_INT);
+			$req->execute();
+			$srt = $req->fetchAll(PDO::FETCH_CLASS,"Produit");
+			return $srt;
+		}
+
 		public function getProduitPanier($arrProduits)
 		{
 			$params = [];

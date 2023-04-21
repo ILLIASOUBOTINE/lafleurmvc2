@@ -3,3 +3,7 @@
 
 <a href="./account" class="btn_grand pd24w600">Voir ma commande</a>
 <a href="./cadeau" class="btn_grand pd24w600">Recevez un cadeau!</a>
+
+<p class="isPanierVide dnone">
+    <?=$isPanierVide?>
+</p>

@@ -23,6 +23,24 @@
     margin-left: 10px;
 }
 
+.block_contact_part1 {
+    height: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.block_contact_part2 {
+    height: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+
+
 .google_map {
     width: 80%;
     height:70%;

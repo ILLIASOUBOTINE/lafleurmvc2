@@ -8,15 +8,15 @@
     </div>
 
     <div class="nav_footer">
-        <a class="int14w200" href="./#">Blog</a>
-        <a class="int14w200" href="./index">Accueil</a>
-        <a class="int14w200" href="./contact">Contact</a>
-        <a class="int14w200" href="./account">Account</a>
+        <a class="int14w200 cursorscall20" href="./#">Blog</a>
+        <a class="int14w200 cursorscall20" href="./index">Accueil</a>
+        <a class="int14w200 cursorscall20" href="./contact">Contact</a>
+        <a class="int14w200 cursorscall20" href="./account">Account</a>
     </div>
 
     <div class="contact_footer">
-        <p class="int14w200">lafleur@needemand.fr</p>
-        <p class="int14w200">05 25 65 78 45</p>
+        <a href="mailto:lafleur@needemand.fr" class="int14w200 cursorscall20">lafleur@needemand.fr</a>
+        <a href="tel:05 25 65 78 45" class="int14w200 cursorscall20">05 25 65 78 45</a>
     </div>
 
 
