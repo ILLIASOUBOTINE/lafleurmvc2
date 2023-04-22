@@ -6,9 +6,9 @@
 <section class="section_commande_identification">
     <div class="commande_block_panier">
         <?php if (isset($messageError)): ?>
-        <div style="margin-bottom: 20px; background-color: red; width: 90%">
+        <div class="message_error_block">
             <?php foreach($messageError as $message):?>
-            <p class="pd24w600  titre_account">
+            <p class="pd24w600 message_error titre_account">
 
                 <?=$message?>
             </p>
@@ -19,6 +19,16 @@
     </div>
     <div class="commande_block_form">
         <a href="/etapeIdentificationLogout" class="btn_grand pd24w600">retour</a>
+        <?php if (isset($arrErrorsLivraison)): ?>
+        <div class="message_error_block">
+            <?php foreach($arrErrorsLivraison as $message):?>
+            <p class="pd24w600 message_error titre_account">
+
+                <?=$message?>
+            </p>
+            <?php endforeach ?>
+        </div>
+        <?php endif ?>
         <?php include 'components/form_livraison.php'?>
     </div>
 </section>
