@@ -7,7 +7,7 @@
 ?>
 <?php if(isset($banniere)):?>
 <div class="banniere">
-    <img class="img_banniere" src="public/imgs/fleurs/<?=$banniere->getPhoto()->getImgUrl()?>" alt="">
+    <img class="img_banniere" src="public/imgs/event/<?=$banniere->getPhoto()->getImgUrl()?>" alt="">
     <div class="text_banniere marg20top">
         <h1 class="titre_banniere pd64w700">
             <?=$banniere->getTitre()?>

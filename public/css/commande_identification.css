@@ -36,6 +36,17 @@
    
 }
 
+.message_error_block {
+    margin: 10px 0;
+    background-color: rgb(226, 140, 140);
+    width: 90%;
+    padding: 5px;
+}
+
+.message_error {
+    margin-bottom: 10px;
+}
+
 @media screen and (max-width: 840px) {
     .section_commande_identification {
        align-items: center;

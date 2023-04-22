@@ -77,7 +77,7 @@
 				
 			}
 			
-			$req1 .= 'GROUP BY produit.idproduit LIMIT 4';
+			$req1 .= 'GROUP BY produit.idproduit LIMIT 8';
 			$req = $this->_bdd->prepare($req1);
 			$req->execute($paramsArr);
 			$srt = $req->fetchAll(PDO::FETCH_CLASS,"Produit");
@@ -87,7 +87,7 @@
 		public function getProduitVotreChoixByCategorie($id)
 		{
 			$req = $this->_bdd->prepare('SELECT produit.* FROM produit JOIN categorie_has_produit
-			ON produit.idproduit = categorie_has_produit.produit_idproduit WHERE categorie_has_produit.categorie_idcategorie = :id  GROUP BY produit.idproduit LIMIT 4');
+			ON produit.idproduit = categorie_has_produit.produit_idproduit WHERE categorie_has_produit.categorie_idcategorie = :id  GROUP BY produit.idproduit LIMIT 8');
 			$req->bindValue(':id',$id, PDO::PARAM_INT);
 			$req->execute();
 			$srt = $req->fetchAll(PDO::FETCH_CLASS,"Produit");

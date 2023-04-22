@@ -8,6 +8,8 @@
 		}
         
 		public function identification(){
+			unset($_SESSION['messageError']);
+			unset($_SESSION['arrErrorsLivraison']);
 			if (isset($_SESSION['client'])) {
 				$this->redirect('./etapeLivraison');
 				
@@ -36,8 +38,11 @@
 				$messageError = $_SESSION['messageError'];
 				$this->addParam('messageError',$messageError);
 			}
-			// $produitM = new ProduitManager();
-			// $produit = $produitM->getById($id);
+			
+			if (isset($_SESSION['arrErrorsLivraison'])) {
+				$arrErrorsLivraison = $_SESSION['arrErrorsLivraison'];
+				$this->addParam('arrErrorsLivraison',$arrErrorsLivraison);
+			}
 			
 			if (isset($_SESSION['livraison'])) {
 				$livraison = $_SESSION['livraison'];
@@ -73,38 +78,47 @@
 		}
 
 		public function controlFormLivraison(){
-			$livraisonM = new LivraisonManager();
-			$date_prevu = $this->get_httpRequest()->getParam()['date_prevu'];
+			
+			$arrErrorsLivraison = [];
+		
 			$id_ville = $this->get_httpRequest()->getParam()['id_ville'];
 			$rue = $this->get_httpRequest()->getParam()['rue'];
+			if (!(isset($rue) && strlen(trim($rue)) > 0 && strlen(trim($rue)) <= 45)) {
+				$arrErrorsLivraison[] = "Le champ 'rue' doit être renseigné et ne doit pas contenir plus de 45 caractères!";
+			}
 			$num_maison = $this->get_httpRequest()->getParam()['num_maison'];
+			if (!(isset($num_maison) && strlen(trim($num_maison)) > 0 && strlen(trim($num_maison)) <= 5)) {
+				$arrErrorsLivraison[] = "Le champ 'numéro de maison' doit être renseigné et ne doit pas contenir plus de 5 caractères!";
+			}
 			$num_appart = $this->get_httpRequest()->getParam()['num_appart'];
+			if (!(isset($num_maison) && strlen(trim($num_maison)) > 0 && strlen(trim($num_maison)) <= 5) || !(isset($num_maison)) ) {
+				$arrErrorsLivraison[] = "Le champ 'numéro d'appartement' ne doit pas contenir plus de 5 caractères!";
+			}
 			$num_telephone = $this->get_httpRequest()->getParam()['num_telephone'];
-
+			if (!(isset($var) && preg_match('/^0[0-9]{9}$/', $num_telephone))) {
+				$arrErrorsLivraison[] = "Le champ 'numéro de téléphone' doit respecter le format: 0 ********* !";
+			}
+			
+			$date_prevu = $this->get_httpRequest()->getParam()['date_prevu'];
+			if (!(!empty($date_prevu) && ($date = DateTime::createFromFormat('Y-m-d', $date_prevu)) !== false && $date->getTimestamp() >= strtotime('tomorrow') && $date->getTimestamp() <= strtotime('+1 month'))) {
+				$arrErrorsLivraison[] = "Le champ 'date de livraison' doit contenir une date entre demain et plus 30 jours à partir d'aujourd'hui!";
+			}
+			$_SESSION['arrErrorsLivraison'] = $arrErrorsLivraison;
+			
 			$livraison = Livraison::createLivraisonConstruct($date_prevu,$id_ville,$rue,$num_maison,$num_appart,$num_telephone);
+			$_SESSION['livraison'] = $livraison;
 			
-			if (true) {
-				// $response = $livraisonM->create(['date_prevu','notre_livraison_idnotre_livraison','rue','num_maison','num_appart','num_telephone'],[$date_prevu,$id_ville,$rue,$num_maison,$num_appart,$num_telephone]);
-				//  if (is_a($response, 'PDOException')){
-				//  // echo $response->getMessage();
-				// 	 $messageError = AccountController::getMessageError($response->getMessage());
-				// 	 $this->addParam('messageError',$messageError);
-				// 	 $filename = 'identification';
-				// 	 return $this->view($filename);
-				//  }else {
-				// 	 $messageSucces = 'Votre compte a été créé';
-				// 	 $this->addParam('messageSucces',$messageSucces);
-				// 	 $filename = 'connexion';
-				// 	 return $this->view($filename);
-				//  }
-			
-				// $strLivraison = '{"date_prevu":"'.$date_prevu.'","id_ville":'.$id_ville.',"rue":"'.$rue.'","num_maison":"'.$num_maison.'","num_appart":"'.$num_appart.'","num_telephone":"'.$num_telephone.'"}';
-				// $_SESSION['livraison'] = json_decode($strLivraison);
-				$_SESSION['livraison'] = $livraison;
-
+			if (count($arrErrorsLivraison) == 0) {
+				
+						
 				$strPanier = $this->get_httpRequest()->getParam()['dataPanier'];
 				$_SESSION['panier'] = json_decode($strPanier);
+				unset($_SESSION['messageError']);
+				unset($_SESSION['arrErrorsLivraison']);
 				$this->redirect('./etapeRecapitulatif');
+			}else {
+				unset($_SESSION['messageError']);
+				$this->redirect('./etapeLivraison');
 			}
 		}
 	
@@ -152,8 +166,7 @@
 				$client = $_SESSION['client'];
 				$this->addParam('client',$client);
 				
-				$produitM = new ProduitManager();
-				$produits = $produitM->getProduitPanier($panier);
+		
 
 				foreach($produits as $produit){
 					foreach($panier as $produitP){
