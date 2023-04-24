@@ -29,7 +29,7 @@
 		
         
 		public function livraison(){
-			// $villesM = new NotreLivraisonManager();
+			
 			$villes = $_SESSION['villes'];
 			$this->addParam('villes',$villes);
 
@@ -95,7 +95,7 @@
 				$arrErrorsLivraison[] = "Le champ 'numéro d'appartement' ne doit pas contenir plus de 5 caractères!";
 			}
 			$num_telephone = $this->get_httpRequest()->getParam()['num_telephone'];
-			if (!(isset($var) && preg_match('/^0[0-9]{9}$/', $num_telephone))) {
+			if (!(isset($num_telephone) && preg_match('/^0[0-9]{9}$/', $num_telephone))) {
 				$arrErrorsLivraison[] = "Le champ 'numéro de téléphone' doit respecter le format: 0 ********* !";
 			}
 			
@@ -149,11 +149,6 @@
 			}
 			
 			if (count($messageError) > 0) {
-				// var_dump($produits);
-				
-				// echo "<br>";
-				// var_dump($messageError);
-				// exit();
 				
 				$_SESSION['messageError'] = $messageError;
 				$this->redirect('./etapeLivraison');

@@ -1,6 +1,7 @@
 <header>
     <nav class="nav_left">
-        <a class="pd24w600 marg20 cursorscall20" href="./#">Blog</a>
+        <a class="pd24w600 marg20 cursorscall20" href="https://soubotine.needemand.com/realisations/lafleurBlog/"
+            target="_blank">Blog</a>
         <a class="pd24w600 marg20 cursorscall20" href="./index">Accueil</a>
         <a class="pd24w600 marg20 cursorscall20" href="./contact">Contact</a>
     </nav>
@@ -19,7 +20,8 @@
 
         <a class="pd24w600 itemdrop" href="./index">Accueil</a>
         <a class="pd24w600 itemdrop" href="./contact">Contact</a>
-        <a class="pd24w600 itemdrop" href="./#">Blog</a>
+        <a class="pd24w600 itemdrop" href="https://soubotine.needemand.com/realisations/lafleurBlog/"
+            target="_blank">Blog</a>
         <div id="filtreProduit" class="pd24w600 itemdrop filtreProduit">
             <span>Filtre produit</span>
             <img src="public/imgs/general/icons_triangle-down.svg" alt="">
@@ -32,7 +34,8 @@
         <a class="marg20 idAccount" href="./account"><img class="cursorscall20"
                 src="public/imgs/general/account_icon.svg" alt="account"></a>
         <img class="marg20 cursorscall20 idlivraison" src="public/imgs/general/delivery_icon.svg" alt="livraison">
-        <img class="marg20 cursorscall20 idpanier" src="public/imgs/general/basket_icon.svg" alt="panier">
+        <div class="lable_panier"><img class="marg20 cursorscall20 idpanier" src="public/imgs/general/basket_icon.svg"
+                alt="panier"></div>
     </nav>
     <?php include 'components/list_livraison.php'?>
     <?php include 'components/panier.php'?>

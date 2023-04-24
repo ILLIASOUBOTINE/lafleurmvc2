@@ -28,25 +28,11 @@
 			return $this->_redirectUrl;	
 		}
 		
-		// private function setRedirectUrl()
-		// {
-		// 	if (isset($_SERVER["REDIRECT_URL"])) {
-		// 		$this->_redirectUrl = $_SERVER["REDIRECT_URL"];
-		// 	}else {
-		// 		$this->_redirectUrl = '/';
-		// 	}
-			
-		// }
-
-		// private function setRedirectUrl()
-		// {
-		// 	$this->_redirectUrl = str_replace($this->routeSite,"",$this->_url);
-			
-		// }
+		
 
 		private function setRedirectUrl()
 		{
-			// $this->_redirectUrl = str_replace($this->routeSite,"",$this->_url);
+			
 			$path = parse_url($this->_url, PHP_URL_PATH);
 			if ($this->_url === $this->routeSite) {
 				$this->_redirectUrl ='/index';
@@ -97,7 +83,7 @@
 					foreach( $_GET as $key => $param)
 					{
 						$this->_param[$key] = $param;
-						// $this->_param[$key] = filter_input(INPUT_GET, $key);
+						
 					}
 				case "POST":
 				case "PUT":
@@ -105,7 +91,7 @@
 					foreach($_POST as $key => $param)
 					{
 						$this->_param[$key] = $param;
-						// $this->_param[$key] = filter_input(INPUT_POST, $key);
+						
 					}
 						
 					

@@ -45,13 +45,12 @@
             $offreProduits = $offre->getProduitOffre(count($_SESSION['offreProduits']),4);
             $_SESSION['offreProduits'] = array_merge($_SESSION['offreProduits'], $offreProduits);
             echo json_encode(Produit::toJson($offreProduits));
-            // $this->redirect('./#produitOffre');
+            
         }
 
         public function getProduitVotreChoix(){
             $votreChoixM = new ProduitManager();
-        //     var_dump($this->get_httpRequest()->getParam());
-        //    exit();
+      
 			$votreChoixProduits = $votreChoixM->getProduitVotreChoix($this->get_httpRequest()->getParam()['prix'],['categories'=>$this->get_httpRequest()->getParam()['categories'], 'fleures'=>$this->get_httpRequest()->getParam()['fleures'], 'couleures'=>$this->get_httpRequest()->getParam()['couleures']]);
            
             $_SESSION['votreChoixProduits'] = $votreChoixProduits;

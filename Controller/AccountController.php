@@ -32,20 +32,20 @@
 				$messageError = 'Un utilisateur avec le même nom existe déjà';
 				$thisController->addParam('messageError',$messageError);
 				$filename = 'identification';
-				// return $thisController->view($filename);
+				
 			}else {
 				$response = $clientM->create(['email','mot_passe'],[$email,$password]);
 				if (is_a($response, 'PDOException')){
-				// echo $response->getMessage();
+				
 					$messageError = AccountController::getMessageError($response->getMessage());
 					$thisController->addParam('messageError',$messageError);
 					$filename = 'identification';
-					// return $thisController->view($filename);
+					
 				}else {
 					$messageSucces = 'Votre compte a été créé';
 					$thisController->addParam('messageSucces',$messageSucces);
 					$filename = 'connexion' ;
-            		// return $thisController->view($filename);
+            		
 				}
 			}
 
@@ -72,18 +72,18 @@
 				$messageError = "email n'est pas correct";
 				$thisController->addParam('messageError',$messageError);
 				$filename = 'connexion' ;
-            	// return $thisController->view($filename);
+            	
 			}else {
 				if (password_verify($password,$client->getMotPasse())) {
 				
 					$_SESSION['client'] = $client;
 					$filename = true ;
-					// $thisController->redirect('/monAccount');
+					
 				}else {
 					$messageError = "password n'est pas correct";
 					$thisController->addParam('messageError',$messageError);
 					$filename = 'connexion' ;
-					// return $thisController->view($filename);
+					
 				}
 				
 			}
@@ -127,9 +127,5 @@
 			return $messageError;
 		}
 	
-		// public function ($email,$clientM) {
-			
-			
-		// }
-	
+		
 	}

@@ -11,7 +11,7 @@
     max-width: 500px;
     width: 50%;
     height: 100%;
-    /* height: fit-content; */
+    
     max-height: 500px;
     min-height: 350px;
     display: flex;

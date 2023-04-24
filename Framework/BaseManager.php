@@ -15,9 +15,7 @@
 		public function getById($id)
 		{
 			$req = $this->_bdd->prepare('SELECT * FROM ' .$this->_table .' WHERE '.$this->_table.'.id'.$this->_table.' = :id');
-			// $re = "SELECT * FROM  $this->_table WHERE {$this->_table}.id{$this->_table} = :id";
-			// echo $re;
-			// $req->execute(array($id));
+			
 			$req->bindValue(':id', $id, PDO::PARAM_INT);
 			$req->execute();
 			$req->setFetchMode(PDO::FETCH_CLASS,$this->_object);
@@ -51,8 +49,7 @@
 				return $insertedId;
 			} catch (Throwable $er) {
 				return $er;
-				// var_dump($er->getMessage());
-				// exit;
+			
 			}
 			
 		}

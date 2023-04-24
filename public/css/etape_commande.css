@@ -1,6 +1,6 @@
 .etape_commande {
     width: 100%;
-    /* max-width: 1000px; */
+    
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -8,11 +8,11 @@
 }
 
 .item_etape {
-    /* width: 100%; */
+    
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* margin: 30px; */
+    
 }
 
 .item_etape_cercle {
@@ -32,9 +32,6 @@
    
 }
 
-/* .item_etape_nom{
-
-} */
 
 .item_etape_ligne {
     display: none;

@@ -1,6 +1,8 @@
 //update page
 window.addEventListener("resize", function () {
-  location.reload();
+ 
+  //  location.reload();
+  
 });
 
 if (window.innerWidth > 841) {
@@ -22,11 +24,11 @@ const idLivraison = document.querySelector(".idlivraison");
 const prix = document.querySelector("#prix");
 const inputSearchVille = document.querySelector("#inputSearchVille");
 
-// const panierList = document.querySelector('.panier_list');
 
-console.dir(document.title);
+
+
 if (document.title == "Commande") {
-  console.log("fyfy");
+ 
   document.getElementById("panier").remove();
 
   if (document.getElementById("panier") !== null) {
@@ -38,20 +40,18 @@ if (document.title == "Commande") {
 }
 
 let produitsPanier;
-// let arrItemIdProduit;
+
 let prixTotalePanier = 0;
 const panierList = document.querySelector(".panier_list");
 if (document.querySelector(".panier_list") !== null) {
   if (sessionStorage.getItem("produitsPanier") == null) {
     produitsPanier = [];
-    //   arrItemIdProduit = [];
+    
+    
   } else {
     produitsPanier = JSON.parse(sessionStorage.getItem("produitsPanier"));
-    console.dir(produitsPanier);
-    // arrItemIdProduit = JSON.parse(sessionStorage.getItem('arrItemIdProduit'));
-
-    produitsPanier.forEach((produit) => {
-      // console.log(produit);
+      produitsPanier.forEach((produit) => {
+      
       let prixProduitTotal1 = Number(produit.prixProduitTotal).toFixed(2);
       let str = getViewItemPanier(
         produit.idProduit,
@@ -63,19 +63,16 @@ if (document.querySelector(".panier_list") !== null) {
       );
       panierList.insertAdjacentHTML("beforeend", str);
       prixTotalePanier += produit.prixProduit * produit.quantite;
+     
     });
-
+    
     // pour prixtotalePanier
     document.querySelector("#panierTotale").textContent =
       "Total: " + prixTotalePanier.toFixed(2) + "$";
   }
 }
 
-// if ( produitsPanier.length === 0 && document.querySelector('#panierCommander') === null) {
-//     document.querySelector('#panier').remove();
-// }
 
-// console.dir(filtreProduit);
 
 //  burger menue
 
@@ -88,16 +85,14 @@ burgerMenu.addEventListener("click", (event) => {
 
   //for close filtre produit if it is not close
   document.querySelector("#itemFiltre").classList.add("dnone");
-  document
-    .querySelector("#filtreProduit>img")
-    .classList.remove("icon_triangle");
+  document.querySelector("#filtreProduit>img").classList.remove("icon_triangle");
 });
 
 //  list filtre
 
 if (filtreProduit !== null) {
   filtreProduit.addEventListener("click", (event) => {
-    // console.log('tyt');
+    
     document.querySelector("#itemFiltre").classList.toggle("dnone");
     document
       .querySelector("#filtreProduit>img")
@@ -187,7 +182,7 @@ if (document.querySelector(".list_carusel") !== null) {
   let arrowLeft = document.querySelector(".chevron_left");
   let arrowRight = document.querySelector(".chevron_right");
   let arr = [];
-  // console.log(carrousel.children);
+
 
   arrowLeft.addEventListener("click", (event) => {
     arr = Array.from(carrousel.children);
@@ -208,11 +203,11 @@ if (document.querySelector(".list_carusel") !== null) {
 
 if (document.querySelector("#produitOffre") !== null) {
   let btnProduitOffre = document.querySelector("#produitOffre");
-  // let blockProduitOffre = document.querySelector("#blockProduitOffre");
+  
   let blockProduitOffre = document.querySelector(
     "#blockProduitOffre>section>div"
   );
-  // console.log(blockProduitOffre);
+ 
   async function jsonFetch(pathUrl, method = "GET", dataForBody) {
     const response = await fetch(pathUrl, {
       method: method,
@@ -228,14 +223,14 @@ if (document.querySelector("#produitOffre") !== null) {
   }
 
   btnProduitOffre.addEventListener("click", (event) => {
-    // console.log(btnProduitOffre);
+    
     jsonFetch("https://soubotine.needemand.com/realisations/lafleurmvc2/getPlusProduitOffre")
       .then((jsonData) => {
         //Utilisation des données ici
-        // console.log(jsonData);
+        
         let str = "";
         for (let produit of jsonData) {
-          // console.log(produit['photos'][0]['img_url']);
+         
           str += getViewCarte(
             produit["idproduit"],
             produit["photos"][0]["img_url"],
@@ -248,7 +243,7 @@ if (document.querySelector("#produitOffre") !== null) {
       })
       .catch((err) => {
         //affiche les code 400+ ici
-        console.log(err);
+        
       });
   });
 }
@@ -289,23 +284,16 @@ document.querySelector("main").addEventListener("click", (event) => {
     event.target.classList.contains("btn_ajouter") &&
     event.target.innerText === "Ajouter"
   ) {
-    // console.dir(event.target);
+   
     let idProduit = event.target.id.replace("idBtnAjouter", "");
-    //  console.log(produitsPanier.findIndex(produit=>produit.idProduit == idProduit) );
-    //  console.dir(event.target.dataset.message);
+    
 
     if (
       produitsPanier.findIndex((produit) => produit.idProduit === idProduit) ==
       -1
     ) {
       let produit = JSON.parse(event.target.dataset.message);
-      // console.log(produit);
-
-      // let produit = event.target.parentElement.parentElement;
-
-      // let nomProduit = produit.children[1].innerText;
-      // let imgProduit = produit.children[0].children[0].src;
-      // let prixProduit = produit.children[2].children[0].innerText;
+      
 
       let nomProduit = produit.nomProduit;
       let imgProduit = produit.imgProduit;
@@ -313,7 +301,7 @@ document.querySelector("main").addEventListener("click", (event) => {
       let prixProduitTotal = prixProduit;
       let quantite = 1;
 
-      console.dir(prixProduitTotal);
+     
       let str = getViewItemPanier(
         idProduit,
         imgProduit,
@@ -333,7 +321,7 @@ document.querySelector("main").addEventListener("click", (event) => {
         prixProduitTotal: prixProduitTotal,
         quantite: 1,
       };
-      // produitsPanier.push(obj);
+      
 
       produitsPanier.push(obj);
       let produitsPanierSerialized = JSON.stringify(produitsPanier);
@@ -341,11 +329,7 @@ document.querySelector("main").addEventListener("click", (event) => {
 
       // pour prixtotalePanier
       getPrixTotalPanier(produitsPanier);
-      // prixTotalePanier = 0;
-      // produitsPanier.forEach((produit)=>{
-      //     prixTotalePanier += produit.prixProduit * produit.quantite;
-      // });
-      // document.querySelector('#panierTotale').textContent = 'Total: '+ prixTotalePanier+'$';
+      
     }
   }
 });
@@ -358,15 +342,7 @@ if (panierList !== null) {
         event.target.parentElement.parentElement.parentElement.parentElement;
       let idItemPanier = itemPanier.id.replace("idItemPanier", "");
 
-      //    let count = ++event.target.previousElementSibling.textContent;
-      //     event.target.parentElement.nextElementSibling.textContent = count*event.target.parentElement.previousElementSibling.textContent;
-
-      // produitsPanier.map((produit)=>{
-      //     if (produit.idProduit === idItemPanier) {
-      //         produit.quantite = count;
-      //         produit.prixProduitTotal = count*event.target.parentElement.previousElementSibling.textContent;
-      //     }
-      // });
+    
 
       produitsPanier.map((produit) => {
         if (produit.idProduit === idItemPanier) {
@@ -383,11 +359,7 @@ if (panierList !== null) {
 
       // pour prixtotalePanier
       getPrixTotalPanier(produitsPanier);
-      // prixTotalePanier = 0;
-      // produitsPanier.forEach((produit)=>{
-      //     prixTotalePanier += produit.prixProduit * produit.quantite;
-      // });
-      // document.querySelector('#panierTotale>span').textContent = prixTotalePanier;
+     ;
     }
 
     if (event.target.classList.contains("panier_item_minus")) {
@@ -396,9 +368,7 @@ if (panierList !== null) {
       let idItemPanier = itemPanier.id.replace("idItemPanier", "");
 
       if (event.target.nextElementSibling.textContent > 1) {
-        // let count = --event.target.nextElementSibling.textContent;
-        // event.target.parentElement.nextElementSibling.textContent = count*event.target.parentElement.previousElementSibling.textContent;
-
+       
         produitsPanier.map((produit) => {
           if (produit.idProduit === idItemPanier) {
             produit.quantite--;
@@ -417,11 +387,7 @@ if (panierList !== null) {
 
         // pour prixtotalePanier
         getPrixTotalPanier(produitsPanier);
-        // prixTotalePanier = 0;
-        // produitsPanier.forEach((produit)=>{
-        //     prixTotalePanier += produit.prixProduit * produit.quantite;
-        // });
-        // document.querySelector('#panierTotale>span').textContent = prixTotalePanier;
+        
       } else if (event.target.nextElementSibling.textContent == 1) {
         let itemPanier =
           event.target.parentElement.parentElement.parentElement.parentElement;
@@ -436,7 +402,7 @@ if (panierList !== null) {
         if (index !== -1) {
           produitsPanier.splice(index, 1);
         }
-        // console.log(produitsPanier);
+        
         sessionStorage.setItem(
           "produitsPanier",
           JSON.stringify(produitsPanier)
@@ -444,11 +410,7 @@ if (panierList !== null) {
 
         // pour prixtotalePanier
         getPrixTotalPanier(produitsPanier);
-        // prixTotalePanier = 0;
-        // produitsPanier.forEach((produit)=>{
-        //     prixTotalePanier += produit.prixProduit * produit.quantite;
-        // });
-        // document.querySelector('#panierTotale>span').textContent = prixTotalePanier;
+       
       }
       // pour la page de commande si le panier vide
       if (produitsPanier.length === 0 && document.title == "Commande") {
@@ -457,7 +419,7 @@ if (panierList !== null) {
       }
 
       // pour cacher le panier si il est vide
-      console.log(produitsPanier.length);
+      
       if (produitsPanier.length === 0) {
         document.querySelector("#panier").classList.remove("panier_active");
       }
@@ -510,7 +472,7 @@ function getPrixTotalPanier(produitsPanier) {
     "Total: " + prixTotalePanier.toFixed(2) + "$";
 }
 
-console.log(sessionStorage.getItem("produitsPanier"));
+
 
 // pour envoye les informations de panier a la serveur
 if (document.querySelector("#panierValider") !== null) {
@@ -535,28 +497,27 @@ if (document.querySelector("#panierValider") !== null) {
 
 if (document.querySelector(".titre_commande_etape") !== null) {
   etaps = document.querySelectorAll(".item_etape_nom");
-  //    console.dir(etaps);
+ 
   etaps.forEach((element) => {
-    // console.dir(element.textContent);
-    // console.dir(document.querySelector('.titre_commande_etape').textContent);
+   
     if (
       element.textContent ==
       document.querySelector(".titre_commande_etape").textContent
     ) {
-      // console.dir(element);
+     
       element.previousElementSibling.classList.add("item_etape_cercle_activ");
     }
   });
 }
 
-console.dir(window.location.pathname);
+
 
 // pour vider le panier apres le paiement
 if(document.querySelector('.isPanierVide') !== null){
   let isPanierVide  = (document.querySelector('.isPanierVide').innerText);
  
   if (isPanierVide == 1) {
-     sessionStorage.removeItem('produitsPanier');
+    sessionStorage.removeItem('produitsPanier');
      
   }
 }

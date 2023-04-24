@@ -36,7 +36,6 @@ html {
   display: grid;
   
   grid-template-rows: max-content 1fr max-content;
-  /* width: 100vw; */
   overflow-x: hidden;
   min-height: 100vh;
  
@@ -44,11 +43,9 @@ html {
 
 main {
   width: 100%;
-  /* height: 100vh; */
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* justify-content: center; */
   overflow-x: hidden;
 }
 
@@ -62,7 +59,7 @@ header {
   justify-content: space-around;
   align-items: center;
   background-color: var(--color-white);
-  /* margin-bottom: 20px; */
+ 
 }
 
 .logo > img {
@@ -70,6 +67,28 @@ header {
   height: 100px;
 }
 
+.lable_panier {
+  display: inline-block;
+  position: relative;
+}
+
+/* .lable_panier::before {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  content: " ";
+  color: red;
+  font-size: 20px;
+  font-weight: 600;
+  
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}  */
 /* header phone */
 .nav_right_phone, .nav_left_phone {
   display: none;
@@ -79,7 +98,6 @@ header {
 .burger_menu {
   display: none;
   cursor: pointer;
-  /* display: flex; */
   flex-direction: column;
   justify-content: space-between;
   height: 40px;
@@ -87,22 +105,11 @@ header {
 
 .drop_menu {
   display: none;
-
-  /* display: flex; */
   flex-direction: column;
-  /* justify-content: space-around; */
-  /* align-items: center; */
   position: absolute;
   left: 0;
-  top: -300px;
-  /* width: 320px; */
+  top: -500px;
   width: 100%;
-  /* min-height: 240px; */
-  /* height: 600px; */
-  /* height: calc(100vh - 60px); */
-  
-  /* height: max-content; */
-  /* overflow: auto; */
   background-color: var(--color-gris);
   z-index: -5;
   transition: top 1s;
@@ -112,7 +119,7 @@ header {
   top: 60px;
   transition: top 1s;
   z-index: -5;
- height: calc(100vh - 60px);
+  height: calc(100vh - 60px);
   overflow: auto;
   background-color: rgb(255, 255, 255, 0.5);
 }
@@ -121,7 +128,6 @@ header {
   transition: transform 1s, opacity 1s;
   transform: rotate(0deg);
   opacity: 1;
-
   width: 40px;
   height: 2px;
   background-color: var(--color-text-main);
@@ -137,7 +143,6 @@ header {
 }
 
 .dhidden {
-  /* visibility: hidden; */
   opacity: 0;
   transition: opacity 1s;
 }
@@ -227,10 +232,7 @@ header {
   margin-bottom: 5px;
 }
 
-/* .cursorscall20 {
-  cursor: pointer;
-  transform: scale(1.2);
-} */
+
 
 .cursorscall20:hover {
   cursor: pointer;
@@ -252,7 +254,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* background-color: var(--color-white); */
+  
   background-color:  var(--color-gris);
   padding: 10px 20px;
   cursor: pointer;
@@ -265,7 +267,6 @@ header {
 
 footer {
   /* height: 120px; */
-  /* height:fit-content; */
   width: 100%;
   display: flex;
   flex-wrap: wrap;
@@ -283,7 +284,6 @@ footer > div {
   align-items: center;
   max-width: 300px;
   min-width: 100px;
-  /* width: 250px; */
   min-height: 120px;
 }
 
@@ -300,7 +300,6 @@ footer > div {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  
   background-color: var(--color-white);
   border-radius: 20px;
   box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.64);
@@ -310,7 +309,7 @@ footer > div {
 .carte > a {
   display: block;
   width: 100%;
-  /* height: 100%; */
+
 }
 
 section {
@@ -323,8 +322,6 @@ section {
 
 .img_carte {
   width: 100%;
-  /* width: 290px; */
-  /* height: 280px; */
   height: 260px;
   border-radius: 20px;
 }
@@ -374,8 +371,7 @@ section {
 /* populaire_section */
 
 .populaire_section {
- /* max-width: 1300px; */
- width: 100%;
+width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -415,13 +411,8 @@ section {
   flex-direction: column;
   align-items: flex-start;
   border-bottom: 1px solid var(--color-text-main);
-  /* justify-content: space-between; */
+  
 }
-
-
-
-
-
 
 /* filtre produit */
 
@@ -432,7 +423,6 @@ section {
 .itemdrop1 {
   width: 100%;
   height: 60px;
-  /* border-bottom: 1px solid var(--color-text-main); */
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -451,7 +441,6 @@ section {
   height: 30px;
   display: flex;
   align-items: center;
-  /* background-color: var(--color-white); */
   background-color: var(--color-gris);
   padding: 5px 40px;
   cursor: pointer;
@@ -462,7 +451,6 @@ section {
 .itemPrix {
   width: 100%;
   height: 60px;
-  /* border-bottom: 1px solid var(--color-text-main); */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -504,22 +492,19 @@ section {
   right: -350px;
   background: var(--color-gris);
   transition: right 1s;
-  /* display: none; */
+ 
 }
 
 .notrelivraison_active {
   width: 320px;
   right: 0;
   transition: right 1s;
- /* display: none; */
+ 
 }
 
 .style_item_list {
   padding: 5px 15px;
 }
-
-
-
 
 .search_ville {
   position: relative;
@@ -544,13 +529,12 @@ section {
   width: 100%;
   height: 40px;
   border-bottom: 1px solid var(--color-text-main);
-  /* display: flex; */
   justify-content: space-between;
   align-items: center;
   background-color: var(--color-white);
   padding: 10px 20px;
   cursor:text;
-  /* display: none; */
+  
 }
 
 /*      panier        */
@@ -565,31 +549,23 @@ section {
   right: -350px;
   background: var(--color-gris);
   transition: right 1s;
-  /* height: calc(100vh - 120px);
-  max-height: 601px; */
   overflow: auto;
-  /* background-color: rgb(255, 255, 255, 0.5); */
-  /* display: none; */
+ 
 }
 
 .panier_active {
-  /* width: 320px; */
   right: 0;
   transition: right 1s;
- /* display: none; */
+ 
 }
 
 .panier_commande {
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* position: absolute;
-  top:120px; */
   width: 320px;
-  /* right: -350px; */
   background: var(--color-gris);
-  /* transition: right 1s; */
-  /* display: none; */
+
 }
 
 .panier_list {
@@ -621,7 +597,6 @@ section {
 
 .panier_details {
   height: 100px;
-  /* width: 160px; */
 }
 
 .panier_countre {
@@ -667,8 +642,6 @@ section {
   cursor: pointer;
 }
 
-
-
 .btnPanierCommander:hover {
   background-color: aquamarine;
 }
@@ -696,13 +669,8 @@ section {
 
 .filtreProduit {
   background: var(--color-gris);
-  /* border-bottom: none; */
-   /* z-index: 5; */
 }
 
-/* .filtreProduit:hover {
-  background: rgba(255, 255, 255, 0.5);
-} */
 
 .nav_seconde_filtre {
   position: absolute;
@@ -711,8 +679,7 @@ section {
   background-color: var(--color-gris);
   border: none;
   z-index: -5;
-  /* width: 100px;
-  height: 100px; */
+  
 }
 
 .nav_categorie {
@@ -729,11 +696,7 @@ section {
 .details {
   width: 95%;
   height: 100%;
-  /* height: 600px; */
-  /* height: fit-content;  */
-  /* max-height: 800px;   */
   display: flex;
-  /* height: fit-content; */
   align-items: center;
   justify-content: space-evenly;
   margin-top: 30px;
@@ -745,7 +708,6 @@ section {
  max-width:500px;
  width: 50%;
   height: 100%;
-  /* height: fit-content; */
   min-height: 470px;
   display: flex;
   flex-direction: column;
@@ -769,20 +731,14 @@ section {
 
 
 .carusel {
- max-width: 500px;
- width: 50%;
- min-height: 470px;
- height: 100%;
- /* flex-basis: 0; */
+  max-width: 500px;
+  width: 50%;
+  min-height: 470px;
+  height: 100%;
   position: relative;
- 
   display: flex;
-  /* display: inline-block; */
-  /* flex-direction: row;
-  flex-wrap: wrap; */
-  /* overflow: hidden; */
- border-radius: 30px;
- margin-right: 10px;
+  border-radius: 30px;
+  margin-right: 10px;
 }
 
 .div_img {
@@ -792,16 +748,11 @@ section {
   width: 100%;
   height: 100%;
   border-radius: 30px;
-  /* flex-wrap: nowrap; */
   flex-shrink: 0;
 }
 
 .list_carusel  {
   display: flex;
-  /* justify-content: center;
-  align-items: center; */
-  /* flex-wrap: wrap; */
-  
   overflow: hidden;
  border-radius: 30px;
   width: 100%;
@@ -835,7 +786,6 @@ section {
 .banniere {
   position: relative;
   width: 100%;
-  /* max-height: 300px; */
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -933,7 +883,6 @@ section {
   }
 
   .details {
-    /* width: 95%; */
     height: fit-content;
     flex-direction: column;
     align-items: center;
@@ -947,13 +896,10 @@ section {
   }
 
   .details_produit {
-  
-     /* height: max-content; */
-     
-     height: fit-content;
-      margin-top: 10px;
-     margin-left: 0;
-   }
+    height: fit-content;
+    margin-top: 10px;
+    margin-left: 0;
+  }
 
   .carusel {
     height: 470px;
@@ -1018,8 +964,6 @@ section {
     font-weight: 600;
   }
 
-
-  
   .pd40w700 {
     font-size: 20px;
     font-weight: 600;
@@ -1208,7 +1152,7 @@ section {
   }
 
   .details {
-    /* width: 95%; */
+    
     height: fit-content;
     flex-direction: column;
     align-items: center;
@@ -1222,13 +1166,10 @@ section {
   }
 
   .details_produit {
-  
-     /* height: max-content; */
-     
-     height: fit-content;
-      margin-top: 10px;
-     margin-left: 0;
-   }
+    height: fit-content;
+    margin-top: 10px;
+    margin-left: 0;
+  }
 
   .carusel {
     min-height: 350px;

@@ -13,7 +13,7 @@
     display: flex;
     justify-content: center;
     
-    /* margin: 10px 20px; */
+   
 }
 
 .commande_block_panier {
@@ -23,7 +23,7 @@
     justify-content: center;
     align-items: center;
     margin: 5px 10px;
-    /* min-width: 400px; */
+  
 }
 
 .commande_block_form {
@@ -54,7 +54,5 @@
     }
     .commande_block_form {
         width: 90%;
-        
-       
     }
 }

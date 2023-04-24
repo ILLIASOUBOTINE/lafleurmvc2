@@ -84,13 +84,6 @@
             </p>
         </div>
 
-        <?php if (isset($_SESSION['livraison'])) {
-           
-            // var_dump($_SESSION['panier']);
-            // var_dump($commande);
-            
-        }?>
-
     </div>
 
 </section>

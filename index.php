@@ -2,8 +2,6 @@
 	$configFile = file_get_contents("config/config.json");
 	$config = json_decode($configFile);
 	
-	// var_dump($config);
-	// var_dump($config->datasource);
 	spl_autoload_register(function($class) use($config)
 	{
 		foreach($config->autoloadFolder as $folder)
@@ -16,43 +14,31 @@
 	});
 	
   	session_start();
-	// unset($_SESSION['client']);
+	
 	unset($_SESSION['populaireProduits']);
-	 unset($_SESSION['categories']);
-	 unset($_SESSION['banniere']);
-	// unset($_SESSION['offreProduits']);
-	// unset($_SESSION['villes']);
-	// unset($_SESSION['votreChoixProduits']);
-	//  unset($_SESSION['livraison']);
-	// require 'functions.php';
-    require 'config/init.php';
+	unset($_SESSION['categories']);
+	unset($_SESSION['banniere']);
+
+    require 'init.php';
 	
 	
-	try
-	{
+	try{
 		$httpRequest = new HttpRequest();
 		$router = new Router();
-		// var_dump($httpRequest);
+	
 		$route = $router->findRoute($httpRequest);
 		$httpRequest->setRoute($route);
 		
-		// if (null !== $httpRequest->getRoute()) {
-			// echo 'exist route';
-			$path = $route->getController().'Controller';
+		$path = $route->getController().'Controller';
 			
-			$controller = new $path($httpRequest);
-			$action = $route->getAction();
-			if (method_exists($controller,$action)) {
-				$controller->$action();
-			}
+		$controller = new $path($httpRequest);
+		$action = $route->getAction();
+		if (method_exists($controller,$action)) {
+			$controller->$action();
+		}
 			
-		// }
-        
-       
-	}
-	catch(Exception $e)
-	{
+	}catch(Exception $e){
 		include '404.html';
-		// echo "Une erreur s'est produite";
+		
 	}
 	

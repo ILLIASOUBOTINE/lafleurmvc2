@@ -14,10 +14,4 @@
             return $this->view($filename);
         }
         
-      
-		
-        
-	
-		
-	
-	}
+    }

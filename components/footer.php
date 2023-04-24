@@ -8,8 +8,9 @@
     </div>
 
     <div class="nav_footer">
-        <a class="int14w200 cursorscall20" href="./#">Blog</a>
-        <a class="int14w200 cursorscall20" href="./index">Accueil</a>
+        <a class="int14w200 cursorscall20" href="https://soubotine.needemand.com/realisations/lafleurBlog/"
+            target="_blank">Blog</a>
+        <a class=" int14w200 cursorscall20" href="./index">Accueil</a>
         <a class="int14w200 cursorscall20" href="./contact">Contact</a>
         <a class="int14w200 cursorscall20" href="./account">Account</a>
     </div>
