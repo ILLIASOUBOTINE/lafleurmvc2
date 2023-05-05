@@ -17,7 +17,7 @@
 
     <div class="contact_footer">
         <a href="mailto:lafleur@needemand.fr" class="int14w200 cursorscall20">lafleur@needemand.fr</a>
-        <a href="tel:05 25 65 78 45" class="int14w200 cursorscall20">05 25 65 78 45</a>
+        <a href="tel:0525657845" class="int14w200 cursorscall20">05 25 65 78 45</a>
     </div>
 
 

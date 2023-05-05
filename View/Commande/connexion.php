@@ -8,19 +8,17 @@
         <?php include 'components/panier.php'?>
     </div>
     <div class="commande_block_form">
-        <?php if (isset($messageError)): ?>
-        <h1 class="pd40w700 marg20top titre_account">
-            <?=$messageError?>
-        </h1>
-        <?php endif ?>
         <?php if (isset($messageSucces)): ?>
         <h1 class="pd40w700 marg20top titre_account">
             <?=$messageSucces?>
         </h1>
         <?php endif ?>
 
-        <a href="./etapeIdentification" class="btn_grand pd24w600">retour</a>
-        <?php include 'components/form_connexion_commande.php'?>
+        <?php include 'components/message_error.php'?>
 
+        <a href="./etapeIdentification" class="btn_grand pd24w600">retour</a>
+        <?php 
+            FormIdentif::form_identif('connexionCommande','formulair_connexion','Connexion');
+        ?>
     </div>
 </section>

@@ -1,14 +1,12 @@
 <?php
-	class Route
-	{
+	class Route{
 		private $path;
 		private $controller;
 		private $action;
 		private $method;
 		private $param;
 		
-		public function __construct($route)
-		{
+		public function __construct($route){
 			$this->path = $route->path;
 			$this->controller = $route->controller;
 			$this->action = $route->action;
@@ -16,8 +14,7 @@
 			$this->param = $route->param;
 		}
 		
-		public function getPath()
-		{
+		public function getPath(){
 			return $this->path;
 		}
 		

@@ -1,4 +1,5 @@
 <form action="getProduitVotreChoix" method="POST" class="itemdrop_menu listFiltre">
+    <input type="hidden" name="csrf_token" value="<?=$_SESSION['csrf_token']?>">
     <div class="itemdrop_menu dnone itemFiltre" id="itemFiltre">
         <div class="filtre_prix itemdrop_menu">
             <div id="filtrePrix" class="pd24w600 itemdrop1">
@@ -9,7 +10,7 @@
                 <input type="range" id="prix" name="prix" value="150" step="1" max="150" min="0">
                 <span class="prix_affiche int20w400">150</span>
                 <span class="int20w400">$</span>
-                </input>
+
             </div>
         </div>
         <!-- Fleur -->

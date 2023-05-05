@@ -20,36 +20,43 @@
 		public function inscription(){
 			$filename = AccountController::inscriptionAccount($this);
 			return $this->view($filename);
-		
 		}
         
 		public static function inscriptionAccount($thisController){
-           $clientM = new ClientManager();
-		   $email = $thisController->get_httpRequest()->getParam()['email'];
-		   $password = password_hash($thisController->get_httpRequest()->getParam()['password'],PASSWORD_BCRYPT);
-		
-		   if ($clientM->getByEmail($email)) {
-				$messageError = 'Un utilisateur avec le même nom existe déjà';
-				$thisController->addParam('messageError',$messageError);
-				$filename = 'identification';
-				
-			}else {
-				$response = $clientM->create(['email','mot_passe'],[$email,$password]);
-				if (is_a($response, 'PDOException')){
-				
-					$messageError = AccountController::getMessageError($response->getMessage());
-					$thisController->addParam('messageError',$messageError);
-					$filename = 'identification';
-					
-				}else {
-					$messageSucces = 'Votre compte a été créé';
-					$thisController->addParam('messageSucces',$messageSucces);
-					$filename = 'connexion' ;
-            		
-				}
-			}
-
-			return $filename;
+			$clientM = new ClientManager();
+			$email = $thisController->get_httpRequest()->getParam()['email'];
+			$password = $thisController->get_httpRequest()->getParam()['password'];
+			$messageError = [];
+			$optionsEmail = array(
+				 'options' => array('flags' => FILTER_FLAG_EMAIL_UNICODE),
+				 'max_len' => 100
+			 );
+			 $patternPassword = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,200}$/i';
+			 $optionsPassword = array('options' => array('regexp' => $patternPassword));
+				if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL, $optionsEmail)) {
+				 $messageError[] = "Le champ 'email' doit être renseigné et ne doit 
+				 pas contenir plus de 100 caractères et ne doit pas contenir de caractères '<' ou '>' !";
+			 }
+			 if (!filter_var($password, FILTER_VALIDATE_REGEXP, $optionsPassword)) {
+				 $messageError[] = "Le champ 'password' doit contenir au moins une lettre majuscule,
+				  une lettre minuscule, un chiffre et au moins 8 caractères et pas plus de 200
+				   et ne doit pas contenir de caractères '<' ou '>' !";
+			 }
+			 if (count($messageError) !== 0) {
+				 $thisController->addParam('messageError',$messageError);
+				 $filename = 'identification';
+			 }elseif($clientM->getByEmail($email)) {
+				 $messageError[] = 'Un utilisateur avec le même email existe déjà';
+				 $thisController->addParam('messageError',$messageError);
+				 $filename = 'identification';
+			 }else {
+				 $password = password_hash($password,PASSWORD_BCRYPT);
+				 $clientM->create(['email','mot_passe'],[$email,$password]);
+				 $messageSucces = 'Votre compte a été créé';
+				 $thisController->addParam('messageSucces',$messageSucces);
+				 $filename = 'connexion' ;
+			 }
+			 return $filename;
 		}
 		
 		public function connexion(){
@@ -62,25 +69,45 @@
 		}
 		
 		
-        public static function connexionAccount($thisController){
+		public static function connexionAccount($thisController){
             $clientM = new ClientManager();
 			$email = $thisController->get_httpRequest()->getParam()['email'];
 			$password = $thisController->get_httpRequest()->getParam()['password'];
+			$messageError = [];
+		   $optionsEmail = array(
+				'options' => array('flags' => FILTER_FLAG_EMAIL_UNICODE),
+				'max_len' => 100
+			);
+			$patternPassword = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,200}$/i';
+			$optionsPassword = array('options' => array('regexp' => $patternPassword));
+		   
+			if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL, $optionsEmail)) {
+				$messageError[] = "Le champ 'email' doit être renseigné et ne doit 
+				pas contenir plus de 100 caractères et ne doit pas contenir de caractères '<' ou '>' !";
+			}
+			if (!filter_var($password, FILTER_VALIDATE_REGEXP, $optionsPassword)) {
+				$messageError[] = "Le champ 'password' doit contenir au moins une lettre majuscule,
+				 une lettre minuscule, un chiffre et au moins 8 caractères et pas plus de 200
+				  et ne doit pas contenir de caractères '<' ou '>' !";
+			}
 			
-			$client = $clientM->getByEmail($email);
-		   if (!$client || empty($client->getEmail())) {
-				$messageError = "email n'est pas correct";
+		   if (count($messageError) !== 0) {
+				$thisController->addParam('messageError',$messageError);
+				$filename = 'identification';
+		   }elseif (!$clientM->getByEmail($email)) {
+			    $messageError[] = "email n'est pas correct";
 				$thisController->addParam('messageError',$messageError);
 				$filename = 'connexion' ;
             	
 			}else {
+				$client = $clientM->getByEmail($email);
 				if (password_verify($password,$client->getMotPasse())) {
 				
 					$_SESSION['client'] = $client;
 					$filename = true ;
 					
 				}else {
-					$messageError = "password n'est pas correct";
+					$messageError[] = "password n'est pas correct";
 					$thisController->addParam('messageError',$messageError);
 					$filename = 'connexion' ;
 					

@@ -1,18 +1,16 @@
 <?php
-	class Fleur
-	{
+	class Fleur{
 		private $idfleures;
 		private $longueur;
 		private $couleur_idcouleur;
 		private $unite_idunite;
 		private $espece_fleur_idespece_fleur;
+		
 		private Couleur $couleur;
 		private EspeceFleur $especeFleur;
 		private Unite $unite;
 		
-		
-		public function __construct()
-		{
+		public function __construct(){
 			$couleurM = new CouleurManager();
 			$this->couleur = $couleurM->getById($this->couleur_idcouleur);
 

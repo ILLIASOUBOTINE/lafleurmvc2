@@ -8,12 +8,9 @@
         <img id="loto_item3" class="loto_item" />
     </div>
     <input id="btnStop" type="button" class="btn_loto btn_grand pd24w600 dnone" value="stop" />
-
     <input id="btnStart" type="button" class="btn_loto btn_grand pd24w600" value="start" />
     <a href="./monAccount" id="btnVoirCommande" class="btn_loto btn_grand pd24w600 dnone">voir la commande</a>
     <p class="jsonCadeaux dnone">
         <?= $jsonCadeaux ?>
     </p>
-
-
 </div>

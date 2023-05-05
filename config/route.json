@@ -6,8 +6,6 @@
 	"method" : "GET",
 	"param" : []
 },
-
-
 {
 	"path" : "/getPlusProduitOffre",
 	"controller" : "Accueil",
@@ -15,7 +13,6 @@
 	"method" : "GET",
 	"param" : []
 },
-
 {
 	"path" : "/getProduitVotreChoix",
 	"controller" : "Accueil",

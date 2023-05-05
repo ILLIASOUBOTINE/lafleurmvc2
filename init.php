@@ -1,4 +1,13 @@
 <?php
+    session_start();
+	
+    unset($_SESSION['populaireProduits']);
+    unset($_SESSION['categories']);
+    unset($_SESSION['banniere']);
+    
+if (!isset($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+} 
 
 if(!isset($_SESSION['villes'])){
     $notreLivraison = new NotreLivraisonManager();

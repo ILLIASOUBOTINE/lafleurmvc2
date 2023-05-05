@@ -8,7 +8,6 @@
     <link rel="shortcut icon" href="public/imgs/general/favicon.ico" type="image/x-icon">
     <link rel="icon" href="public/imgs/general/favicon.ico" type="image/x-icon">
     <title><?=$title?></title>
-
     <link rel="stylesheet" href="public/css/main.css">
 </head>
 
@@ -22,16 +21,12 @@
                 echo $content;
             ?>
         </main>
-
         <?php
            include 'components/footer.php';
         ?>
-
-
     </div>
     <script src="public/main.js"></script>
     <script src="public/loto.js"></script>
 </body>
-
 
 </html>

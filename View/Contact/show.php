@@ -1,10 +1,10 @@
-<section class="contact">
+<div class="contact">
 
     <div class="block_contact">
         <div class="block_contact_part1">
             <p class="pd24w600">Pour nous contacter:</p>
             <a href="mailto:lafleur@needemand.fr" class="int20w400 cursorscall20"> lafleur@needemand.fr</a>
-            <a href="tel:05 25 65 78 45" class="int20w400 cursorscall20">05 25 65 78 45
+            <a href="tel:0525657845" class="int20w400 cursorscall20">05 25 65 78 45
             </a>
         </div>
 
@@ -29,4 +29,4 @@
             allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
         </iframe>
     </div>
-</section>
+</div>
