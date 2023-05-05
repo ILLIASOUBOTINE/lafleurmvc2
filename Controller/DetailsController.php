@@ -8,33 +8,16 @@
 		}
         
 		public function show(){
-            
-            // $notreLivraison = new NotreLivraisonManager();
-            // $villes = $notreLivraison->getAll();
-            // $villes = $_SESSION['villes'];
-        
-            // $this->addParam('villes',$villes);
-           
-            // var_dump((int)$_GET['id']);
-             $produitM = new ProduitManager();
-             $produit = $produitM->getById($_GET['id']);
-            //  $produits = $produitM->getAll();
-            // var_dump($produit);
-            
+            $produitM = new ProduitManager();
+            $produit = $produitM->getById($this->get_httpRequest()->getParam()['id']);
+            if(!$produit) {
+                include '404.html';
+            } 
             $this->addParam('produit',$produit);
-            // $this->addParam('produits',$produits);
-            // // var_dump( $villes);
-
-            // $couleurM = new CouleurManager();
-            // $couleur = $couleurM->getAll();
-            // $this->addParam('couleur',$couleur);
-            
             $populaireProduits = $_SESSION['populaireProduits'];
             $this->addParam('titreSectionPopulaire', 'Le plus populaire');
             $this->addParam('populaireProduits', $populaireProduits);
-            
-            $filename = 'show';
-            return $this->view($filename);
+            return $this->view('show');
         }
         
       

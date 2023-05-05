@@ -1,5 +1,22 @@
 <?php
 
+session_start();
+
+// unset($_SESSION['client']);
+unset($_SESSION['populaireProduits']);
+unset($_SESSION['categories']);
+unset($_SESSION['banniere']);
+// unset($_SESSION['offreProduits']);
+	// unset($_SESSION['villes']);
+	// unset($_SESSION['votreChoixProduits']);
+	//  unset($_SESSION['livraison']);
+	//  unset($_SESSION['essaiCadeau']);
+	// require 'functions.php';
+
+if (!isset($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}    
+
 if(!isset($_SESSION['villes'])){
     $notreLivraison = new NotreLivraisonManager();
     $villes = $notreLivraison->getAll();

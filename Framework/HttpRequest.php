@@ -1,15 +1,13 @@
 <?php
 
-	class HttpRequest
-	{
+	class HttpRequest{
 		private $_url;
 		private $_redirectUrl;
 		private $_method;
 		private $_param;
 		private $_route;
 		
-		public function __construct()
-		{
+		public function __construct(){
 			$this->_url = $_SERVER['REQUEST_URI'];
 			$this->setRedirectUrl();
 			$this->_method = $_SERVER['REQUEST_METHOD'];
@@ -67,27 +65,30 @@
 		}
 		
 		
-		public function bindParam()
-		{
-			switch($this->_method)
-			{
+		public function bindParam(){
+			switch($this->_method){
 				case "GET":
-				case "DELETE":
-					foreach( $_GET as $key => $param)
-					{
+					foreach( $_GET as $key => $param){
 						$this->_param[$key] = $param;
-						// $this->_param[$key] = filter_input(INPUT_GET, $key);
 					}
+					break;
 				case "POST":
-				case "PUT":
-					
-					foreach($_POST as $key => $param)
-					{
-						$this->_param[$key] = $param;
-						// $this->_param[$key] = filter_input(INPUT_POST, $key);
+					if(!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+						die('Invalid CSRF token');
+					}else {
+						foreach($_POST as $key => $param){
+							if ($key !== 'csrf_token') {
+								if (!preg_match('/[<>]/', $param)) {
+									$this->_param[$key] = $param;
+								}else{
+									$this->_param[$key] = "";
+								}
+							}
+						}
+						// var_dump($this->_param);
+						// exit;
 					}
-						
-					
+					break;	
 			}
 		}
 	}

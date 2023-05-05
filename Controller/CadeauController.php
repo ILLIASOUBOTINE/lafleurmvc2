@@ -95,6 +95,7 @@
 						// exit;
 						// $commande->modifQuantiteProduitTotalDansBD();
 						$_SESSION['essaiCadeau'] = true;
+						unset($_SESSION['idcommande']);
 						// $this->redirect('/monAccount');
 						echo json_encode(['success' => $idCadeau]);
 					}

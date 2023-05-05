@@ -31,6 +31,9 @@
 		
         
 		public function livraison(){
+			if (!isset($_SESSION['client'])) {
+				$this->redirect('/etapeIdentification');
+			}
 			// $villesM = new NotreLivraisonManager();
 			$villes = $_SESSION['villes'];
 			$this->addParam('villes',$villes);
@@ -85,23 +88,27 @@
 		}
 
 		public function controlFormLivraison(){
+			if (!isset($_SESSION['client'])) {
+				$this->redirect('/etapeIdentification');
+			}
 			$arrErrorsLivraison = [];
 		
 			$id_ville = $this->get_httpRequest()->getParam()['id_ville'];
 			$rue = $this->get_httpRequest()->getParam()['rue'];
+			
 			if (!(isset($rue) && strlen(trim($rue)) > 0 && strlen(trim($rue)) <= 45)) {
-				$arrErrorsLivraison[] = "Le champ 'rue' doit être renseigné et ne doit pas contenir plus de 45 caractères!";
+				$arrErrorsLivraison[] = "Le champ 'rue' doit être renseigné et ne doit pas contenir plus de 45 caractèreset et ne doit pas contenir de caractères '<' ou '>'!";
 			}
 			$num_maison = $this->get_httpRequest()->getParam()['num_maison'];
 			if (!(isset($num_maison) && strlen(trim($num_maison)) > 0 && strlen(trim($num_maison)) <= 5)) {
-				$arrErrorsLivraison[] = "Le champ 'numéro de maison' doit être renseigné et ne doit pas contenir plus de 5 caractères!";
+				$arrErrorsLivraison[] = "Le champ 'numéro de maison' doit être renseigné et ne doit pas contenir plus de 5 caractères et ne doit pas contenir de caractères '<' ou '>'!";
 			}
 			$num_appart = $this->get_httpRequest()->getParam()['num_appart'];
-			if (!(isset($num_maison) && strlen(trim($num_maison)) > 0 && strlen(trim($num_maison)) <= 5) || !(isset($num_maison)) ) {
-				$arrErrorsLivraison[] = "Le champ 'numéro d'appartement' ne doit pas contenir plus de 5 caractères!";
+			if (!(isset($num_appart) && strlen(trim($num_appart)) > 0 && strlen(trim($num_appart)) <= 5) || !(isset($num_appart)) ) {
+				$arrErrorsLivraison[] = "Le champ 'numéro d'appartement' ne doit pas contenir plus de 5 caractères et ne doit pas contenir de caractères '<' ou '>'!";
 			}
 			$num_telephone = $this->get_httpRequest()->getParam()['num_telephone'];
-			if (!(isset($var) && preg_match('/^0[0-9]{9}$/', $num_telephone))) {
+			if (!(isset($num_telephone) && preg_match('/^0[0-9]{9}$/', $num_telephone))) {
 				$arrErrorsLivraison[] = "Le champ 'numéro de téléphone' doit respecter le format: 0 ********* !";
 			}
 			
@@ -116,7 +123,11 @@
 			
 			if (count($arrErrorsLivraison) == 0) {
 				$strPanier = $this->get_httpRequest()->getParam()['dataPanier'];
+				
 				$_SESSION['panier'] = json_decode($strPanier);
+			// 	echo($strPanier);
+			// 	echo(json_last_error());
+			// exit;
 				unset($_SESSION['messageError']);
 				unset($_SESSION['arrErrorsLivraison']);
 				$this->redirect('/etapeRecapitulatif');
@@ -127,8 +138,12 @@
 		}
 	
 		public function recapitulatif(){
-			
+			if (!isset($_SESSION['client'])) {
+				$this->redirect('/etapeIdentification');
+			}
 			$panier = $_SESSION['panier'];
+			// var_dump($_SESSION['panier']);
+			// exit;
 			$this->addParam('panier',$panier);
 			
 			$produitM = new ProduitManager();
@@ -195,11 +210,17 @@
 
 
 		public function paiement(){
+			if (!isset($_SESSION['client']) && isset($_SESSION['commande'])) {
+				$this->redirect('/etapeIdentification');
+			}
 			$filename = 'paiement';
 			return $this->view($filename);
 		}
 
 		public function controlPaiement(){
+			if (!isset($_SESSION['client']) && isset($_SESSION['commande'])) {
+				$this->redirect('/etapeIdentification');
+			}
 			
 			$commande = $_SESSION['commande'];
 			$idLivraison = Livraison::createLivraisonDansBD();
@@ -219,8 +240,8 @@
 			$this->sendMailCommandeClient($mail, $numCommande, $messageCommande);
 			
 			///////////////
-
 			
+			unset($_SESSION['commande']);
 			unset($_SESSION['essaiCadeau']);
 			unset($_SESSION['panier']);
 			$_SESSION['isPanierVide'] = true;
@@ -228,7 +249,9 @@
 		}
 
 		public function etapeFinale(){
-			
+			if (!isset($_SESSION['client'])) {
+				$this->redirect('/etapeIdentification');
+			}
 			if (isset($_SESSION['isPanierVide']) && $_SESSION['isPanierVide']) {
 				$isPanierVide = $_SESSION['isPanierVide'];
 				$this->addParam('isPanierVide',$isPanierVide);

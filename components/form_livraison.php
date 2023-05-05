@@ -1,5 +1,5 @@
 <form action="/controlFormLivraison" method="POST" class="formulair_identif">
-
+    <input type="hidden" name="csrf_token" value="<?=$_SESSION['csrf_token']?>">
     <h3 class="titre_formulair_identif pd24w600">Adresse de livraison</h3>
 
     <?php if(isset($_SESSION['livraison'])):?>

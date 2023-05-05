@@ -42,7 +42,7 @@
 			$paramsArr = [$prix];
 			foreach($params as $key => $param){
 				// echo '<br>';
-				//  var_dump($param);
+				// var_dump($params);
 				array_shift($param);
 				// var_dump($newArr);
 				switch ($key) {

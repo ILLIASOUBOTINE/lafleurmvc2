@@ -15,18 +15,8 @@
 		}
 	});
 	
-  	session_start();
-	// unset($_SESSION['client']);
-	unset($_SESSION['populaireProduits']);
-	 unset($_SESSION['categories']);
-	 unset($_SESSION['banniere']);
-	// unset($_SESSION['offreProduits']);
-	// unset($_SESSION['villes']);
-	// unset($_SESSION['votreChoixProduits']);
-	//  unset($_SESSION['livraison']);
-	//  unset($_SESSION['essaiCadeau']);
-	// require 'functions.php';
-    require 'config/init.php';
+  	
+    require 'init.php';
 	
 	
 	try
@@ -58,4 +48,10 @@
 		include '404.html';
 		// echo "Une erreur s'est produite";
 	}
-	
+	if(!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+		echo 'NO';
+		echo $_POST['csrf_token'];
+	}else {
+		echo 'YES';
+	}
+	var_dump($_SESSION['csrf_token']);
